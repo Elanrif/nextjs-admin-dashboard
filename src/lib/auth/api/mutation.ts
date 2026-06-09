@@ -1,0 +1,36 @@
+"use client";
+
+import { useMutation } from "@tanstack/react-query";
+import {
+  signIn,
+  signUp,
+  changeUserPassword,
+} from "@/lib/auth/api/services/auth.client";
+import { Login, Registrer } from "../api/types";
+
+// ─── Mutations ────────────────────────────────────────────────────────────────
+
+/** Connexion */
+export function useSignIn() {
+  return useMutation({
+    mutationFn: (data: Login) => signIn(data),
+  });
+}
+
+/** Inscription */
+export function useSignUp() {
+  return useMutation({
+    mutationFn: (data: Registrer) => signUp(data),
+  });
+}
+
+/** Changer le mot de passe */
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: (data: {
+      oldPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) => changeUserPassword(data),
+  });
+}

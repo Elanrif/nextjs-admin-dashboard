@@ -1,0 +1,250 @@
+"server-only";
+
+import apiClient from "@config/api.config";
+import environment from "@config/environment.config";
+import { AxiosResponse } from "axios";
+import { parseResetPassword } from "@lib/users/schemas/user";
+import { getLogger } from "@/config/logger.config";
+import {
+  ChangePasswordProfileFormData,
+  parseChangePasswordProfile,
+  parseLogin,
+  parseProfileUser,
+  parseRegister,
+  ProfileUserFormData,
+  RegisterFormData,
+} from "@lib/auth/schemas/auth.schema";
+import { Login } from "../types";
+import { ResetPassword, User } from "@/lib/users/api/types";
+import { ApiErrorResponse } from "@/lib/_/errors/api-error.server";
+import { Result } from "@/lib/_/errors/response.model";
+import { ApiError, badRequestApiError } from "@/lib/_/errors/api-error";
+import { validateId } from "@/utils";
+
+/**
+ * ⚠️ Never trust the client input
+ * ❌ Someone can bypass the form
+ * ✅ Protection against malicious bugs
+ */
+const {
+  api: {
+    rest: {
+      endpoints: {
+        auth: {
+          login: loginUrl,
+          register: registerUrl,
+          editProfile: editProfileUrl,
+          updatePassword: updatePwdUrl,
+          resetPassword: resetPasswordUrl,
+        },
+      },
+    },
+  },
+} = environment;
+const logger = getLogger("server");
+
+/**
+ * Sign in a user with email and password
+ */
+export async function signIn(login: Login): Promise<Result<User, ApiError>> {
+  const validation = parseLogin(login);
+  if (!validation.success) {
+    logger.warn({ email: login.email }, "Invalid login attempt");
+    return {
+      ok: false,
+      error: badRequestApiError(validation.error.message),
+    };
+  }
+
+  try {
+    const { data } = await apiClient(true).post<any, AxiosResponse<User>>(
+      loginUrl,
+      login,
+    );
+    logger.info({ email: data.email }, "User signed in successfully");
+    return { ok: true, data };
+  } catch (error) {
+    logger.error({ email: login.email }, "Failed to sign in");
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "signIn"),
+    };
+  }
+}
+
+/**
+ * Register a new user with email and password
+ */
+export async function signUp(
+  registration: RegisterFormData,
+): Promise<Result<User, ApiError>> {
+  const validation = parseRegister(registration);
+  if (!validation.success) {
+    logger.warn({ email: registration.email }, "Invalid registration attempt");
+    return {
+      ok: false,
+      error: badRequestApiError(validation.error.message),
+    };
+  }
+
+  try {
+    await apiClient(true).post<any, AxiosResponse<any>>(
+      registerUrl,
+      registration,
+    );
+  } catch (error) {
+    logger.error({ email: registration.email }, "Failed to register user");
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "signUp"),
+    };
+  }
+
+  const maybeUser = await signIn(registration);
+  if (!maybeUser.ok) {
+    logger.error(
+      {
+        email: registration.email,
+        detail: maybeUser.error.detail,
+      },
+      "Error after registration during sign in",
+    );
+    throw new Error(maybeUser.error.detail);
+  }
+  return maybeUser;
+}
+
+export async function changeUserPassword(
+  userId: number,
+  oldPassword: string,
+  newPassword: string,
+): Promise<Result<User, ApiError>> {
+  const idError = validateId(userId);
+  if (idError) return idError;
+
+  try {
+    const body = {
+      old_password: oldPassword,
+      new_password: newPassword,
+    };
+    const url = `/${userId}`;
+    const result = await apiClient(true) //
+      .patch<any, AxiosResponse<User>>(url, body);
+    logger.info({ userId }, "changeUserPassword");
+    return { ok: true, data: result.data };
+  } catch (error: any) {
+    logger.error(
+      {
+        userId,
+        err: error.response?.data ?? error,
+      },
+      "Error during changeUserPassword",
+    );
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "changeUserPassword"),
+    };
+  }
+}
+
+/**
+ * Change password for a user
+ */
+export async function resetPassword(
+  data: ResetPassword,
+): Promise<Result<User, ApiError>> {
+  const validation = parseResetPassword(data);
+  if (!validation.success) {
+    logger.warn({ email: data.email }, "Invalid reset password attempt");
+    return {
+      ok: false,
+      error: badRequestApiError(validation.error.message),
+    };
+  }
+
+  try {
+    const res = await apiClient(true).patch<any, AxiosResponse<User>>(
+      resetPasswordUrl,
+      data,
+    );
+    logger.info({ id: res.data.id }, "Password reset successfully");
+    return { ok: true, data: res.data };
+  } catch (error: any) {
+    logger.error(
+      { err: error.response?.data ?? error },
+      "Failed to reset password",
+    );
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "resetPassword"),
+    };
+  }
+}
+
+/**
+ * Edit user profile
+ */
+export async function editProfile(
+  data: ProfileUserFormData,
+): Promise<Result<User, ApiError>> {
+  const validation = parseProfileUser(data);
+  if (!validation.success) {
+    logger.warn({ id: data.email }, "Invalid profile update attempt");
+    return {
+      ok: false,
+      error: badRequestApiError(validation.error.message),
+    };
+  }
+
+  try {
+    const res = await apiClient(true).patch<any, AxiosResponse<User>>(
+      editProfileUrl,
+      data,
+    );
+    logger.info({ id: res.data.id }, "Profile updated successfully");
+    return { ok: true, data: res.data };
+  } catch (error: any) {
+    logger.error(
+      { err: error.response?.data ?? error },
+      "Failed to update profile",
+    );
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "editProfile"),
+    };
+  }
+}
+
+/**
+ * Change user profile password
+ */
+export async function changePasswordProfile(
+  data: ChangePasswordProfileFormData,
+): Promise<Result<User, ApiError>> {
+  const validation = parseChangePasswordProfile(data);
+  if (!validation.success) {
+    logger.warn({ id: data.email }, "Invalid password change attempt");
+    return {
+      ok: false,
+      error: badRequestApiError(validation.error.message),
+    };
+  }
+
+  try {
+    const res = await apiClient(true).patch<any, AxiosResponse<User>>(
+      updatePwdUrl,
+      data,
+    );
+    logger.info({ id: res.data.id }, "Profile updated successfully");
+    return { ok: true, data: res.data };
+  } catch (error: any) {
+    logger.error(
+      { err: error.response?.data ?? error },
+      "Failed to update profile",
+    );
+    return {
+      ok: false,
+      error: ApiErrorResponse(error, "changeProfilePassword"),
+    };
+  }
+}
