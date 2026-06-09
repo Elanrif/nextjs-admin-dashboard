@@ -133,7 +133,7 @@ const tableData: Product[] = [
 
 type StatusFilter = "All" | "Active" | "Pending" | "Cancel";
 
-export default function BasicTableTwo() {
+export default function BasicTableThree() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);

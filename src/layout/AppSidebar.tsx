@@ -84,6 +84,7 @@ const othersItems: NavItem[] = [
       { name: "Avatar", path: "/dashboard/avatars", pro: false },
       { name: "Badge", path: "/dashboard/badge", pro: false },
       { name: "Buttons", path: "/dashboard/buttons", pro: false },
+      { name: "Pagination", path: "/dashboard/paginations", pro: false },
       { name: "Images", path: "/dashboard/images", pro: false },
       { name: "Videos", path: "/dashboard/videos", pro: false },
     ],
