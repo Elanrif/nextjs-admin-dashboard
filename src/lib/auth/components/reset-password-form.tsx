@@ -1,15 +1,10 @@
 "use client";
-import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
-import { EyeCloseIcon, EyeIcon } from "@/icons";
 import BackButton from "@/layout/back-button";
 import Link from "next/link";
-import React, { useState } from "react";
 
 export default function ResetPasswordForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <BackButton link="/" text="Back to Home" />

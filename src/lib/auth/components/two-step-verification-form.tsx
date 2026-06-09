@@ -1,15 +1,11 @@
 "use client";
-import Checkbox from "@/components/form/input/Checkbox";
-import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label";
-import { EyeCloseIcon, EyeIcon } from "@/icons";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import BackButton from "@/layout/back-button";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import Link from "next/link";
-import React, { useState } from "react";
 
 export default function TwoStepVerificationForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <BackButton link="/" text="Back to Home" />
@@ -27,12 +23,50 @@ export default function TwoStepVerificationForm() {
           <div>
             <form>
               <div className="space-y-6">
-                <div>
-                  <Label>
-                    Email <span className="text-red-500">*</span>{" "}
-                  </Label>
-                  <Input placeholder="info@gmail.com" type="email" />
-                </div>
+                <Field className="w-fit">
+                  <FieldLabel htmlFor="round-sep">
+                    Type your 6 digits security code
+                  </FieldLabel>
+                  <InputOTP
+                    id="round-sep"
+                    maxLength={6}
+                    pattern={REGEXP_ONLY_DIGITS}
+                  >
+                    <div className="flex items-center gap-3">
+                      <InputOTPGroup className="gap-2">
+                        <InputOTPSlot
+                          index={0}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                        <InputOTPSlot
+                          index={1}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                        <InputOTPSlot
+                          index={2}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                      </InputOTPGroup>
+                      <span className="text-2xl font-bold text-gray-300 dark:text-gray-700">
+                        —
+                      </span>
+                      <InputOTPGroup className="gap-2">
+                        <InputOTPSlot
+                          index={3}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                        <InputOTPSlot
+                          index={4}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                        <InputOTPSlot
+                          index={5}
+                          className="rounded-full h-12 w-12 [&>input]:rounded-full [&>input]:text-center"
+                        />
+                      </InputOTPGroup>
+                    </div>
+                  </InputOTP>
+                </Field>
                 {/* <!-- Button --> */}
                 <div>
                   <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-blue-500 shadow-theme-xs hover:bg-blue-600">
