@@ -15,6 +15,7 @@ const Switch: React.FC<SwitchProps> = ({
   disabled = false,
   onChange,
   color = "blue", // Default to blue color
+  ...props
 }) => {
   const [isChecked, setIsChecked] = useState(defaultChecked);
 

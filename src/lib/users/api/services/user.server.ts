@@ -7,7 +7,7 @@ import {
   UserCreate,
   UserFilters,
   UserUpdate,
-  UsersResult,
+  UsersResponse,
 } from "@/lib/users/api/types";
 import {
   parseUserApiCreate,
@@ -36,7 +36,7 @@ const logger = getLogger("server");
 
 export async function getUsers(
   filters: UserFilters,
-): Promise<Result<UsersResult, ApiError>> {
+): Promise<Result<UsersResponse, ApiError>> {
   try {
     // 🔥 Clean undefined params
     const cleanParams: Record<string, string> = {};
@@ -49,7 +49,7 @@ export async function getUsers(
     const queryParams = new URLSearchParams(cleanParams).toString();
     const url = `${usersUrl}${queryParams ? `?${queryParams}` : ""}`;
 
-    const res = await apiClient().get<UsersResult>(url);
+    const res = await apiClient().get<UsersResponse>(url);
     logger.info({ count: res.data.meta.total }, "get users");
     return { ok: true, data: res.data };
   } catch (error) {
@@ -119,7 +119,16 @@ export async function updateUser(
   const idError = validateId(id);
   if (idError) return idError;
 
-  const parse = parseUserApiUpdate(user);
+  // ✅ Nettoyer les données avant validation
+  const cleanedUser = { ...user };
+
+  // Supprimer les mots de passe vides ou qui ne contiennent que des espaces
+  if (cleanedUser.password && cleanedUser.password.trim() === "") {
+    delete cleanedUser.password;
+    delete cleanedUser.confirmPassword;
+  }
+  
+  const parse = parseUserApiUpdate(cleanedUser);
   if (!parse.success) {
     logger.warn(
       { context: "updateUser", errors: parse.error.message },

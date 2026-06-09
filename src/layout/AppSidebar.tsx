@@ -18,6 +18,7 @@ import {
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
+import { ShoppingBasket } from "lucide-react";
 
 type NavItem = {
   name: string;
@@ -31,6 +32,15 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Dashboard",
     subItems: [{ name: "Ecommerce", path: "/dashboard", pro: false }],
+  },
+  {
+    icon: <ShoppingBasket />,
+    name: "Store",
+    subItems: [
+      { name: "Users", path: "/dashboard/users", pro: false },
+      { name: "Posts", path: "/dashboard/posts", pro: false },
+      { name: "Comments", path: "/dashboard/comments", pro: false },
+      ],
   },
   {
     icon: <CalenderIcon />,
@@ -48,6 +58,7 @@ const navItems: NavItem[] = [
     icon: <ListIcon />,
     subItems: [
       { name: "Form Elements", path: "/dashboard/form-elements", pro: false },
+      { name: "Form Layout", path: "/dashboard/form-layout", pro: false },
     ],
   },
   {
@@ -84,6 +95,7 @@ const othersItems: NavItem[] = [
       { name: "Avatar", path: "/dashboard/avatars", pro: false },
       { name: "Badge", path: "/dashboard/badge", pro: false },
       { name: "Buttons", path: "/dashboard/buttons", pro: false },
+      { name: "Pagination", path: "/dashboard/paginations", pro: false },
       { name: "Images", path: "/dashboard/images", pro: false },
       { name: "Videos", path: "/dashboard/videos", pro: false },
     ],
@@ -94,6 +106,12 @@ const othersItems: NavItem[] = [
     subItems: [
       { name: "Sign In", path: "/dashboard/signin", pro: false },
       { name: "Sign Up", path: "/dashboard/signup", pro: false },
+      { name: "Reset Password", path: "/dashboard/reset-password", pro: false },
+      {
+        name: "Two-Step Verification",
+        path: "/dashboard/two-step-verification",
+        pro: false,
+      },
     ],
   },
 ];

@@ -50,7 +50,7 @@ export type UserFilters = {
   sort?: string;
 };
 
-export type UsersResult = {
+export type UsersResponse = {
   data: User[];
   meta: {
     total: number;
@@ -89,6 +89,7 @@ export interface UserUpdate {
   password?: string;
   confirmPassword?: string;
   avatarUrl?: string;
+  isActive?: boolean;
 }
 
 export type UserMutationPayload = UserCreate;

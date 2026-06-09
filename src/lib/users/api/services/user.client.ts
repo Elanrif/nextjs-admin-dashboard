@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { proxyEnvironment } from "@config/proxy-api.config";
-import { User, UserFilters, UsersResult } from "@lib/users/api/types";
+import { User, UserFilters, UsersResponse } from "@lib/users/api/types";
 import { frontendHttp } from "@config/axios/frontend-http.config";
 import { ApiError } from "@/lib/_/errors/api-error";
 import { Result } from "@/lib/_/errors/response.model";
@@ -24,7 +24,7 @@ const {
  */
 export async function fetchUsers(
   filters: UserFilters,
-): Promise<Result<UsersResult, ApiError>> {
+): Promise<Result<UsersResponse, ApiError>> {
   // 🔥 Clean undefined params
   const cleanParams: Record<string, string> = {};
 
@@ -38,7 +38,7 @@ export async function fetchUsers(
 
   const res = await frontendHttp().get<
     unknown,
-    AxiosResponse<Result<UsersResult, ApiError>>
+    AxiosResponse<Result<UsersResponse, ApiError>>
   >(url);
   return res.data;
 }

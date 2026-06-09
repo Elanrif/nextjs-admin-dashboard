@@ -7,6 +7,7 @@ import { UserRole } from "../api/types";
  * ❌ Someone can bypass the form
  */
 export const userBaseSchema = z.object({
+  avatarUrl: z.string().optional().default(""),
   firstName: z
     .string()
     .min(2, "First name must be at least 2 characters")
@@ -23,6 +24,7 @@ export const userBaseSchema = z.object({
     .email({ message: "Invalid email address" })
     .max(255, "Email must be at most 255 characters"),
   role: z.nativeEnum(UserRole),
+  isActive: z.boolean().default(false),
 });
 
 const passwordSchema = z
@@ -66,23 +68,23 @@ export const parseUserApiCreate = userCreateSchema.safeParse;
 export const userUpdateSchema = userBaseSchema
   .partial()
   .extend({
-    password: passwordSchema.optional(),
-    confirmPassword: passwordSchema.optional(),
+    password: z.string().optional(), // ← Pas de passwordSchema
+    confirmPassword: z.string().optional(), // ← Pas de passwordSchema
   })
   .refine(
     (data) => {
-      if (data.password !== undefined || data.confirmPassword !== undefined) {
-        if (
-          typeof data.password === "string" &&
-          typeof data.confirmPassword === "string" &&
-          data.password.length >= 8 &&
-          data.confirmPassword.length >= 8
-        ) {
-          return data.password === data.confirmPassword;
-        }
+      // Si les deux champs sont vides ou undefined -> valide
+      if (!data.password && !data.confirmPassword) {
+        return true;
+      }
+
+      // Si un des deux est rempli mais pas l'autre -> invalide
+      if (!data.password || !data.confirmPassword) {
         return false;
       }
-      return true;
+
+      // Si les deux sont remplis, vérifier qu'ils correspondent
+      return data.password === data.confirmPassword;
     },
     {
       message: "Passwords must match and be at least 8 characters",

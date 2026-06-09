@@ -18,3 +18,650 @@
 {"level":30,"time":1780914831922,"pid":45624,"hostname":"ELTECH","count":4,"msg":"get users"}
 {"level":30,"time":1780914902388,"pid":45624,"hostname":"ELTECH","count":4,"msg":"get users"}
 {"level":30,"time":1780914973686,"pid":45624,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044343198,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044632387,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044650955,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044689482,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044691011,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044702382,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044711793,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044718402,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044721554,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044766851,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044778226,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044829183,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044958777,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781044962509,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045063991,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045064097,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045069026,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045163968,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045164018,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045172731,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045176330,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045183645,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045191858,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045198777,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045208710,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045246185,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045246776,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045249347,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045250435,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045251855,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045252637,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045277259,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045280937,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045314329,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045320487,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045327647,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045617931,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045617938,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045618180,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045619083,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045675094,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045683507,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045683623,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045703328,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045709481,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045717458,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045726250,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045732016,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045743146,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045747991,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045839262,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045839314,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045846558,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045893439,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045907644,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045921609,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045938002,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045945289,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781045996921,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046053111,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046109400,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046193513,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046204324,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046212060,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046226547,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046236523,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046580134,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046633413,"pid":52124,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781046642821,"pid":52124,"hostname":"ELTECH","id":3,"msg":"User deleted successfully"}
+{"level":30,"time":1781046643036,"pid":52124,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":50,"time":1781046654820,"pid":52124,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781046654821,"pid":52124,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781046654821,"pid":52124,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781046663203,"pid":52124,"hostname":"ELTECH","id":4,"msg":"User deleted successfully"}
+{"level":30,"time":1781046663431,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781046791881,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781046792800,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781046802585,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":50,"time":1781046806814,"pid":52124,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781046806815,"pid":52124,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781046806816,"pid":52124,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781046844718,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781046846107,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":50,"time":1781046851151,"pid":52124,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781046851155,"pid":52124,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781046851158,"pid":52124,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781046885433,"pid":52124,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781046885434,"pid":52124,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781046885434,"pid":52124,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781046936790,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781047010911,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781047011057,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781047020875,"pid":52124,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781096104700,"pid":12732,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781101485988,"pid":12732,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781105190271,"pid":12732,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781180421797,"pid":14236,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781180907485,"pid":14236,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":50,"time":1781180920187,"pid":14236,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/1","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781180920193,"pid":14236,"hostname":"ELTECH","id":1,"msg":"Failed to delete user"}
+{"level":50,"time":1781180920194,"pid":14236,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/1","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781180925982,"pid":14236,"hostname":"ELTECH","id":3,"msg":"User deleted successfully"}
+{"level":30,"time":1781180926039,"pid":14236,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781180932183,"pid":14236,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781180933374,"pid":14236,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781180936315,"pid":14236,"hostname":"ELTECH","id":4,"msg":"User deleted successfully"}
+{"level":30,"time":1781180936376,"pid":14236,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":50,"time":1781180945235,"pid":14236,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781180945235,"pid":14236,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781180945235,"pid":14236,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781180952636,"pid":14236,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781180952636,"pid":14236,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781180952636,"pid":14236,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":40,"time":1781182247329,"pid":20884,"hostname":"ELTECH","context":"updateUser","errors":"[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_small\",\n    \"minimum\": 2,\n    \"inclusive\": true,\n    \"path\": [\n      \"lastName\"\n    ],\n    \"message\": \"Last name must be at least 2 characters\"\n  }\n]","msg":"validation failed"}
+{"level":30,"time":1781182776200,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781182798302,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781183227374,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781183227687,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781183234033,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781183234108,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781183238783,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781184949498,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781184950530,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781261158188,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781261159610,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261159708,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261159863,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781261160098,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261160760,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261160806,"pid":20884,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781261160976,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261161063,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261161592,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261161617,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261322508,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261359838,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261359895,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261360535,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261360623,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261386458,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261449041,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261455783,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261460097,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781261476802,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781263422980,"pid":20884,"hostname":"ELTECH","id":5,"msg":"User created successfully"}
+{"level":30,"time":1781263423879,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781263423936,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781263444425,"pid":20884,"hostname":"ELTECH","id":5,"msg":"User deleted successfully"}
+{"level":30,"time":1781263444626,"pid":20884,"hostname":"ELTECH","count":2,"msg":"get users"}
+{"level":30,"time":1781263489350,"pid":20884,"hostname":"ELTECH","id":6,"msg":"User created successfully"}
+{"level":30,"time":1781263489743,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781263489797,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":50,"time":1781263529597,"pid":20884,"hostname":"ELTECH","error":"Request failed with status code 404","detail":"User not found: 3","instance":"/api/v1/users/3","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"API error"}
+{"level":50,"time":1781263529598,"pid":20884,"hostname":"ELTECH","id":3,"msg":"Failed to get user"}
+{"level":40,"time":1781263529598,"pid":20884,"hostname":"ELTECH","detail":"User not found: 3","instance":"/api/v1/users/3","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"[Axios Error] [getUserById]"}
+{"level":50,"time":1781263531724,"pid":20884,"hostname":"ELTECH","error":"Request failed with status code 404","detail":"User not found: 3","instance":"/api/v1/users/3","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"API error"}
+{"level":50,"time":1781263531725,"pid":20884,"hostname":"ELTECH","id":3,"msg":"Failed to get user"}
+{"level":40,"time":1781263531725,"pid":20884,"hostname":"ELTECH","detail":"User not found: 3","instance":"/api/v1/users/3","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"[Axios Error] [getUserById]"}
+{"level":50,"time":1781263540359,"pid":20884,"hostname":"ELTECH","error":"Request failed with status code 404","detail":"User not found: 4","instance":"/api/v1/users/4","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"API error"}
+{"level":50,"time":1781263540360,"pid":20884,"hostname":"ELTECH","id":4,"msg":"Failed to get user"}
+{"level":40,"time":1781263540360,"pid":20884,"hostname":"ELTECH","detail":"User not found: 4","instance":"/api/v1/users/4","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"[Axios Error] [getUserById]"}
+{"level":50,"time":1781263541232,"pid":20884,"hostname":"ELTECH","error":"Request failed with status code 404","detail":"User not found: 4","instance":"/api/v1/users/4","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"API error"}
+{"level":50,"time":1781263541233,"pid":20884,"hostname":"ELTECH","id":4,"msg":"Failed to get user"}
+{"level":40,"time":1781263541233,"pid":20884,"hostname":"ELTECH","detail":"User not found: 4","instance":"/api/v1/users/4","status":404,"title":"Resource not found","errorCode":"RESOURCE_NOT_FOUND","msg":"[Axios Error] [getUserById]"}
+{"level":30,"time":1781264102249,"pid":20884,"hostname":"ELTECH","id":1,"msg":"User updated successfully"}
+{"level":30,"time":1781264102980,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264103039,"pid":20884,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264341325,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264341328,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264502494,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264512481,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264515905,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264516548,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264559899,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264565768,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264570430,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264574117,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264577189,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264585572,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264597063,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264612770,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264617721,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264624387,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264629848,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264636339,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264646487,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264650031,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264650139,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264652672,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264667624,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264673093,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264681906,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264685080,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264688829,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264695015,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264699733,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264704583,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264710800,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264723788,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264733616,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264760669,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264762895,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264769154,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264778447,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264829369,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264874990,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264885530,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264905154,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264922201,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264924735,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264976162,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264976245,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264977212,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781264977300,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265028666,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265031514,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265062557,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265081361,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265084656,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265106133,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265112614,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265183040,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265298736,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265298810,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265302586,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265381780,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265386204,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265386247,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265420937,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265432160,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265436947,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265451390,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265464492,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265485405,"pid":32472,"hostname":"ELTECH","id":1,"msg":"User updated successfully"}
+{"level":30,"time":1781265485655,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265486135,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265486168,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265526252,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265552667,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265552677,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265559368,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265559377,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265559381,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265559626,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265563672,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265568327,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265572493,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265579264,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265597420,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265618088,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265626196,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265637537,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265719616,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265720233,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265722857,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265734418,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265742516,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265747661,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265759499,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265763884,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265771032,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265779685,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265823815,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265826085,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265842486,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265848812,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265850392,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265859597,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265880984,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265883944,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265900832,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265992888,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781265995214,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266006571,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266006584,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266008402,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266010953,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266016973,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266019079,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266038657,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266044021,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266047894,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266053785,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266126038,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266127802,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266137705,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266181427,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266255565,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266267200,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266284847,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266297753,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266301578,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266305742,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266312725,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266330911,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266339643,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266345396,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266355956,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266407929,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266425331,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266444033,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":50,"time":1781266461718,"pid":32472,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/1","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781266461719,"pid":32472,"hostname":"ELTECH","id":1,"msg":"Failed to delete user"}
+{"level":50,"time":1781266461720,"pid":32472,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/1","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781266490806,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781266514083,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267703805,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267703853,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267713021,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267738529,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267741455,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267752536,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267755332,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267765567,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267776749,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267811892,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267819973,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267824597,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267843949,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267846590,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267851571,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267859019,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267861569,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267864988,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267893040,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267941110,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267944360,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267948792,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267951502,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267954263,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267963910,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267981888,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267981924,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781267987541,"pid":32472,"hostname":"ELTECH","count":3,"msg":"get users"}
+{"level":30,"time":1781268054378,"pid":32472,"hostname":"ELTECH","id":7,"msg":"User created successfully"}
+{"level":30,"time":1781268054532,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268054877,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268054912,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268075120,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268113729,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268216178,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268217977,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268362386,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268370022,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268378238,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268397244,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781268417807,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781272742875,"pid":32472,"hostname":"ELTECH","count":4,"msg":"get users"}
+{"level":30,"time":1781363294050,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363514317,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363597360,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363598664,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363612951,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363633814,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363637095,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363643048,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363665263,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363702291,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363712451,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363720530,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363759459,"pid":32676,"hostname":"ELTECH","id":1,"msg":"User updated successfully"}
+{"level":30,"time":1781363759642,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363762685,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363763207,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363773076,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363905501,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363919931,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363922028,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363925123,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363928679,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363939661,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363957952,"pid":32676,"hostname":"ELTECH","id":2,"msg":"User updated successfully"}
+{"level":30,"time":1781363958158,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363958616,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363958665,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363968920,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781363977884,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781364014045,"pid":32676,"hostname":"ELTECH","id":16,"msg":"User created successfully"}
+{"level":30,"time":1781364014229,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364014552,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364014595,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364032444,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781364046453,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/8","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781364046453,"pid":32676,"hostname":"ELTECH","id":8,"msg":"Failed to delete user"}
+{"level":50,"time":1781364046454,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/8","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781364051876,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/9","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781364051879,"pid":32676,"hostname":"ELTECH","id":9,"msg":"Failed to delete user"}
+{"level":50,"time":1781364051880,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/9","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781364149673,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364149684,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781364159379,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/4","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781364159379,"pid":32676,"hostname":"ELTECH","id":4,"msg":"Failed to delete user"}
+{"level":50,"time":1781364159379,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/4","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781364163201,"pid":32676,"hostname":"ELTECH","id":5,"msg":"User deleted successfully"}
+{"level":30,"time":1781364163353,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":50,"time":1781364169452,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/4","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781364169452,"pid":32676,"hostname":"ELTECH","id":4,"msg":"Failed to delete user"}
+{"level":50,"time":1781364169452,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/4","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781364237035,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364237036,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364237037,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":30,"time":1781364254367,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781364267722,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364267724,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364267724,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364271477,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364271477,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364271477,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364283582,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364283583,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364283583,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364291779,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364291779,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364291780,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364293475,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364293475,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364293476,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364297283,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364297283,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364297284,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364307246,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364307247,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364307247,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364420864,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364420865,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364420865,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364427201,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364427202,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364427202,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364427622,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364427622,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364427622,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364436111,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364436113,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364436113,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364527440,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364527442,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364527442,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364531077,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364531078,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364531079,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364662140,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364662140,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364662140,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364666101,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364666102,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364666102,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364671482,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364671483,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364671483,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364720977,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364720978,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364720979,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":50,"time":1781364730329,"pid":32676,"hostname":"ELTECH","error":"","msg":"API error"}
+{"level":50,"time":1781364730330,"pid":32676,"hostname":"ELTECH","context":"getUsers","msg":"Error getting users"}
+{"level":50,"time":1781364730330,"pid":32676,"hostname":"ELTECH","status":500,"detail":"Unknown Axios error","title":"Error","errorCode":"NETWORK_ERROR","msg":"[Axios Error] [getUsers]"}
+{"level":30,"time":1781364831708,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781364855484,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781364855486,"pid":32676,"hostname":"ELTECH","id":3,"msg":"Failed to delete user"}
+{"level":50,"time":1781364855487,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781364915899,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364915947,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364926607,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364932100,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781364936038,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365041091,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365041163,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781365055971,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365055988,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365055989,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365066869,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365078522,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365172590,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781365175337,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365175338,"pid":32676,"hostname":"ELTECH","id":3,"msg":"Failed to delete user"}
+{"level":50,"time":1781365175339,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365334395,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365337266,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365342986,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781365369797,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365369798,"pid":32676,"hostname":"ELTECH","id":3,"msg":"Failed to delete user"}
+{"level":50,"time":1781365369798,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/3","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365491606,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365496160,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365518060,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365639612,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":30,"time":1781365641942,"pid":32676,"hostname":"ELTECH","count":16,"msg":"get users"}
+{"level":50,"time":1781365649405,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365649406,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365649407,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781365656537,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365656538,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365656538,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365663620,"pid":32676,"hostname":"ELTECH","id":5,"msg":"User deleted successfully"}
+{"level":30,"time":1781365663727,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781365753087,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781365753151,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":50,"time":1781365756843,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365756843,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365756844,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781365760310,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365760311,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365760311,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":50,"time":1781365761113,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365761118,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365761118,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365772101,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":30,"time":1781365776769,"pid":32676,"hostname":"ELTECH","count":15,"msg":"get users"}
+{"level":50,"time":1781365782621,"pid":32676,"hostname":"ELTECH","error":"Request failed with status code 500","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"API error"}
+{"level":50,"time":1781365782623,"pid":32676,"hostname":"ELTECH","id":2,"msg":"Failed to delete user"}
+{"level":50,"time":1781365782626,"pid":32676,"hostname":"ELTECH","detail":"An unexpected error occurred","instance":"/api/v1/users/2","status":500,"title":"Internal server error","errorCode":"INTERNAL_ERROR","msg":"[Axios Error] [deleteUser]"}
+{"level":30,"time":1781365790372,"pid":32676,"hostname":"ELTECH","id":11,"msg":"User deleted successfully"}
+{"level":30,"time":1781365790520,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365811829,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365834919,"pid":32676,"hostname":"ELTECH","id":1,"msg":"User updated successfully"}
+{"level":30,"time":1781365835164,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365835541,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365835588,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365863446,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365878243,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781365979423,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366005189,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366009208,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366031149,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366033103,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366077561,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366078330,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366078726,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366084708,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366138504,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366141164,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366216074,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366231248,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366235489,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366248442,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366260094,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366261788,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366267111,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366411723,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366425903,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366449244,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366450210,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366460248,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366497458,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366497763,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366497780,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366497867,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366512831,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366522191,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366527801,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366531197,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366540828,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366546744,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366577879,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366579463,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366584208,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366666867,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366666959,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366686847,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366758490,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366761926,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366766371,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366768713,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366778925,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366796156,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366854787,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366887234,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366901513,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366904851,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366908084,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366910190,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781366914889,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367008403,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367016417,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367043374,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367043761,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367049585,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367055780,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367066452,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367076515,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367079931,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367082932,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367085244,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367099215,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367128975,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367296985,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367345918,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367348171,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367459547,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367461707,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367532184,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367716177,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367760621,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367764956,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367822680,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367830252,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367968736,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367971563,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781367976186,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368023388,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368027714,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368034008,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368038136,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368054913,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368069331,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368176597,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368176736,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368180496,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368255268,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368272308,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368320565,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368322583,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368380230,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368383119,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368398882,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368399979,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368525009,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368531876,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368594572,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368600576,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368890419,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368901027,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368914961,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368932913,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781368978080,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369117173,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369124633,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369161797,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369165714,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369168134,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369175235,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369287357,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369287456,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369289352,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369359015,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369359329,"pid":32676,"hostname":"ELTECH","id":1,"msg":"User updated successfully"}
+{"level":30,"time":1781369359552,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369360112,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369360225,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369362015,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369629177,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369657831,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369826193,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369831257,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369840510,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369881254,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}
+{"level":30,"time":1781369891490,"pid":32676,"hostname":"ELTECH","count":14,"msg":"get users"}

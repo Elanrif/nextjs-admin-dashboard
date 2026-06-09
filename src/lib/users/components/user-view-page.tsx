@@ -25,7 +25,6 @@ function EditUserView({ userId }: { userId: number }) {
   if (!data?.ok || !data?.data) {
     notFound();
   }
-
   return <UserForm initialData={data.data as User} pageTitle="Edit User" />;
 }
 
