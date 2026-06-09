@@ -9,12 +9,20 @@ import {
 } from "@/components/ui/pagination";
 import { useEffect, useState } from "react";
 
+// PAGINATION CLIENT SIDE (FRONTEND)
+// À utiliser quand vous avez DÉJÀ TOUTES les données chargées en mémoire.
+// La pagination se fait localement en découpant les données.
+// Idéal pour petits volumes (< 5000 items).
 interface PaginationWithTextProps {
   totalItems: number;
   itemsPerPage?: number;
   onPageChange?: (page: number) => void;
 }
 
+// PAGINATION SERVER SIDE (BACKEND)
+// À utiliser quand vous chargez les données PAGE PAR PAGE via une API.
+// C'est le composant parent qui gère l'appel API et fournit currentPage et totalPages.
+// Idéal pour gros volumes de données (API avec pagination).
 interface PaginationControlsProps {
   currentPage: number;
   totalPages: number;
