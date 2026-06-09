@@ -17,18 +17,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "../ui/input";
-import {
-  MoreHorizontal,
-  Eye,
-  Pencil,
-  Trash2,
-  Copy,
-} from "lucide-react";
+import { MoreHorizontal, Eye, Pencil, Trash2, Copy } from "lucide-react";
 
 // Importez vos modals préconfigurées
 import { Modal } from "@/components/ui/modal";
 import { useModal } from "@/hooks/useModal";
 import { Button } from "../ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { PaginationControls, PaginationWithTextIcon } from "../ui/paginations";
 
 interface Product {
   id: number;
@@ -133,10 +137,15 @@ const tableData: Product[] = [
 
 type StatusFilter = "All" | "Active" | "Pending" | "Cancel";
 
+// Composant Pagination interne
+
+
 export default function BasicTableThree() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3; // Nombre d'items par page
 
   // Modals
   const viewModal = useModal();
@@ -155,6 +164,20 @@ export default function BasicTableThree() {
 
     return matchesSearch && matchesStatus;
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of table
+    document
+      .getElementById("table-top")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleExport = () => {
     console.log("Exporting data...");
@@ -195,8 +218,18 @@ export default function BasicTableThree() {
 
   const confirmDelete = () => {
     console.log("Deleting product:", selectedProduct);
-    // Logique de suppression ici
     deleteModal.closeModal();
+  };
+
+  // Reset to first page when filters change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleStatusFilterChange = (filter: StatusFilter) => {
+    setStatusFilter(filter);
+    setCurrentPage(1);
   };
 
   return (
@@ -273,7 +306,7 @@ export default function BasicTableThree() {
             type="text"
             placeholder="Search..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchChange}
             className="pl-10"
           />
         </div>
@@ -304,7 +337,7 @@ export default function BasicTableThree() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-40">
-            <DropdownMenuItem onClick={() => setStatusFilter("All")}>
+            <DropdownMenuItem onClick={() => handleStatusFilterChange("All")}>
               <div className="flex items-center gap-2">
                 {statusFilter === "All" && (
                   <svg
@@ -324,7 +357,9 @@ export default function BasicTableThree() {
                 All
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setStatusFilter("Active")}>
+            <DropdownMenuItem
+              onClick={() => handleStatusFilterChange("Active")}
+            >
               <div className="flex items-center gap-2">
                 {statusFilter === "Active" && (
                   <svg
@@ -344,7 +379,9 @@ export default function BasicTableThree() {
                 Active
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setStatusFilter("Pending")}>
+            <DropdownMenuItem
+              onClick={() => handleStatusFilterChange("Pending")}
+            >
               <div className="flex items-center gap-2">
                 {statusFilter === "Pending" && (
                   <svg
@@ -364,7 +401,9 @@ export default function BasicTableThree() {
                 Pending
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setStatusFilter("Cancel")}>
+            <DropdownMenuItem
+              onClick={() => handleStatusFilterChange("Cancel")}
+            >
               <div className="flex items-center gap-2">
                 {statusFilter === "Cancel" && (
                   <svg
@@ -389,8 +428,10 @@ export default function BasicTableThree() {
       </div>
 
       {/* Results count */}
-      <div className="text-sm text-gray-500 dark:text-gray-400">
-        Showing {filteredProducts.length} of {tableData.length} products
+      <div className="text-sm text-gray-500 dark:text-gray-400" id="table-top">
+        Showing {startIndex + 1} to{" "}
+        {Math.min(endIndex, filteredProducts.length)} of{" "}
+        {filteredProducts.length} products
       </div>
 
       {/* Table */}
@@ -442,8 +483,8 @@ export default function BasicTableThree() {
 
               {/* Table Body */}
               <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-                {filteredProducts.length > 0 ? (
-                  filteredProducts.map((product) => (
+                {currentProducts.length > 0 ? (
+                  currentProducts.map((product) => (
                     <TableRow key={product.id}>
                       <TableCell className="px-5 py-4 sm:px-6 text-start">
                         <div className="flex items-center gap-3">
@@ -507,10 +548,7 @@ export default function BasicTableThree() {
                       <TableCell className="px-4 py-3 text-start">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                            >
+                            <Button size="sm" className="h-8 w-8 p-0">
                               <MoreHorizontal className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
@@ -546,9 +584,7 @@ export default function BasicTableThree() {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell
-                      className="px-5 py-8 text-center text-gray-500 dark:text-gray-400"
-                    >
+                    <TableCell className="px-5 py-8 text-center text-gray-500 dark:text-gray-400">
                       <div className="flex flex-col items-center gap-2">
                         <svg
                           className="h-12 w-12 text-gray-300 dark:text-gray-600"
@@ -576,6 +612,13 @@ export default function BasicTableThree() {
           </div>
         </div>
       </div>
+
+      {/* Pagination */}
+      <PaginationControls
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
 
       {/* View Product Modal */}
       <Modal
@@ -684,8 +727,8 @@ export default function BasicTableThree() {
             Delete Product
           </h3>
           <p className="text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete {selectedProduct?.projectName}?
-            This action cannot be undone.
+            Are you sure you want to delete {selectedProduct?.projectName}? This
+            action cannot be undone.
           </p>
           <div className="flex justify-center gap-3 pt-4">
             <Button variant="outline" onClick={deleteModal.closeModal}>

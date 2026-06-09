@@ -15,6 +15,12 @@ interface PaginationWithTextProps {
   onPageChange?: (page: number) => void;
 }
 
+interface PaginationControlsProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
 function PaginationWithText({
   totalItems,
   itemsPerPage = 10,
@@ -448,4 +454,109 @@ function PaginationWithTextIcon({
   );
 }
 
-export { PaginationWithText, PaginationWithIcon, PaginationWithTextIcon };
+function PaginationControls({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationControlsProps) {
+  const getPageNumbers = () => {
+    const delta = 2;
+    const range = [];
+    const rangeWithDots: any = [];
+    let l: any;
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= currentPage - delta && i <= currentPage + delta)
+      ) {
+        range.push(i);
+      }
+    }
+
+    range.forEach((i) => {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push("...");
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
+    });
+
+    return rangeWithDots;
+  };
+
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+      <div className="text-sm text-gray-500 dark:text-gray-400">
+        Page {currentPage} of {totalPages}
+      </div>
+
+      <Pagination>
+        <PaginationContent className="justify-center gap-2">
+          <PaginationItem>
+            <PaginationPrevious
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage > 1) onPageChange(currentPage - 1);
+              }}
+              className={`p-5 border border-gray-300 ${
+                currentPage === 1
+                  ? "pointer-events-none opacity-50"
+                  : "hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
+            />
+          </PaginationItem>
+
+          {getPageNumbers().map((page: any, index: any) => (
+            <PaginationItem key={index}>
+              {page === "..." ? (
+                <PaginationEllipsis />
+              ) : (
+                <PaginationLink
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onPageChange(page as number);
+                  }}
+                  isActive={currentPage === page}
+                  className={`p-5 border border-gray-300 ${
+                    currentPage === page
+                      ? "bg-brand-500 text-white hover:bg-brand-600 hover:text-white dark:bg-brand-600"
+                      : "hover:bg-gray-50 dark:hover:bg-gray-800"
+                  }`}
+                >
+                  {page}
+                </PaginationLink>
+              )}
+            </PaginationItem>
+          ))}
+
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) onPageChange(currentPage + 1);
+              }}
+              className={`p-5 border border-gray-300 ${
+                currentPage === totalPages
+                  ? "pointer-events-none opacity-50"
+                  : "hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
+  );
+}
+
+export { PaginationWithText, PaginationWithIcon, PaginationWithTextIcon, PaginationControls };
