@@ -94,6 +94,8 @@ const othersItems: NavItem[] = [
     subItems: [
       { name: "Sign In", path: "/dashboard/signin", pro: false },
       { name: "Sign Up", path: "/dashboard/signup", pro: false },
+      { name: "Reset Password", path: "/dashboard/reset-password", pro: false },
+      { name: "Two-Step Verification", path: "/dashboard/two-step-verification", pro: false },
     ],
   },
 ];
