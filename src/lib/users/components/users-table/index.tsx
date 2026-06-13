@@ -23,7 +23,10 @@ import { MoreHorizontal, Eye, Pencil, Trash2, Copy, X } from "lucide-react";
 import { Modal } from "@/components/ui/modal";
 import { useModal } from "@/hooks/useModal";
 import { Button } from "@/components/ui/button";
-import { PaginationControls } from "@/components/ui/paginations";
+import {
+  PaginationControls,
+  PaginationWithTextIcon,
+} from "@/components/ui/paginations";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { usersQueryOptions } from "../../api/queries/queries.client";
 import { User } from "../../api/types";
@@ -31,7 +34,7 @@ import { ApiError } from "@/lib/_/errors/api-error";
 import { Result } from "@/lib/_/errors/response.model";
 import { deleteUserMutation } from "../../api/mutations";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import UserViewPage from "../user-view-page";
 
 type RoleFilter = "All" | "ADMIN" | "USER";
@@ -39,17 +42,31 @@ type StatusFilter = "All" | "Active" | "Inactive";
 
 export function UsersTable() {
   const route = useRouter();
-  const { data } = useSuspenseQuery(usersQueryOptions({}));
-
-  const users = data.ok ? data?.data?.data || [] : [];
-  const meta = data.ok ? data?.data?.meta : undefined;
 
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState<RoleFilter>("All");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const searchParams = useSearchParams(); // Hook pour lire les paramètres de recherche exp: url?param1=value1&param2=value2
+  const [currentPage, setCurrentPage] = useState(
+    () => Number(searchParams.get("page")) || 1,
+  );
+  const [itemsPerPage, setItemsPerPage] = useState(
+    () => Number(searchParams.get("size")) || 5,
+  );
+
+  // Construire les filtres pour la requête API
+  const filters = {
+    page: currentPage,
+    size: itemsPerPage,
+    search: searchQuery || undefined,
+    role: roleFilter !== "All" ? roleFilter : undefined,
+    isActive: statusFilter !== "All" ? statusFilter === "Active" : undefined,
+  };
+
+  const { data } = useSuspenseQuery(usersQueryOptions(filters));
+  const users = data.ok ? data?.data?.data || [] : [];
+  const meta = data.ok ? data?.data?.meta : undefined;
 
   // Modals
   const viewModal = useModal();
@@ -595,13 +612,18 @@ export function UsersTable() {
         </div>
       </div>
       {/* Pagination */}
-      {totalPages > 1 && (
+      {/* {totalPages > 1 && (
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
-      )}
+      )} */}
+      <PaginationWithTextIcon
+        totalItems={users.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
       {/* Modals Details */}
       <Modal
         isOpen={viewModal.isOpen}
