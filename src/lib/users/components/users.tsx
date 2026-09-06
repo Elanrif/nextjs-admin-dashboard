@@ -18,7 +18,6 @@ import { ErrorState } from "@/lib/shared/ui/error-state";
 import { EmptyState } from "@/lib/shared/ui/empty-state";
 
 import { exportToCSV } from "@/lib/utils";
-import { MAX_EXPORT_SIZE } from "@/lib/shared";
 import { usersQueryOptions } from "../api/queries/queries.client";
 import { deleteUserMutation } from "../api/mutations";
 import { userKeys } from "@/lib/auth/api/queries";
@@ -26,13 +25,14 @@ import { Filters } from "./ui/users-table/filters";
 import { Columns } from "./ui/users-table/columns";
 import { Row } from "./ui/users-table/row";
 import { Modals } from "./ui/users-table/modals";
-import { usePaginationParams } from "@/lib/use-pagination-params";
+import { usePageQuery } from "@/lib/use-page-query";
 import { User } from "../api/types";
 import { useUserFilters } from "./ui/users-table/use-filters";
 import environment from "@/config/environment.config";
 
 const {
   pagination: { page, size },
+  export: { maxSize: MAX_EXPORT_SIZE },
 } = environment;
 
 export function Users() {
@@ -40,7 +40,7 @@ export function Users() {
   const queryClient = useQueryClient();
 
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
-    usePaginationParams({
+    usePageQuery({
       pageParam: "page",
       sizeParam: "size",
       defaultPage: page,
@@ -119,7 +119,7 @@ export function Users() {
       { key: "status", label: "Statut" },
     ] as const;
 
-    exportToCSV(dataToExport, columnsConfig, "liste-utilisateurs.csv");
+    exportToCSV(dataToExport, columnsConfig, "users.csv");
   };
 
   if (!data.ok) {

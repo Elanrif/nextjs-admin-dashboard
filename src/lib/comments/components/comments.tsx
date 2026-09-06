@@ -13,19 +13,12 @@ import { Download, MessageSquare } from "lucide-react";
 import Button from "@/components/ui/button/Button";
 import { UnifiedPagination } from "@/components/ui/paginations";
 import { useModal } from "@/hooks/useModal";
-import {
-  Table,
-  TableBody,
-  TableHeader,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 import { postsQueryOptions } from "@/lib/posts/api/queries/queries.client";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
 import { exportToCSV } from "@/lib/utils";
-import { usePaginationParams } from "@/lib/use-pagination-params";
-import { Result, PageResponse } from "@/lib/shared/types";
-import { ApiError } from "@/lib/shared/api-error";
-
+import { usePageQuery } from "@/lib/use-page-query";
 import { commentKeys } from "../api/queries";
 import { commentsQueryOptions } from "../api/queries/queries.client";
 import { deleteCommentMutation } from "../api/mutations";
@@ -38,8 +31,7 @@ import { Modals } from "./ui/comments-table/modals";
 import { useCommentFilters } from "./ui/comments-table/use-filters";
 import { ErrorState } from "@/lib/shared/ui/error-state";
 import { EmptyState } from "@/lib/shared/ui/empty-state";
-import { MAX_EXPORT_SIZE, unwrapList } from "@/lib/shared";
-
+import environment from "@/config/environment.config";
 
 export type CommentsQueryProps = {
   queryParams?: {
@@ -48,17 +40,22 @@ export type CommentsQueryProps = {
   };
 };
 
+const {
+  pagination: { page, size },
+  export: { maxSize: MAX_EXPORT_SIZE },
+} = environment;
+
 export function Comments({ queryParams }: CommentsQueryProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const [selectedComment, setSelectedComment] = useState<Comment | null>(null);
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
-    usePaginationParams({
+    usePageQuery({
       pageParam: "page",
       sizeParam: "size",
-      defaultPage: 1,
-      defaultSize: 5,
+      defaultPage: page,
+      defaultSize: size,
     });
 
   const {
@@ -77,10 +74,10 @@ export function Comments({ queryParams }: CommentsQueryProps) {
 
   const { data } = useSuspenseQuery(commentsQueryOptions(filters));
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: MAX_EXPORT_SIZE }),
+    usersQueryOptions({ size: size }),
   );
   const { data: postsResult } = useSuspenseQuery(
-    postsQueryOptions({ size: MAX_EXPORT_SIZE }),
+    postsQueryOptions({ size: size }),
   );
 
   const viewModal = useModal();
@@ -109,7 +106,7 @@ export function Comments({ queryParams }: CommentsQueryProps) {
     const result = await queryClient.fetchQuery(
       commentsQueryOptions({ size: MAX_EXPORT_SIZE }),
     );
-    const rows = unwrapList(result);
+    const rows = result.ok ? result.data.content : [];
 
     exportToCSV(
       rows.map((comment) => ({
@@ -145,7 +142,6 @@ export function Comments({ queryParams }: CommentsQueryProps) {
     deleteModal.openModal();
   };
 
-  // Comments are the core content of this view — a failure here blocks the page.
   if (!data.ok) {
     return <ErrorState error={data.error} />;
   }
@@ -153,9 +149,8 @@ export function Comments({ queryParams }: CommentsQueryProps) {
   const comments = data.data.content;
   const pagination = data.data;
 
-  // Authors/posts only feed the filters — degrade gracefully instead of blocking the page.
-  const authors = unwrapList(usersResult);
-  const posts = unwrapList(postsResult);
+  const authors = usersResult.ok ? usersResult.data.content : [];
+  const posts = postsResult.ok ? postsResult.data.content : [];
   const authorsFailed = !usersResult.ok;
   const postsFailed = !postsResult.ok;
 

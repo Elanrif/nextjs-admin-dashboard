@@ -1,4 +1,3 @@
-import { Address } from "@/lib/addresses/api/types";
 import { PageResponse } from "@/lib/shared/types";
 
 export enum UserRole {
@@ -23,8 +22,7 @@ export interface User {
   avatarUrl?: string;
   role: UserRole;
   status: UserStatus;
-  addrSize?: number;
-  addresses?: Address[];
+  numberOfAddresses?: number;
   createdAt: string;
   updatedAt: string;
 }

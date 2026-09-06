@@ -17,7 +17,7 @@ import { Address } from "@/lib/addresses/api/types";
 import { userAddressesQueryOptions } from "@/lib/addresses/api/queries/queries.client";
 import { deleteUserAddressMutation } from "@/lib/addresses/api/mutations";
 import { addressKeys } from "@/lib/addresses/api/queries";
-import { usePaginationParams } from "@/lib/use-pagination-params";
+import { usePageQuery } from "@/lib/use-page-query";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
 import { Filters } from "./ui/addresses-card/filters";
@@ -44,7 +44,7 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
-    usePaginationParams({
+    usePageQuery({
       pageParam: "current",
       sizeParam: "limit",
       defaultPage: page,

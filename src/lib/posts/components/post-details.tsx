@@ -28,7 +28,7 @@ export default function PostDetails({ postId }: { postId: number }) {
     { id: "description", label: "Description", icon: FileText },
     {
       id: "comments",
-      label: `Commentaires (${post.commentSize ?? 0})`,
+      label: `Commentaires (${post.numberOfComments ?? 0})`,
       icon: MessageSquare,
     },
   ];
@@ -155,7 +155,7 @@ export default function PostDetails({ postId }: { postId: number }) {
                     <div className="flex items-center gap-2">
                       <span className="text-gray-500">💬</span>
                       <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {post.commentSize ?? 0}
+                        {post.numberOfComments ?? 0}
                       </span>
                     </div>
                     <span className="text-xs text-gray-500 dark:text-gray-400">

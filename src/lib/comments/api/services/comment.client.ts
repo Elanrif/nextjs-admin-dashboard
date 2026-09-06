@@ -26,9 +26,8 @@ export async function fetchComments(
 export async function fetchCommentById(
   id: number,
 ): Promise<Result<Comment, ApiError>> {
-  const res = await frontendHttp().get<
-    unknown,
-    AxiosResponse<Result<Comment, ApiError>>
-  >(`${commentsUrl}/${id}`);
+  const res = await frontendHttp().get<Result<Comment, ApiError>>(
+    `${commentsUrl}/${id}`,
+  );
   return res.data;
 }

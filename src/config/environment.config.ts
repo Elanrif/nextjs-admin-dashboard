@@ -35,6 +35,9 @@ const environment = {
       process.env.NEXT_PUBLIC_PAGINATION_DEFAULT_LIMIT || "10",
     ),
   },
+  export: {
+    maxSize: Number.parseInt(process.env.NEXT_PUBLIC_EXPORT_MAX_SIZE || "1000"),
+  },
   cloudinary: {
     cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,

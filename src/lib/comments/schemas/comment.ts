@@ -11,15 +11,9 @@ const commentSchema = z.object({
 });
 
 export const commentCreateSchema = commentSchema;
-export type CommentFormValues = z.infer<typeof commentCreateSchema>;
-export const parseCommentCreate =
-  commentCreateSchema.safeParse.bind(commentCreateSchema);
-
-export const commentUpdateSchema = commentCreateSchema
-  .partial()
-  .refine((data) => Object.keys(data).length > 0, {
-    message: "Au moins un champ doit être mis à jour",
-  });
+export const commentUpdateSchema = commentCreateSchema.partial();
+// .refine((data) => Object.keys(data).length > 0, {
+  //   message: "Au moins un champ doit être mis à jour",
+  // });
+  export type CommentFormValues = z.infer<typeof commentCreateSchema>;
 export type CommentUpdateFormValues = z.infer<typeof commentUpdateSchema>;
-export const parseCommentUpdate =
-  commentUpdateSchema.safeParse.bind(commentUpdateSchema);

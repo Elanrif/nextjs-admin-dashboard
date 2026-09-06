@@ -1,20 +1,25 @@
 "use client";
 
+import environment from "@/config/environment.config";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type UsePaginationParamsOptions = {
+type UsePageQueryOptions = {
   defaultPage?: number;
   defaultSize?: number;
   pageParam?: string;
   sizeParam?: string;
 };
 
-export function usePaginationParams({
-  defaultPage = 1,
-  defaultSize = 5,
+const {
+  pagination: { page, size },
+} = environment;
+
+export function usePageQuery({
+  defaultPage = page,
+  defaultSize = size,
   pageParam = "page",
   sizeParam: sizeParam = "size",
-}: UsePaginationParamsOptions = {}) {
+}: UsePageQueryOptions = {}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

@@ -23,7 +23,7 @@ export function Row({
       : post.description,
     post.author ? `${post.author.firstName} ${post.author.lastName}` : "—",
     <Badge key="comments" size="sm" color="light">
-      {post.commentSize || 0}
+      {post.numberOfComments || 0}
     </Badge>,
     <Badge key="likes" size="sm" color="primary">
       {post.likes}

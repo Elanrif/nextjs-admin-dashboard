@@ -36,7 +36,7 @@ export default function UserDetails({ userId }: { userId: number }) {
     {
       id: "addresses" as const,
       label: "Adresses",
-      count: user.addrSize || 0,
+      count: user.numberOfAddresses || 0,
       icon: MapPin,
     },
   ];

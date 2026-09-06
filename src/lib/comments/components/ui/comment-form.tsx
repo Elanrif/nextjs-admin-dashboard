@@ -32,7 +32,7 @@ import {
 } from "../../schemas/comment";
 import { Comment } from "../../api/types";
 import { CommentsQueryProps } from "../comments";
-import { MAX_EXPORT_SIZE } from "@/lib/shared";
+import environment from "@/config/environment.config";
 
 interface CommentFormProps {
   initialData: Comment | null;
@@ -40,6 +40,10 @@ interface CommentFormProps {
   hiddenFields?: CommentsQueryProps["queryParams"];
   onSaved?: () => void;
 }
+
+const {
+  export: { maxSize: MAX_EXPORT_SIZE },
+} = environment;
 
 export function CommentForm({
   initialData,
@@ -76,8 +80,14 @@ export function CommentForm({
     formState: { errors, isSubmitting },
   } = useForm<CommentFormValues | CommentUpdateFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: isEdit
+  ? {
       content: initialData?.content ?? "",
+      postId: selectedPostId,
+      authorId: selectedAuthorId,
+    }
+  : {
+      content: "",
       postId: selectedPostId,
       authorId: selectedAuthorId,
     },
@@ -123,8 +133,6 @@ export function CommentForm({
     },
   });
 
-  // zodResolver already validated `values` against formSchema before
-  // handleSubmit calls this — no need to re-parse here.
   const onSubmit = (values: CommentFormValues | CommentUpdateFormValues) => {
     if (isEdit) {
       updateMutation.mutate({

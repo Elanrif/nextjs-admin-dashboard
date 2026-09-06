@@ -9,7 +9,7 @@ export interface Post {
   description: string;
   likes: number;
   author: UserSummary;
-  commentSize?: number;
+  numberOfComments?: number;
   comments?: Comment[];
   createdAt: string;
   updatedAt: string;

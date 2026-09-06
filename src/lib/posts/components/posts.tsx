@@ -22,7 +22,7 @@ import { Columns } from "./ui/posts-table/columns";
 import { Row } from "./ui/posts-table/row";
 import { Post } from "../api/types";
 import { Modals } from "./ui/posts-table/modals";
-import { usePaginationParams } from "@/lib/use-pagination-params";
+import { usePageQuery } from "@/lib/use-page-query";
 import { usePostFilters } from "./ui/posts-table/use-filters";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
 import { ErrorState } from "@/lib/shared/ui/error-state";
@@ -36,17 +36,22 @@ export type PostQueryProps = {
   };
 };
 
+const {
+  pagination: { page, size },
+  export: { maxSize: MAX_EXPORT_SIZE },
+} = environment;
+
 export function Posts({ queryParams }: PostQueryProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
-    usePaginationParams({
+    usePageQuery({
       pageParam: "page",
       sizeParam: "size",
-      defaultPage: 1,
-      defaultSize: 5,
+      defaultPage: page,
+      defaultSize: size,
     });
 
   const { filters, searchQuery, authorId, handleSearch, handleAuthorChange } =
@@ -96,10 +101,10 @@ export function Posts({ queryParams }: PostQueryProps) {
 
   const { data } = useSuspenseQuery(postsQueryOptions(filters));
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: environment.pagination.size }),
+    usersQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
   const allQuery = useSuspenseQuery(
-    postsQueryOptions({ size: environment.pagination.size }),
+    postsQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
 
   if (!data?.ok) {

@@ -213,8 +213,8 @@ export default function Posts() {
                       className="inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
                     >
                       <MessageSquare size={17} />
-                      {(post.commentSize as number) > 0
-                        ? `${post.commentSize} commentaire${(post.commentSize as number) > 1 ? "s" : ""}`
+                      {(post.numberOfComments as number) > 0
+                        ? `${post.numberOfComments} commentaire${(post.numberOfComments as number) > 1 ? "s" : ""}`
                         : `Aucun commentaire`}
                       {isExpanded ? (
                         <ChevronUp size={15} />

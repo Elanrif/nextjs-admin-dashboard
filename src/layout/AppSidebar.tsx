@@ -18,7 +18,8 @@ import {
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
-import { ShoppingBasket } from "lucide-react";
+import { MenuIcon, ShoppingBasket } from "lucide-react";
+import { ROUTES } from "@/utils/routes";
 
 type NavItem = {
   name: string;
@@ -27,20 +28,22 @@ type NavItem = {
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
+const { DASHBOARD, USERS, POSTS, COMMENTS } = ROUTES;
+
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Home",
-    path: "/dashboard",
+    path: DASHBOARD,
   },
   {
-    icon: <ShoppingBasket />,
-    name: "Store",
+    icon: <MenuIcon />,
+    name: "Main",
     subItems: [
-      { name: "Users", path: "/dashboard/users", pro: false },
-      { name: "Posts", path: "/dashboard/posts", pro: false },
-      { name: "Comments", path: "/dashboard/comments", pro: false },
-      ],
+      { name: "Users", path: `${DASHBOARD}/${USERS}`, pro: false },
+      { name: "Posts", path: `${DASHBOARD}/${POSTS}`, pro: false },
+      { name: "Comments", path: `${DASHBOARD}/${COMMENTS}`, pro: false },
+    ],
   },
   {
     icon: <CalenderIcon />,

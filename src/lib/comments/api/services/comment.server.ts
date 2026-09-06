@@ -12,10 +12,10 @@ import { checkValidId } from "@/utils";
 import { Result } from "@/lib/shared/types";
 import { ApiError, fromZodError } from "@/lib/shared/api-error";
 import {
+  commentCreateSchema,
   CommentFormValues,
   CommentUpdateFormValues,
-  parseCommentCreate,
-  parseCommentUpdate,
+  commentUpdateSchema
 } from "../../schemas/comment";
 
 const {
@@ -65,7 +65,7 @@ export async function getCommentById(
 export async function createComment(
   comment: CommentFormValues,
 ): Promise<Result<Comment, ApiError>> {
-  const parse = parseCommentCreate(comment);
+  const parse = commentCreateSchema.safeParse(comment);
 
   if (!parse.success) {
     return {
@@ -98,7 +98,7 @@ export async function updateComment(
   const idCheck = checkValidId(id, "comment");
   if (idCheck) return idCheck;
 
-  const parse = parseCommentUpdate(comment);
+  const parse = commentUpdateSchema.safeParse(comment);
 
   if (!parse.success) {
     return {
