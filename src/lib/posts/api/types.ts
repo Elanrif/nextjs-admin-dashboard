@@ -4,7 +4,7 @@
  */
 
 import { Comment } from "@/lib/comments/api/types";
-import { Meta } from "@/lib/shared/types";
+import { PageResponse } from "@/lib/shared/types";
 import { UserSummary } from "@/lib/users/api/types";
 
 // ============================================================================
@@ -24,10 +24,7 @@ export interface Post {
   updatedAt: string;
 }
 
-export type PostsResponse = {
-  data: Post[];
-  meta: Meta;
-};
+export type PostsResponse = PageResponse<Post>;
 
 // ============================================================================
 // REQUEST & RESPONSE TYPES

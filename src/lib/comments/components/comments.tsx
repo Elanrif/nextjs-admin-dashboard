@@ -6,17 +6,25 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Download } from "lucide-react";
+import { Download, MessageSquare } from "lucide-react";
 
 import Button from "@/components/ui/button/Button";
 import { UnifiedPagination } from "@/components/ui/paginations";
 import { useModal } from "@/hooks/useModal";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+} from "@/components/ui/table";
 
 import { postsQueryOptions } from "@/lib/posts/api/queries/queries.client";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
 import { exportToCSV } from "@/lib/utils";
 import { usePaginationParams } from "@/lib/use-pagination-params";
+import { Result, PageResponse } from "@/lib/shared/types";
+import { ApiError } from "@/lib/shared/api-error";
 
 import { commentKeys } from "../api/queries";
 import { commentsQueryOptions } from "../api/queries/queries.client";
@@ -28,24 +36,23 @@ import { Columns } from "./ui/comments-table/columns";
 import { Row } from "./ui/comments-table/row";
 import { Modals } from "./ui/comments-table/modals";
 import { useCommentFilters } from "./ui/comments-table/use-filters";
-import { useRouter } from "next/navigation";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { ErrorState } from "@/lib/shared/ui/error-state";
+import { EmptyState } from "@/lib/shared/ui/empty-state";
+
+const MAX_EXPORT_SIZE = 1000;
+
+function unwrapList<T>(result: Result<PageResponse<T>, ApiError>): T[] {
+  return result.ok ? result.data.content : [];
+}
 
 export type CommentsQueryProps = {
-  // Optional parameters provided by the parent to scope the comments.
   queryParams?: {
     postId?: number;
     authorId?: number;
   };
 };
 
-export function Comments({ queryParams}: CommentsQueryProps) {
+export function Comments({ queryParams }: CommentsQueryProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -73,20 +80,11 @@ export function Comments({ queryParams}: CommentsQueryProps) {
   });
 
   const { data } = useSuspenseQuery(commentsQueryOptions(filters));
-  const comments = data.ok ? data.data.data : [];
-  const meta = data.ok ? data.data.meta : null;
-
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
+    usersQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
   const { data: postsResult } = useSuspenseQuery(
-    postsQueryOptions({ size: 1000 }),
-  );
-  const authors = usersResult.ok ? usersResult.data.data : [];
-  const posts = postsResult.ok ? postsResult.data.data : [];
-
-  const { data: allCommentsData } = useSuspenseQuery(
-    commentsQueryOptions({ size: 1000 }),
+    postsQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
 
   const viewModal = useModal();
@@ -96,28 +94,26 @@ export function Comments({ queryParams}: CommentsQueryProps) {
 
   const deleteMutation = useMutation({
     ...deleteCommentMutation,
-
     onSuccess: (result) => {
       if (!result.ok) {
         toast.error(result.error.message);
         return;
       }
 
-      void queryClient.invalidateQueries({
-        queryKey: commentKeys.all,
-      });
-
+      void queryClient.invalidateQueries({ queryKey: commentKeys.all });
       toast.success("Comment deleted successfully");
 
       deleteModal.closeModal();
       setSelectedComment(null);
-
       router.refresh();
     },
   });
 
-  const exportComments = () => {
-    const rows = allCommentsData.ok ? allCommentsData.data.data : [];
+  const exportComments = async () => {
+    const result = await queryClient.fetchQuery(
+      commentsQueryOptions({ size: MAX_EXPORT_SIZE }),
+    );
+    const rows = unwrapList(result);
 
     exportToCSV(
       rows.map((comment) => ({
@@ -153,11 +149,23 @@ export function Comments({ queryParams}: CommentsQueryProps) {
     deleteModal.openModal();
   };
 
-  const startIndex =
-    meta && comments.length > 0 ? (meta.page - 1) * meta.size + 1 : 0;
+  // Comments are the core content of this view — a failure here blocks the page.
+  if (!data.ok) {
+    return <ErrorState error={data.error} />;
+  }
 
-  const endIndex =
-    meta && comments.length > 0 ? startIndex + comments.length - 1 : 0;
+  const comments = data.data.content;
+  const pagination = data.data;
+
+  // Authors/posts only feed the filters — degrade gracefully instead of blocking the page.
+  const authors = unwrapList(usersResult);
+  const posts = unwrapList(postsResult);
+  const authorsFailed = !usersResult.ok;
+  const postsFailed = !postsResult.ok;
+
+  const startIndex =
+    comments.length > 0 ? (pagination.page - 1) * pagination.size + 1 : 0;
+  const endIndex = comments.length > 0 ? startIndex + comments.length - 1 : 0;
 
   return (
     <div className="space-y-4">
@@ -165,7 +173,6 @@ export function Comments({ queryParams}: CommentsQueryProps) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold">Comments List</h2>
-
           <p className="text-sm text-gray-500">Manage your comments.</p>
         </div>
 
@@ -197,22 +204,30 @@ export function Comments({ queryParams}: CommentsQueryProps) {
         itemsPerPage={itemsPerPage}
         onLimitChange={handleSizeChange}
       />
+      {(authorsFailed || postsFailed) && (
+        <p className="text-sm text-amber-600">
+          {authorsFailed && postsFailed
+            ? "Unable to load authors and posts filters."
+            : authorsFailed
+              ? "Unable to load authors filter."
+              : "Unable to load posts filter."}
+        </p>
+      )}
 
       {/* INFO */}
       <div className="text-sm text-gray-500">
-        Showing {startIndex} to {endIndex} of {meta?.total ?? 0} comments
+        Showing {startIndex} to {endIndex} of {pagination.total} comments
       </div>
 
-      {/* TABLE */}
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
-        <Table>
-          <TableHeader className="text-start bg-green-600 text-white border-b border-gray-100 dark:border-white/5">
-            <Columns />
-          </TableHeader>
-
-          <TableBody>
-            {comments.length > 0 ? (
-              comments.map((comment) => (
+        {/* TABLE */}
+        {comments.length > 0 ? (
+          <Table>
+            <TableHeader className="text-start bg-brand-500 text-white border-b border-gray-100 dark:border-white/5">
+              <Columns />
+            </TableHeader>
+            <TableBody>
+              {comments.map((comment) => (
                 <Row
                   key={comment.id}
                   comment={comment}
@@ -220,36 +235,33 @@ export function Comments({ queryParams}: CommentsQueryProps) {
                   onEdit={handleEdit}
                   onDelete={handleDelete}
                 />
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={5}
-                  className="py-8 text-center text-gray-500"
-                >
-                  No comments found
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <EmptyState
+            icon={MessageSquare}
+            title="Aucun commentaire"
+            description="Aucun commentaire ne correspond à ces critères pour le moment."
+            fullWidth={false}
+            className="border-0 bg-transparent"
+          />
+        )}
       </div>
 
       {/* PAGINATION */}
-      {meta && (
-        <UnifiedPagination
-          mode="server"
-          currentPage={meta.page}
-          totalPages={meta.totalPages}
-          totalItems={meta.total}
-          itemsPerPage={meta.size}
-          onPageChange={handlePageChange}
-          variant="both"
-        />
-      )}
+      <UnifiedPagination
+        mode="server"
+        currentPage={pagination.page}
+        totalPages={pagination.totalPages}
+        totalItems={pagination.total}
+        itemsPerPage={pagination.size}
+        onPageChange={handlePageChange}
+        variant="both"
+      />
 
       {/* MODALS */}
-      {/* 
+      {/*
       Optional queryParams scope the create/edit forms and hide the
       corresponding select fields.
       When omitted, the related fields remain
@@ -259,22 +271,10 @@ export function Comments({ queryParams}: CommentsQueryProps) {
         selectedComment={selectedComment}
         hiddenFields={{ authorId, postId }}
         modals={{
-          view: {
-            isOpen: viewModal.isOpen,
-            close: viewModal.closeModal,
-          },
-          edit: {
-            isOpen: editModal.isOpen,
-            close: editModal.closeModal,
-          },
-          create: {
-            isOpen: createModal.isOpen,
-            close: createModal.closeModal,
-          },
-          delete: {
-            isOpen: deleteModal.isOpen,
-            close: deleteModal.closeModal,
-          },
+          view: { isOpen: viewModal.isOpen, close: viewModal.closeModal },
+          edit: { isOpen: editModal.isOpen, close: editModal.closeModal },
+          create: { isOpen: createModal.isOpen, close: createModal.closeModal },
+          delete: { isOpen: deleteModal.isOpen, close: deleteModal.closeModal },
         }}
         onConfirmDelete={() =>
           selectedComment && deleteMutation.mutate(selectedComment.id)

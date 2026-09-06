@@ -9,7 +9,7 @@ export const commentsQueryOptions = (filters: CommentFilters) =>
     queryFn: () => fetchComments(filters),
   });
 
-export const commentByIdOptions = (id: number) =>
+export const commentByIdQueryOptions = (id: number) =>
   queryOptions({
     queryKey: commentKeys.detail(id),
     queryFn: () => fetchCommentById(id),

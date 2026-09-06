@@ -28,13 +28,16 @@ export function isValidImgUrl(url: unknown): url is string {
   );
 }
 
-export function validateId(id: number): Result<never, ApiError> | null {
+export function checkValidId(
+  id: number,
+  entity = "resource",
+): Result<never, ApiError> | null {
   if (!Number.isInteger(id) || id <= 0) {
     return {
       ok: false,
       error: {
         status: 400,
-        message: "Invalid user ID",
+        message: `Invalid ${entity} ID`,
         error: "INVALID_ID",
       },
     };

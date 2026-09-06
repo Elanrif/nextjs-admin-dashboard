@@ -2,7 +2,7 @@
 // CORE ENTITIES
 // ============================================================================
 
-import { Meta } from "@/lib/shared/types";
+import { PageResponse } from "@/lib/shared/types";
 
 export interface Address {
   id: number;
@@ -18,10 +18,7 @@ export interface Address {
 // REQUEST & RESPONSE TYPES
 // ============================================================================
 
-export type AddressesResponse = {
-  data: Address[];
-  meta: Meta;
-};
+export type AddressesResponse = PageResponse<Address>;
 
 /*
  * These filters are used within a parent resource that has its own pagination.

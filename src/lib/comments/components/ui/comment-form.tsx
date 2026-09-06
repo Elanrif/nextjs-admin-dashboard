@@ -9,6 +9,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { LoaderIcon } from "lucide-react";
 
 import { postsQueryOptions } from "@/lib/posts/api/queries/queries.client";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
@@ -17,7 +18,6 @@ import ComponentCard from "@/components/common/ComponentCard";
 import Select from "@/components/form/Select";
 import Button from "@/components/ui/button/Button";
 import { ChevronDownIcon, PlusIcon } from "@/icons";
-import { LoaderIcon } from "lucide-react";
 import { User } from "@/lib/users/api/types";
 import {
   createCommentMutation,
@@ -30,14 +30,12 @@ import {
   CommentUpdateFormValues,
   commentUpdateSchema,
 } from "../../schemas/comment";
-import { Comment, CommentCreate, CommentUpdate } from "../../api/types";
+import { Comment } from "../../api/types";
 import { CommentsQueryProps } from "../comments";
 
 interface CommentFormProps {
   initialData: Comment | null;
   pageTitle: string;
-  postId?: number;
-  authorId?: number;
   hiddenFields?: CommentsQueryProps["queryParams"];
   onSaved?: () => void;
 }
@@ -59,16 +57,16 @@ export function CommentForm({
   const showAuthorSelect = selectedAuthorId == null;
 
   const formSchema = isEdit ? commentUpdateSchema : commentCreateSchema;
+
   const { data: postsResult } = useSuspenseQuery(
     postsQueryOptions({ size: 1000 }),
   );
-
   const { data: usersResult } = useSuspenseQuery(
     usersQueryOptions({ size: 1000 }),
   );
 
-  const posts = postsResult.ok ? postsResult.data.data : [];
-  const users = usersResult.ok ? usersResult.data.data : [];
+  const posts = postsResult.ok ? postsResult.data.content : [];
+  const users = usersResult.ok ? usersResult.data.content : [];
 
   const {
     register,
@@ -77,7 +75,6 @@ export function CommentForm({
     formState: { errors, isSubmitting },
   } = useForm<CommentFormValues | CommentUpdateFormValues>({
     resolver: zodResolver(formSchema),
-
     defaultValues: {
       content: initialData?.content ?? "",
       postId: selectedPostId,
@@ -85,82 +82,58 @@ export function CommentForm({
     },
   });
 
-  // Création
   const createMutation = useMutation({
     ...createCommentMutation,
-
     onSuccess: async (result) => {
       if (!result.ok) {
-        toast.error(result.error?.message || "Failed to create comment");
+        toast.error(result.error.message);
         return;
       }
 
-      await queryClient.invalidateQueries({
-        queryKey: commentKeys.all,
-      });
-
+      await queryClient.invalidateQueries({ queryKey: commentKeys.all });
       toast.success("Comment created successfully");
       onSaved?.();
-
-      //router.push("/dashboard/comments");
       router.refresh();
     },
-
-    onError: () => {
-      toast.error("Failed to create comment");
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to create comment",
+      );
     },
   });
 
-  // Modification
   const updateMutation = useMutation({
     ...updateCommentMutation,
-
     onSuccess: async (result) => {
       if (!result.ok) {
-        toast.error(result.error?.message || "Failed to update comment");
+        toast.error(result.error.message);
         return;
       }
 
-      await queryClient.invalidateQueries({
-        queryKey: commentKeys.all,
-      });
-
+      await queryClient.invalidateQueries({ queryKey: commentKeys.all });
       toast.success("Comment updated successfully");
-
       onSaved?.();
-
-      //router.push("/dashboard/comments");
       router.refresh();
     },
-
-    onError: () => {
-      toast.error("Failed to update comment");
+    onError: (error) => {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to update comment",
+      );
     },
   });
 
+  // zodResolver already validated `values` against formSchema before
+  // handleSubmit calls this — no need to re-parse here.
   const onSubmit = (values: CommentFormValues | CommentUpdateFormValues) => {
     if (isEdit) {
-      const parsed = commentUpdateSchema.safeParse(values);
-
-      if (parsed.success) {
-        const payload: CommentUpdate = parsed.data;
-
-        updateMutation.mutate({
-          id: initialData.id,
-          values: payload,
-        });
-      }
-
+      updateMutation.mutate({
+        id: initialData.id,
+        values: values as CommentUpdateFormValues,
+      });
       return;
     }
 
-    const parsed = commentCreateSchema.safeParse(values);
-
-    if (parsed.success) {
-      const payload: CommentCreate = parsed.data;
-
-      createMutation.mutate(payload);
-    }
+    createMutation.mutate(values as CommentFormValues);
   };
 
   const isSaving =
@@ -171,7 +144,7 @@ export function CommentForm({
       {Object.keys(errors).length > 0 && (
         <ComponentCard>
           <p className="text-sm text-error-500">
-            Certains champs contiennent des erreurs. Veuillez les corriger.
+            Some fields contain errors. Please fix them.
           </p>
         </ComponentCard>
       )}
@@ -276,7 +249,6 @@ export function CommentForm({
         disabled={isSaving}
       >
         {isSaving ? "Saving..." : isEdit ? "Edit comment" : "Create comment"}
-
         {isSaving && <LoaderIcon className="ml-2 animate-spin" />}
       </Button>
     </form>

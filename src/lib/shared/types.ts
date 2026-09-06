@@ -1,4 +1,5 @@
-export type Meta = {
+export type PageResponse<T> = {
+  content: T[];
   total: number;
   page: number;
   size: number;

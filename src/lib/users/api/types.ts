@@ -1,5 +1,5 @@
 import { Address } from "@/lib/addresses/api/types";
-import { Meta } from "@/lib/shared/types";
+import { PageResponse } from "@/lib/shared/types";
 
 export enum UserRole {
   USER = "USER",
@@ -55,10 +55,7 @@ export type UserFilters = {
   sort?: string;
 };
 
-export type UsersResponse = {
-  data: User[];
-  meta: Meta;
-};
+export type UsersResponse = PageResponse<User>;
 
 export interface UserLogin {
   token: string;

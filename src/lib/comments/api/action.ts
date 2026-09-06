@@ -6,12 +6,13 @@ import {
   updateComment,
   deleteComment,
 } from "./services/comment.server";
-import { Comment, CommentCreate, CommentUpdate } from "./types";
+import { Comment} from "./types";
 import { ApiError } from "@/lib/shared/api-error";
 import { Result } from "@/lib/shared/types";
+import { CommentFormValues, CommentUpdateFormValues } from "../schemas/comment";
 
 export async function createCommentAction(
-  data: CommentCreate,
+  data: CommentFormValues,
 ): Promise<Result<Comment, ApiError>> {
   const result = await createComment(data);
   if (result.ok) {
@@ -22,7 +23,7 @@ export async function createCommentAction(
 
 export async function updateCommentAction(
   id: number,
-  data: CommentUpdate,
+  data: CommentUpdateFormValues,
 ): Promise<Result<Comment, ApiError>> {
   const result = await updateComment(id, data);
   if (result.ok) {

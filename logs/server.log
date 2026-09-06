@@ -3763,3 +3763,62 @@
 {"level":30,"time":1788205387972,"pid":18204,"hostname":"ELTECH","filters":{"page":1,"size":5,"authorId":2},"count":3,"msg":"Posts fetched"}
 {"level":30,"time":1788205388018,"pid":18204,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
 {"level":30,"time":1788207331938,"pid":18204,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207388079,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207388099,"pid":17452,"hostname":"ELTECH","filters":{"page":1,"size":5,"authorId":2},"count":3,"msg":"Posts fetched"}
+{"level":30,"time":1788207388105,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207395507,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207423807,"pid":17452,"hostname":"ELTECH","msg":"Request to safe URL http://localhost:8081/api/v1/auth/login, skipping token interceptor"}
+{"level":30,"time":1788207424162,"pid":17452,"hostname":"ELTECH","id":2,"email":"visitor@gmail.com","msg":"User signed in"}
+{"level":30,"time":1788207433945,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207444180,"pid":17452,"hostname":"ELTECH","id":26,"content":"Oui il a fait son temps","msg":"Comment created successfully"}
+{"level":30,"time":1788207450776,"pid":17452,"hostname":"ELTECH","id":10,"msg":"Post fetched"}
+{"level":30,"time":1788207471026,"pid":17452,"hostname":"ELTECH","id":10,"msg":"Post updated"}
+{"level":30,"time":1788207471105,"pid":17452,"hostname":"ELTECH","id":10,"msg":"Post fetched"}
+{"level":30,"time":1788207471114,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207502178,"pid":17452,"hostname":"ELTECH","id":10,"msg":"Post updated"}
+{"level":30,"time":1788207502274,"pid":17452,"hostname":"ELTECH","id":10,"msg":"Post fetched"}
+{"level":30,"time":1788207502287,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207516600,"pid":17452,"hostname":"ELTECH","filters":{"page":1,"size":5},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207516673,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207519149,"pid":17452,"hostname":"ELTECH","filters":{"page":3,"size":5},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207525173,"pid":17452,"hostname":"ELTECH","id":2,"msg":"User fetched"}
+{"level":30,"time":1788207526140,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":7,"msg":"User addresses fetched"}
+{"level":30,"time":1788207532628,"pid":17452,"hostname":"ELTECH","addressId":6,"msg":"Address fetched"}
+{"level":30,"time":1788207535077,"pid":17452,"hostname":"ELTECH","addressId":6,"msg":"Address updated"}
+{"level":30,"time":1788207535825,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":7,"msg":"User addresses fetched"}
+{"level":30,"time":1788207535904,"pid":17452,"hostname":"ELTECH","addressId":6,"msg":"Address fetched"}
+{"level":30,"time":1788207536130,"pid":17452,"hostname":"ELTECH","addressId":6,"msg":"Address fetched"}
+{"level":30,"time":1788207536204,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":7,"msg":"User addresses fetched"}
+{"level":30,"time":1788207541830,"pid":17452,"hostname":"ELTECH","addressId":4,"msg":"Address deleted"}
+{"level":30,"time":1788207541980,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":6,"msg":"User addresses fetched"}
+{"level":30,"time":1788207542084,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":6,"msg":"User addresses fetched"}
+{"level":30,"time":1788207547643,"pid":17452,"hostname":"ELTECH","addressId":3,"msg":"Address deleted"}
+{"level":30,"time":1788207547876,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":5,"msg":"User addresses fetched"}
+{"level":30,"time":1788207547975,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":5,"msg":"User addresses fetched"}
+{"level":30,"time":1788207555697,"pid":17452,"hostname":"ELTECH","filters":{"page":3,"size":5},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207558770,"pid":17452,"hostname":"ELTECH","filters":{"page":1,"size":5},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207558798,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207564461,"pid":17452,"hostname":"ELTECH","id":2,"msg":"User fetched"}
+{"level":30,"time":1788207565690,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":5,"msg":"User addresses fetched"}
+{"level":30,"time":1788207572518,"pid":17452,"hostname":"ELTECH","addressId":2,"msg":"Address deleted"}
+{"level":30,"time":1788207572641,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207572809,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207589342,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?userId=2","filters":{"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207593642,"pid":17452,"hostname":"ELTECH","addressId":7,"msg":"Address fetched"}
+{"level":30,"time":1788207595553,"pid":17452,"hostname":"ELTECH","addressId":7,"msg":"Address updated"}
+{"level":30,"time":1788207595668,"pid":17452,"hostname":"ELTECH","addressId":7,"msg":"Address fetched"}
+{"level":30,"time":1788207595685,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207595736,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207595741,"pid":17452,"hostname":"ELTECH","addressId":7,"msg":"Address fetched"}
+{"level":30,"time":1788207600507,"pid":17452,"hostname":"ELTECH","filters":{"page":1,"size":5,"authorId":2},"count":3,"msg":"Posts fetched"}
+{"level":30,"time":1788207600558,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207612135,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?userId=2","filters":{"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207627247,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?userId=2","filters":{"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207636713,"pid":17452,"hostname":"ELTECH","url":"http://localhost:8081/api/v1/addresses?page=1&size=5&userId=2","filters":{"current":1,"limit":5,"userId":2},"count":4,"msg":"User addresses fetched"}
+{"level":30,"time":1788207657766,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207657799,"pid":17452,"hostname":"ELTECH","filters":{"page":1,"size":5},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207657828,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207660213,"pid":17452,"hostname":"ELTECH","filters":{"page":2,"size":5},"count":6,"msg":"Posts fetched"}
+{"level":30,"time":1788207666128,"pid":17452,"hostname":"ELTECH","id":1,"msg":"Post fetched"}
+{"level":30,"time":1788207722223,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":16,"msg":"Users fetched"}
+{"level":30,"time":1788207722240,"pid":17452,"hostname":"ELTECH","filters":{"size":1000},"count":6,"msg":"Posts fetched"}

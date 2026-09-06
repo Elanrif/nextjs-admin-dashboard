@@ -3,10 +3,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 
-import { Comment } from "../api/types";
-import { commentByIdOptions } from "../api/queries/queries.client";
+import { commentByIdQueryOptions } from "../api/queries/queries.client";
 import { CommentForm } from "./ui/comment-form";
 import { CommentsQueryProps } from "./comments";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 type CommentFormViewProps = {
   commentId: string;
@@ -18,7 +18,7 @@ export default function CommentFormView({
   commentId,
   onSaved,
   hiddenFields: { postId, authorId } = {},
-}: CommentFormViewProps & CommentsQueryProps) {
+}: CommentFormViewProps) {
   if (commentId === "new") {
     return (
       <CommentForm
@@ -30,33 +30,45 @@ export default function CommentFormView({
     );
   }
 
+  const numericId = Number(commentId);
+  if (Number.isNaN(numericId)) {
+    notFound();
+    return null;
+  }
+
   return (
     <EditCommentView
-      commentId={Number(commentId)}
+      commentId={numericId}
       hiddenFields={{ postId, authorId }}
       onSaved={onSaved}
     />
   );
 }
 
+type EditCommentViewProps = {
+  commentId: number;
+  onSaved?: () => void;
+  hiddenFields?: CommentsQueryProps["queryParams"];
+};
+
 function EditCommentView({
   commentId,
   hiddenFields: { postId, authorId } = {},
   onSaved,
-}: {
-  commentId: number;
-  onSaved?: () => void;
-  hiddenFields?: CommentsQueryProps["queryParams"];
-}) {
-  const { data } = useSuspenseQuery(commentByIdOptions(commentId));
+}: EditCommentViewProps) {
+  const { data } = useSuspenseQuery(commentByIdQueryOptions(commentId));
 
-  if (!data?.ok || !data.data) {
-    notFound();
+  if (!data.ok) {
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
 
   return (
     <CommentForm
-      initialData={data.data as Comment}
+      initialData={data.data}
       pageTitle="Edit Comment"
       onSaved={onSaved}
       hiddenFields={{ postId, authorId }}
