@@ -16,23 +16,10 @@ const {
 export async function fetchUserAddresses(
   filters: AddressFilters = {},
 ): Promise<Result<AddressesResponse, ApiError>> {
-  const cleanParams: Record<string, string> = {};
-
-  // Filter keys are mapped directly to URL search parameters.
-  // => /addresses?filters.key1=filters.value1&filters.key2=filters.value2
-  for (const [key, value] of Object.entries(filters)) {
-    if (value !== undefined && value !== null && value !== "") {
-      cleanParams[key] = String(value);
-    }
-  }
-
-  const queryParams = new URLSearchParams(cleanParams).toString();
-  const url = `${addressesUrl}${queryParams ? `?${queryParams}` : ""}`;
-  console.log("fetchUserAddresses URL:", url); // Debugging line
-  const res = await frontendHttp().get<
-    unknown,
-    AxiosResponse<Result<AddressesResponse, ApiError>>
-  >(url);
+  const res = await frontendHttp().get<Result<AddressesResponse, ApiError>>(
+    addressesUrl,
+    { params: filters }
+  );
 
   return res.data;
 }
@@ -40,10 +27,10 @@ export async function fetchUserAddresses(
 export async function fetchUserAddressById(
   addressId: number,
 ): Promise<Result<Address, ApiError>> {
-  const res = await frontendHttp().get<
-    unknown,
-    AxiosResponse<Result<Address, ApiError>>
-  >(`${addressesUrl}/${addressId}`);
+  const res = await frontendHttp().get<Result<Address, ApiError>>(
+    `${addressesUrl}/${addressId}`,
+    { params: { id: addressId } }
+  );
 
   return res.data;
 }

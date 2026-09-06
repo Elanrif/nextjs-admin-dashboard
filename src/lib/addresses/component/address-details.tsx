@@ -1,13 +1,17 @@
 import { Building2, Globe, Hash, MapPin, MapPinned } from "lucide-react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import notFound from "@/app/not-found";
-import { userAddressesByIdOptions } from "../api/queries/queries.client";
+import { userAddressesByIdQueryOptions } from "../api/queries/queries.client";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 export default function AddressDetails({ addressId }: { addressId: number }) {
-  const { data } = useSuspenseQuery(userAddressesByIdOptions(addressId));
+  const { data } = useSuspenseQuery(userAddressesByIdQueryOptions(addressId));
   if (!data.ok) {
-    notFound();
-    return null;
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
   const address = data.data;
 

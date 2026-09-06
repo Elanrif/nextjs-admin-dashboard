@@ -9,14 +9,14 @@ import {
   updateAddressAction,
 } from "./action";
 import { addressKeys } from "./queries";
-import { AddressCreatePayload, AddressUpdatePayload } from "../schemas/address";
+import { AddressFormValues } from "../schemas/address";
 
 
 export const createUserAddressMutation = mutationOptions({
   mutationFn: ({
     payload,
   }: {
-    payload: AddressCreatePayload;
+    payload: AddressFormValues;
   }) => createUserAddressAction(payload),
 
   onSettled: () => {
@@ -32,7 +32,7 @@ export const updateAddressMutation = mutationOptions({
     payload,
   }: {
     addressId: number;
-    payload: Partial<AddressUpdatePayload>;
+    payload: Partial<AddressFormValues>;
   }) => updateAddressAction(addressId, payload),
 
   onSettled: () => {

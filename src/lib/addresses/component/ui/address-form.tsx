@@ -1,7 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -27,6 +31,7 @@ import { AddressesQueryProps } from "../addresses";
 import Select from "@/components/form/Select";
 import { User } from "@/lib/users/api/types";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 export default function AddressForm({
   initialData,
@@ -49,7 +54,6 @@ export default function AddressForm({
   const { data: usersResult } = useSuspenseQuery(
     usersQueryOptions({ size: 1000 }),
   );
-  const users = usersResult.ok ? usersResult.data.data : [];
 
   const {
     register,
@@ -116,28 +120,15 @@ export default function AddressForm({
 
   const onSubmit = (values: AddressFormValues | AddressUpdateFormValues) => {
     if (isEdit && initialData) {
-      const parsed = addressUpdateSchema.safeParse(values);
-      if (parsed.success) {
-        updateMutation.mutate({
-          addressId: initialData.id,
-          payload: parsed.data,
-        });
-      }
-      return;
-    }
-
-    const parsed = addressCreateSchema.safeParse(values);
-    if (!parsed.success) {
-      return;
-    }
-
-    if (!userId) {
-      toast.error("User is required to create an address");
+      updateMutation.mutate({
+        addressId: initialData.id,
+        payload: values as AddressUpdateFormValues,
+      });
       return;
     }
 
     createMutation.mutate({
-      payload: parsed.data,
+      payload: values as AddressFormValues,
     });
   };
 
@@ -147,6 +138,11 @@ export default function AddressForm({
       shouldValidate: true,
     });
   };
+
+  if (!usersResult.ok) {
+    return <ErrorState error={usersResult.error} />;
+  }
+  const users = usersResult.data.content;
 
   const isSaving =
     isSubmitting || createMutation.isPending || updateMutation.isPending;
@@ -254,9 +250,7 @@ export default function AddressForm({
             />
 
             {errors.userId && (
-              <p className="text-sm text-error-500">
-                {errors.userId.message}
-              </p>
+              <p className="text-sm text-error-500">{errors.userId.message}</p>
             )}
           </div>
         ) : (

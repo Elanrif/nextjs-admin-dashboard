@@ -32,6 +32,7 @@ import {
 } from "../../schemas/comment";
 import { Comment } from "../../api/types";
 import { CommentsQueryProps } from "../comments";
+import { MAX_EXPORT_SIZE } from "@/lib/shared";
 
 interface CommentFormProps {
   initialData: Comment | null;
@@ -59,10 +60,10 @@ export function CommentForm({
   const formSchema = isEdit ? commentUpdateSchema : commentCreateSchema;
 
   const { data: postsResult } = useSuspenseQuery(
-    postsQueryOptions({ size: 1000 }),
+    postsQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
+    usersQueryOptions({ size: MAX_EXPORT_SIZE }),
   );
 
   const posts = postsResult.ok ? postsResult.data.content : [];

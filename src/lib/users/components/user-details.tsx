@@ -13,16 +13,20 @@ import Image from "next/image";
 import { Addresses } from "@/lib/addresses/component/addresses";
 import notFound from "@/app/not-found";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { userByIdOptions } from "../api/queries/queries.client";
+import { userByIdQueryOptions } from "../api/queries/queries.client";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 export default function UserDetails({ userId }: { userId: number }) {
   const [activeTab, setActiveTab] = useState<"info" | "addresses">("info");
-  const { data } = useSuspenseQuery(userByIdOptions(userId));
+  const { data } = useSuspenseQuery(userByIdQueryOptions(userId));
   if (!data.ok) {
-    notFound();
-    return null;
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
-  const user: User = data.data;
+  const user = data.data;
 
   const tabs = [
     {
@@ -257,7 +261,9 @@ export default function UserDetails({ userId }: { userId: number }) {
         {/* ADDRESSES */}
         {/* ======================================================= */}
 
-        {activeTab === "addresses" && <Addresses queryParams={{ userId: user.id }} />}
+        {activeTab === "addresses" && (
+          <Addresses queryParams={{ userId: user.id }} />
+        )}
       </main>
     </div>
   );

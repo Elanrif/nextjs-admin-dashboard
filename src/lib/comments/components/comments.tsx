@@ -38,12 +38,8 @@ import { Modals } from "./ui/comments-table/modals";
 import { useCommentFilters } from "./ui/comments-table/use-filters";
 import { ErrorState } from "@/lib/shared/ui/error-state";
 import { EmptyState } from "@/lib/shared/ui/empty-state";
+import { MAX_EXPORT_SIZE, unwrapList } from "@/lib/shared";
 
-const MAX_EXPORT_SIZE = 1000;
-
-function unwrapList<T>(result: Result<PageResponse<T>, ApiError>): T[] {
-  return result.ok ? result.data.content : [];
-}
 
 export type CommentsQueryProps = {
   queryParams?: {

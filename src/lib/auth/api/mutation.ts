@@ -2,38 +2,35 @@
 
 import { mutationOptions, useMutation } from "@tanstack/react-query";
 import { signIn, signUp } from "@/lib/auth/api/services/auth.client";
-import { ChangePwdPayload, DeletePayload, LoginPayload, RegisterPayload, UserPayload } from "../schemas/auth";
-import { deleteMyAccountAction, updateMyAccountAction, updateMyPasswordAction } from "./action";
+import {
+  deleteMyAccountAction,
+  updateMyAccountAction,
+  updateMyPasswordAction,
+} from "./action";
 import { userKeys } from "./queries";
 import { getQueryClient } from "@/lib/query-client";
+import {
+  ChangePwdFormValues,
+  DeleteFormValues,
+  LoginFormValues,
+  RegisterFormValues,
+  UserFormValues,
+} from "../schemas/auth";
 
-/* =========================================================
-   🔹 SIMPLE UI MUTATIONS (useMutation)
-   👉 Utilisées directement dans les composants React
-   👉 Logique locale, sans configuration réutilisable
-   ========================================================= */
-
-export function useSignIn() {
+export function useSignInMutation() {
   return useMutation({
-    mutationFn: (data: LoginPayload) => signIn(data),
+    mutationFn: (data: LoginFormValues) => signIn(data),
   });
 }
 
-export function useSignUp() {
+export function useSignUpMutation() {
   return useMutation({
-    mutationFn: (data: RegisterPayload) => signUp(data),
+    mutationFn: (data: RegisterFormValues) => signUp(data),
   });
 }
 
-
-/* =========================================================
-   🔸 REUSABLE MUTATION CONFIG (mutationOptions)
-   👉 Configuration centralisée (cache, invalidation, etc.)
-   👉 Réutilisable avec useMutation(updateMyAccountMutation)
-   ========================================================= */
-   
 export const updateMyAccountMutation = mutationOptions({
-  mutationFn: (values: UserPayload) => updateMyAccountAction(values),
+  mutationFn: (values: UserFormValues) => updateMyAccountAction(values),
 
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });
@@ -41,14 +38,14 @@ export const updateMyAccountMutation = mutationOptions({
 });
 
 export const updateMyPasswordMutation = mutationOptions({
-  mutationFn: (values: ChangePwdPayload) => updateMyPasswordAction(values),
+  mutationFn: (values: ChangePwdFormValues) => updateMyPasswordAction(values),
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });
   },
 });
 
 export const deleteMyAccountMutation = mutationOptions({
-  mutationFn: (values: DeletePayload) => deleteMyAccountAction(values),
+  mutationFn: (values: DeleteFormValues) => deleteMyAccountAction(values),
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });
   },

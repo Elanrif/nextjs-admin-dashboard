@@ -1,6 +1,7 @@
 import environment from "@config/environment.config";
 import { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { getLogger } from "@config/logger.config";
+import { cookies } from "next/headers";
 
 const {
   api: {
@@ -16,6 +17,22 @@ const SAFE_URLS = [register, login];
 
 const isSafeUrl = (candidate: string): boolean => {
   return SAFE_URLS.some((url: string) => candidate.startsWith(url));
+};
+
+export const sessionCookieInterceptor = async (
+  config: InternalAxiosRequestConfig,
+) => {
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore
+    .getAll()
+    .map(({ name, value }) => `${name}=${value}`)
+    .join("; ");
+
+  if (cookieHeader) {
+    config.headers.Cookie = cookieHeader;
+  }
+
+  return config;
 };
 
 export const anonTokenInterceptor = async (

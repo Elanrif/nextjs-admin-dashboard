@@ -25,7 +25,7 @@ export default function SignInForm() {
     formState: { errors, isSubmitting: loading },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues: { email: "visitor@gmail.com", password: "visitor123" },
+    defaultValues: { email: "visitor@gmail.com", password: "visitor" },
   });
 
   const [errorFromApi, setErrorFromApi] = useState<string | null>(null);

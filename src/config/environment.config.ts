@@ -27,6 +27,14 @@ const environment = {
       },
     },
   },
+  pagination: {
+    defaultPage: Number.parseInt(
+      process.env.NEXT_PUBLIC_PAGINATION_DEFAULT_PAGE || "1",
+    ),
+    defaultLimit: Number.parseInt(
+      process.env.NEXT_PUBLIC_PAGINATION_DEFAULT_LIMIT || "10",
+    ),
+  },
   cloudinary: {
     cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,

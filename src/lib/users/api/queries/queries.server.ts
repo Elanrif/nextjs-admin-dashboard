@@ -9,7 +9,7 @@ export const usersQueryOptions = (filters: UserFilters) =>
     queryFn: () => getUsers(filters),
   });
 
-export const userByIdOptions = (id: number) =>
+export const userByIdQueryOptions = (id: number) =>
   queryOptions({
     queryKey: userKeys.detail(id),
     queryFn: () => getUserById(id),

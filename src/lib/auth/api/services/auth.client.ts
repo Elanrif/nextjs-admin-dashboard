@@ -2,15 +2,10 @@ import { AxiosResponse } from "axios";
 import { proxyEnvironment } from "@config/proxy-api.config";
 import { frontendHttp } from "@config/axios/frontend-http.config";
 import { User } from "@/lib/users/api/types";
-import { LoginPayload, RegisterPayload } from "../../schemas/auth";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
+import { LoginFormValues, RegisterFormValues } from "../../schemas/auth";
 
-/**
- * ⚠️ NO Logging and error Handling is needed here as the proxy API routes will handle logging.
- * Auth client service for handling user authentication operations.
- * This service interacts with the proxy API endpoints for authentication.
- */
 const {
   api: {
     rest: {
@@ -20,7 +15,7 @@ const {
 } = proxyEnvironment;
 
 export async function signIn(
-  login: LoginPayload,
+  login: LoginFormValues,
 ): Promise<Result<User, ApiError>> {
   const result = await frontendHttp().post<
     any,
@@ -30,7 +25,7 @@ export async function signIn(
 }
 
 export async function signUp(
-  registration: RegisterPayload,
+  registration: RegisterFormValues,
 ): Promise<Result<User, ApiError>> {
   const res = await frontendHttp().post<
     any,

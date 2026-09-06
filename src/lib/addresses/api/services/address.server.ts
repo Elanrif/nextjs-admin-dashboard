@@ -3,16 +3,16 @@
 import apiClient from "@config/api.config";
 import environment from "@config/environment.config";
 import { getLogger } from "@config/logger.config";
-import { validateId } from "@/utils";
 import { Address, AddressesResponse, AddressFilters } from "../types";
 import {
-  AddressCreatePayload,
-  AddressUpdatePayload,
   addressCreateSchema,
+  AddressFormValues,
+  AddressUpdateFormValues,
   addressUpdateSchema,
 } from "../../schemas/address";
 import { Result } from "@/lib/shared/types";
-import { ApiError } from "@/lib/shared/api-error";
+import { ApiError, fromZodError } from "@/lib/shared/api-error";
+import { checkValidId } from "@/utils";
 
 const logger = getLogger("server");
 
@@ -28,39 +28,17 @@ export async function getUserAddresses(
   filters: AddressFilters = {},
 ): Promise<Result<AddressesResponse, ApiError>> {
   try {
-    const params = new URLSearchParams();
-    const { current, limit, ...rest } = filters;
-
-    if (current != null) params.set("page", String(current));
-    if (limit != null) params.set("size", String(limit));
-
-    Object.entries(rest).forEach(([key, value]) => {
-      if (value != null && value !== "") {
-        params.set(key, String(value));
-      }
+    const response = await apiClient(true).get<AddressesResponse>(addressesUrl, {
+      params: filters,
     });
 
-    const url = params.toString()
-      ? `${addressesUrl}?${params.toString()}`
-      : addressesUrl;
-
-    const response = await apiClient().get<AddressesResponse>(url);
-
-    logger.info(
-      {
-        url,
-        filters,
-        count: response.data.meta.total,
-      },
-      "User addresses fetched",
-    );
+    logger.debug({ count: response.data.total }, "User addresses fetched");
 
     return {
       ok: true,
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "getUserAddresses"),
@@ -71,20 +49,16 @@ export async function getUserAddresses(
 export async function getDefaultUserAddress(
   userId: number,
 ): Promise<Result<Address, ApiError>> {
-  const idError = validateId(userId);
-
-  if (idError) return idError;
+  const idCheck = checkValidId(userId);
+  if (idCheck) return idCheck;
 
   try {
-    const response = await apiClient().get<Address>(
+    const response = await apiClient(true).get<Address>(
       `${addressesUrl}/user/${userId}/default`,
     );
 
     logger.info(
-      {
-        userId,
-        addressId: response.data.id,
-      },
+      { userId, addressId: response.data.id },
       "Default address fetched",
     );
 
@@ -93,7 +67,6 @@ export async function getDefaultUserAddress(
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "getDefaultUserAddress"),
@@ -104,28 +77,21 @@ export async function getDefaultUserAddress(
 export async function getUserAddress(
   addressId: number,
 ): Promise<Result<Address, ApiError>> {
-  const idError = validateId(addressId);
-
-  if (idError) return idError;
+  const idCheck = checkValidId(addressId);
+  if (idCheck) return idCheck;
 
   try {
-    const response = await apiClient().get<Address>(
+    const response = await apiClient(true).get<Address>(
       `${addressesUrl}/${addressId}`,
     );
 
-    logger.info(
-      {
-        addressId,
-      },
-      "Address fetched",
-    );
+    logger.info({ addressId: response.data.id }, "Address fetched");
 
     return {
       ok: true,
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "getUserAddress"),
@@ -134,43 +100,23 @@ export async function getUserAddress(
 }
 
 export async function createUserAddress(
-  payload: AddressCreatePayload,
+  payload: AddressFormValues,
 ): Promise<Result<Address, ApiError>> {
   const parse = addressCreateSchema.safeParse(payload);
 
-  // Zod error: the validation error is already known locally,
-  // so we directly return it as an ApiError with HTTP 400.
   if (!parse.success) {
-    logger.warn(
-      {
-        errors: parse.error.format(),
-      },
-      "Address creation validation failed",
-    );
-
-    const error: ApiError = {
-      status: 400,
-      error: "Bad Request",
-      message: parse.error.message,
-    };
-
     return {
       ok: false,
-      error,
+      error: fromZodError(parse.error, "Address creation"),
     };
   }
 
   try {
-    const response = await apiClient().post<Address>(
-      addressesUrl,
-      parse.data,
-    );
+    const response = await apiClient(true).post<Address>(addressesUrl, parse.data);
 
     logger.info(
-      {
-        addressId: response.data.id,
-      },
-      "Address created",
+      { addressId: response.data.id },
+      "Address created successfully",
     );
 
     return {
@@ -178,7 +124,6 @@ export async function createUserAddress(
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "createUserAddress"),
@@ -188,47 +133,29 @@ export async function createUserAddress(
 
 export async function updateAddress(
   addressId: number,
-  payload: AddressUpdatePayload,
+  payload: AddressUpdateFormValues,
 ): Promise<Result<Address, ApiError>> {
-  const idError = validateId(addressId);
-
-  if (idError) return idError;
+  const idCheck = checkValidId(addressId);
+  if (idCheck) return idCheck;
 
   const parse = addressUpdateSchema.safeParse(payload);
 
-  // Zod error: the validation error is already known locally,
-  // so we directly return it as an ApiError with HTTP 400.
   if (!parse.success) {
-    logger.warn(
-      {
-        errors: parse.error.format(),
-      },
-      "Address update validation failed",
-    );
-
-    const error: ApiError = {
-      status: 400,
-      error: "Bad Request",
-      message: parse.error.message,
-    };
-
     return {
       ok: false,
-      error,
+      error: fromZodError(parse.error, "Address update"),
     };
   }
 
   try {
-    const response = await apiClient().patch<Address>(
+    const response = await apiClient(true).patch<Address>(
       `${addressesUrl}/${addressId}`,
       parse.data,
     );
 
     logger.info(
-      {
-        addressId,
-      },
-      "Address updated",
+      { addressId: response.data.id },
+      "Address updated successfully",
     );
 
     return {
@@ -236,7 +163,6 @@ export async function updateAddress(
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "updateAddress"),
@@ -247,26 +173,18 @@ export async function updateAddress(
 export async function deleteUserAddress(
   addressId: number,
 ): Promise<Result<void, ApiError>> {
-  const addressError = validateId(addressId);
-
-  if (addressError) return addressError;
+  const idCheck = checkValidId(addressId);
+  if (idCheck) return idCheck;
 
   try {
-    await apiClient().delete(`${addressesUrl}/${addressId}`);
-
-    logger.info(
-      {
-        addressId,
-      },
-      "Address deleted",
-    );
+    await apiClient(true).delete(`${addressesUrl}/${addressId}`);
+    logger.debug({ addressId }, "Address deleted");
 
     return {
       ok: true,
       data: undefined,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "deleteUserAddress"),
@@ -278,33 +196,24 @@ export async function setDefaultAddress(
   userId: number,
   addressId: number,
 ): Promise<Result<void, ApiError>> {
-  const userError = validateId(userId);
-
+  const userError = checkValidId(userId);
   if (userError) return userError;
 
-  const addressError = validateId(addressId);
-
+  const addressError = checkValidId(addressId);
   if (addressError) return addressError;
 
   try {
-    await apiClient().post(
+    await apiClient(true).post(
       `${addressesUrl}/user/${userId}/default/${addressId}`,
     );
 
-    logger.info(
-      {
-        userId,
-        addressId,
-      },
-      "Default address updated",
-    );
+    logger.debug({ userId, addressId }, "Default address updated");
 
     return {
       ok: true,
       data: undefined,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "setDefaultAddress"),
@@ -315,28 +224,19 @@ export async function setDefaultAddress(
 export async function resetDefaultAddress(
   userId: number,
 ): Promise<Result<void, ApiError>> {
-  const idError = validateId(userId);
-
-  if (idError) return idError;
+  const idCheck = checkValidId(userId);
+  if (idCheck) return idCheck;
 
   try {
-    await apiClient().post(
-      `${addressesUrl}/user/${userId}/default`,
-    );
+    await apiClient(true).post(`${addressesUrl}/user/${userId}/default`);
 
-    logger.info(
-      {
-        userId,
-      },
-      "Default address reset",
-    );
+    logger.debug({ userId }, "Default address reset");
 
     return {
       ok: true,
       data: undefined,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "resetDefaultAddress"),

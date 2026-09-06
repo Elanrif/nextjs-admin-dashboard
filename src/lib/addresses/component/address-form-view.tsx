@@ -2,10 +2,11 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
-import { userAddressesByIdOptions } from "../api/queries/queries.client";
+import { userAddressesByIdQueryOptions } from "../api/queries/queries.client";
 import { Address } from "../api/types";
 import AddressForm from "./ui/address-form";
 import { AddressesQueryProps } from "./addresses";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 type TAddressViewPageProps = {
   addressId: string;
@@ -29,6 +30,12 @@ export default function AddressFormView({
     );
   }
 
+  const numericId = Number(userId);
+  if (Number.isNaN(numericId)) {
+    notFound();
+    return null;
+  }
+
   return (
     <EditAddressView
       addressId={Number(addressId)}
@@ -47,11 +54,16 @@ function EditAddressView({
   onSaved?: () => void;
   hiddenFields: AddressesQueryProps["queryParams"];
 }) {
-  const { data } = useSuspenseQuery(userAddressesByIdOptions(addressId));
+  const { data } = useSuspenseQuery(userAddressesByIdQueryOptions(addressId));
 
-  if (!data?.ok || !data?.data) {
-    notFound();
+  if (!data.ok) {
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
+
   return (
     <AddressForm
       initialData={data.data as Address}

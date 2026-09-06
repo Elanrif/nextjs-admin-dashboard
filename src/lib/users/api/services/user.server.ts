@@ -5,14 +5,14 @@ import environment from "@config/environment.config";
 import { getLogger } from "@config/logger.config";
 import { User, UserFilters, UsersResponse } from "@/lib/users/api/types";
 import {
-  UserCreatePayload,
-  UserUpdatePayload,
-  userCreateSchema,
-  userUpdateSchema,
+  parseUserCreate,
+  parseUserUpdate,
+  UserUpdateFormValues,
 } from "@/lib/users/schemas/user";
-import { validateId } from "@/utils";
 import { Result } from "@/lib/shared/types";
-import { ApiError } from "@/lib/shared/api-error";
+import { ApiError, fromZodError } from "@/lib/shared/api-error";
+import { checkValidId } from "@/utils";
+import { UserFormValues } from "@/lib/auth/schemas/auth";
 
 const {
   api: {
@@ -30,34 +30,20 @@ export async function getUsers(
   filters: UserFilters = {},
 ): Promise<Result<UsersResponse, ApiError>> {
   try {
-    const params = new URLSearchParams();
-
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value != null && value !== "") {
-        params.append(key, String(value));
-      }
-    });
-
-    const url = params.toString()
-      ? `${usersUrl}?${params.toString()}`
-      : usersUrl;
-
-    const response = await apiClient().get<UsersResponse>(url);
-
-    logger.info(
+    const res = await apiClient(true).get<UsersResponse>(
+      usersUrl,
       {
-        filters,
-        count: response.data.meta.total,
+        params: filters,
       },
-      "Users fetched",
     );
+
+    logger.info({ count: res.data?.content?.length || 0 }, "Users fetched");
 
     return {
       ok: true,
-      data: response.data,
+      data: res.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "getUsers"),
@@ -65,74 +51,22 @@ export async function getUsers(
   }
 }
 
-export async function createUser(
-  user: UserCreatePayload,
-): Promise<Result<User, ApiError>> {
-  const parse = userCreateSchema.safeParse(user);
-
-  // Zod error: the validation error is already known locally,
-  // so we directly return it as an ApiError with HTTP 400.
-  if (!parse.success) {
-    logger.warn(
-      {
-        context: "createUser",
-        errors: parse.error.format(),
-      },
-      "Validation failed",
-    );
-
-    const error: ApiError = {
-      status: 400,
-      error: "Bad Request",
-      message: parse.error.message,
-    };
-
-    return {
-      ok: false,
-      error,
-    };
-  }
+export async function getUserById(id: number): Promise<Result<User, ApiError>> {
+  const idCheck = checkValidId(id);
+  if (idCheck) return idCheck;
 
   try {
-    const response = await apiClient().post<User>(usersUrl, parse.data);
-
-    logger.info({
-        id: response.data.id,
-      },
-      "User created",
+    const response = await apiClient(true).get<User>(
+      userUrl(id),
     );
+
+    logger.info({ id: response.data.id }, "User fetched");
 
     return {
       ok: true,
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
-    return {
-      ok: false,
-      error: ApiError(error, "createUser"),
-    };
-  }
-}
-
-export async function getUserById(
-  id: number,
-): Promise<Result<User, ApiError>> {
-  const idError = validateId(id);
-
-  if (idError) return idError;
-
-  try {
-    const response = await apiClient().get<User>(userUrl(id));
-
-    logger.info({ id }, "User fetched");
-
-    return {
-      ok: true,
-      data: response.data,
-    };
-  } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "getUserById"),
@@ -140,53 +74,64 @@ export async function getUserById(
   }
 }
 
-export async function updateUser(
-  id: number,
-  user: UserUpdatePayload,
+export async function createUser(
+  user: UserFormValues,
 ): Promise<Result<User, ApiError>> {
-  const idError = validateId(id);
+  const parse = parseUserCreate(user);
 
-  if (idError) return idError;
-
-  const parse = userUpdateSchema.safeParse(user);
-
-  // Zod error: the validation error is already known locally,
-  // so we directly return it as an ApiError with HTTP 400.
   if (!parse.success) {
-    logger.warn(
-      {
-        context: "updateUser",
-        errors: parse.error.format(),
-      },
-      "Validation failed",
-    );
-
-    const error: ApiError = {
-      status: 400,
-      error: "Bad Request",
-      message: parse.error.message,
-    };
-
     return {
       ok: false,
-      error,
+      error: fromZodError(parse.error, "User creation"),
     };
   }
 
   try {
-    const response = await apiClient().patch<User>(
-      userUrl(id),
-      parse.data,
-    );
+    const res = await apiClient(true).post<User>(usersUrl, parse.data);
 
-    logger.info({ id }, "User updated");
+      logger.info(
+        { id: res.data.id, content: res.data.email },
+        "User created successfully",
+      );
+
+    return {
+      ok: true,
+      data: res.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error: ApiError(error, "createUser"),
+    };
+  }
+}
+
+export async function updateUser(
+  id: number,
+  user: UserUpdateFormValues,
+): Promise<Result<User, ApiError>> {
+  const idCheck = checkValidId(id, "user");
+  if (idCheck) return idCheck;
+
+  const parse = parseUserUpdate(user);
+
+   if (!parse.success) {
+     return {
+       ok: false,
+       error: fromZodError(parse.error, "User update"),
+     };
+   }
+
+  try {
+    const response = await apiClient(true).patch<User>(userUrl(id), parse.data);
+
+    logger.info({ id, email: response.data.email }, "User updated");
 
     return {
       ok: true,
       data: response.data,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "updateUser"),
@@ -194,24 +139,19 @@ export async function updateUser(
   }
 }
 
-export async function deleteUser(
-  id: number,
-): Promise<Result<void, ApiError>> {
-  const idError = validateId(id);
-
-  if (idError) return idError;
+export async function deleteUser(id: number): Promise<Result<void, ApiError>> {
+  const idCheck = checkValidId(id, "user");
+  if (idCheck) return idCheck;
 
   try {
-    await apiClient().delete(userUrl(id));
-
-    logger.info({ id }, "User deleted");
+    await apiClient(true).delete(userUrl(id));
+    logger.info({ id}, "User deleted");
 
     return {
       ok: true,
       data: undefined,
     };
   } catch (error) {
-    // Backend/Axios error: ApiError normalizes the Spring Boot error response.
     return {
       ok: false,
       error: ApiError(error, "deleteUser"),

@@ -1,13 +1,7 @@
 import { z } from "zod";
 import { UserRole, UserStatus } from "../api/types";
 
-/**
- * ------------------------------------------------------------------
- * RÈGLES DE BASE PARTAGÉES
- * ------------------------------------------------------------------
- */
 const coreFields = {
-  avatarUrl: z.string().optional().default(""),
   firstName: z
     .string()
     .trim()
@@ -47,12 +41,6 @@ const optionalPasswordSchema = z
   )
   .pipe(passwordSchema.optional());
 
-/**
- * ------------------------------------------------------------------
- * SCHÉMAS API / SERVICE
- * ------------------------------------------------------------------
- */
-
 export const userCreateSchema = userBaseSchema
   .extend({
     password: passwordSchema,
@@ -68,10 +56,10 @@ export const userCreateSchema = userBaseSchema
     }
   });
 
-
 export const userUpdateSchema = userBaseSchema
   .partial()
   .extend({
+    avatarUrl: z.string().optional().default(""),
     password: optionalPasswordSchema,
     confirmPassword: optionalPasswordSchema,
   })
@@ -95,7 +83,6 @@ export const userUpdateSchema = userBaseSchema
       });
     }
   });
-
 
 export const userFormSchema = z
   .object({
@@ -129,18 +116,9 @@ export const userFormSchema = z
     }
   });
 
-/**
- * ------------------------------------------------------------------
- * Types UI / Form
- * ------------------------------------------------------------------
- */
 export type UserCreateFormValues = z.input<typeof userCreateSchema>;
+export const parseUserCreate =
+  userCreateSchema.safeParse.bind(userCreateSchema);
 export type UserUpdateFormValues = z.input<typeof userUpdateSchema>;
-
-/**
- * ------------------------------------------------------------------
- * Types API / Service
- * ------------------------------------------------------------------
- */
-export type UserCreatePayload = z.output<typeof userCreateSchema>;
-export type UserUpdatePayload = z.output<typeof userUpdateSchema>;
+export const parseUserUpdate =
+  userUpdateSchema.safeParse.bind(userUpdateSchema);

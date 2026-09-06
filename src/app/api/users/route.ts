@@ -31,18 +31,3 @@ export async function GET(_request: NextRequest) {
    */
   return NextResponse.json(response, { status: 200 });
 }
-
-/**
- *  ⚠️Methods below are not used, just an example if we want to call API routes directly,
- *  from client components without going through server actions.
- *  ✅We use server actions for mutations to leverage revalidation
- *  and avoid handling client-side state management (loading, error).
- * @param user
- * @returns
- */
-
-// export async function POST(request: NextRequest) {
-//   const body = await request.json().catch(() => null);
-//   const response = await createUser(body);
-//   return NextResponse.json(response, { status: 200 });
-// }

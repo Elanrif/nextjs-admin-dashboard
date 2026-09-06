@@ -10,12 +10,12 @@ import {
   updateAddress,
 } from "./services/address.server";
 import { Address } from "./types";
-import { AddressCreatePayload, AddressUpdatePayload } from "../schemas/address";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
+import { AddressFormValues } from "../schemas/address";
 
 export async function createUserAddressAction(
-  payload: AddressCreatePayload,
+  payload: AddressFormValues,
 ): Promise<Result<Address, ApiError>> {
   const result = await createUserAddress(payload);
 
@@ -29,7 +29,7 @@ export async function createUserAddressAction(
 
 export async function updateAddressAction(
   addressId: number,
-  payload: Partial<AddressUpdatePayload>,
+  payload: Partial<AddressFormValues>,
 ): Promise<Result<Address, ApiError>> {
   const result = await updateAddress(addressId, payload);
 

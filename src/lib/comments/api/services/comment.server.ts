@@ -1,6 +1,5 @@
 "server-only";
 
-import { AxiosResponse } from "axios";
 import apiClient from "@config/api.config";
 import environment from "@config/environment.config";
 import { getLogger } from "@config/logger.config";
@@ -33,7 +32,7 @@ export async function getComments(
   filters?: CommentFilters,
 ): Promise<Result<CommentsResponse, ApiError>> {
   try {
-    const res = await apiClient().get<unknown, AxiosResponse<CommentsResponse>>(
+    const res = await apiClient().get<CommentsResponse>(
       commentsUrl,
       { params: filters },
     );
@@ -53,7 +52,7 @@ export async function getCommentById(
   if (idCheck) return idCheck;
 
   try {
-    const res = await apiClient().get<unknown, AxiosResponse<Comment>>(
+    const res = await apiClient().get<Comment>(
       `${commentsUrl}/${id}`,
     );
 
@@ -76,7 +75,7 @@ export async function createComment(
   }
 
   try {
-    const res = await apiClient().post<unknown, AxiosResponse<Comment>>(
+    const res = await apiClient().post<Comment>(
       commentsUrl,
       parse.data,
     );
@@ -109,7 +108,7 @@ export async function updateComment(
   }
 
   try {
-    const res = await apiClient().patch<unknown, AxiosResponse<Comment>>(
+    const res = await apiClient().patch<Comment>(
       `${commentsUrl}/${id}`,
       parse.data,
     );

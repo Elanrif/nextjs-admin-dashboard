@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   useMutation,
@@ -8,22 +8,17 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { Download } from "lucide-react";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { UnifiedPagination } from "@/components/ui/paginations";
 import { useModal } from "@/hooks/useModal";
+import { ErrorState } from "@/lib/shared/ui/error-state";
+import { EmptyState } from "@/lib/shared/ui/empty-state";
 
 import { exportToCSV } from "@/lib/utils";
-import { Download } from "lucide-react";
-import { Result } from "@/lib/shared/types";
-import { ApiError } from "@/lib/shared/api-error";
+import { MAX_EXPORT_SIZE } from "@/lib/shared";
 import { usersQueryOptions } from "../api/queries/queries.client";
 import { deleteUserMutation } from "../api/mutations";
 import { userKeys } from "@/lib/auth/api/queries";
@@ -34,6 +29,11 @@ import { Modals } from "./ui/users-table/modals";
 import { usePaginationParams } from "@/lib/use-pagination-params";
 import { User } from "../api/types";
 import { useUserFilters } from "./ui/users-table/use-filters";
+import environment from "@/config/environment.config";
+
+const {
+  pagination: { defaultPage, defaultLimit },
+} = environment;
 
 export function Users() {
   const router = useRouter();
@@ -43,8 +43,8 @@ export function Users() {
     usePaginationParams({
       pageParam: "page",
       sizeParam: "size",
-      defaultPage: 1,
-      defaultSize: 5,
+      defaultPage: defaultPage,
+      defaultSize: defaultLimit,
     });
 
   const {
@@ -58,32 +58,22 @@ export function Users() {
   } = useUserFilters({
     currentPage,
     itemsPerPage,
-    onPageReset: () => {
-      handlePageChange(1);
-    },
+    onPageReset: () => handlePageChange(1),
   });
 
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
   const { data } = useSuspenseQuery(usersQueryOptions(filters));
-  const { data: DownloadToCsv } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
-  );
-  const users = data.ok ? data?.data?.data || [] : [];
-  const meta = data.ok ? data.data.meta : null;
 
-  // Hooks de Modals uniques
   const viewModal = useModal();
   const editModal = useModal();
   const createModal = useModal();
   const deleteModal = useModal();
 
-  // Mutation
   const deleteMutation = useMutation({
     ...deleteUserMutation,
-    onSuccess: async (result: Result<void, ApiError>) => {
+    onSuccess: async (result) => {
       if (!result.ok) {
-        toast.error(result.error?.message || "Failed to delete user");
+        toast.error(result.error.message);
         return;
       }
       await queryClient.invalidateQueries({ queryKey: userKeys.all });
@@ -107,15 +97,20 @@ export function Users() {
     deleteModal.openModal();
   };
 
-  const exportUsers = () => {
-    const users = DownloadToCsv.ok ? DownloadToCsv?.data?.data || [] : [];
-    const dataToExport = users.map((user) => ({
+  const exportUsers = async () => {
+    const result = await queryClient.fetchQuery(
+      usersQueryOptions({ size: MAX_EXPORT_SIZE }),
+    );
+    const rows = result.ok ? result.data.content : [];
+
+    const dataToExport = rows.map((user) => ({
       fullName: `${user.firstName} ${user.lastName}`,
       email: user.email,
       telephone: user.phoneNumber || "-",
       role: user.role,
       status: user.status,
     }));
+
     const columnsConfig = [
       { key: "fullName", label: "Nom Complet" },
       { key: "email", label: "Email" },
@@ -123,12 +118,20 @@ export function Users() {
       { key: "role", label: "Rôle" },
       { key: "status", label: "Statut" },
     ] as const;
+
     exportToCSV(dataToExport, columnsConfig, "liste-utilisateurs.csv");
   };
 
+  if (!data.ok) {
+    return <ErrorState error={data.error} />;
+  }
+
+  const users = data.data.content;
+  const pagination = data.data;
+
   const startIndex =
-    meta && users.length > 0 ? (meta.page - 1) * meta.size + 1 : 0;
-  const endIndex = meta ? startIndex + users.length - 1 : 0;
+    users.length > 0 ? (pagination.page - 1) * pagination.size + 1 : 0;
+  const endIndex = users.length > 0 ? startIndex + users.length - 1 : 0;
 
   return (
     <div className="space-y-4">
@@ -169,19 +172,19 @@ export function Users() {
 
       {/* Résumé textuel */}
       <div className="text-sm text-gray-500 dark:text-gray-400" id="table-top">
-        Showing {startIndex} to {endIndex} of {meta?.total ?? 0} users
+        Showing {startIndex} to {endIndex} of {pagination.total} users
       </div>
 
       {/* Structure de la Table HTML */}
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
         <div className="max-w-full overflow-x-auto">
-          <Table>
-            <TableHeader className="text-start bg-green-600 text-white border-b border-gray-100 dark:border-white/5">
-              <Columns />
-            </TableHeader>
-            <TableBody className="divide-y divide-gray-100 dark:divide-white/5">
-              {users.length > 0 ? (
-                users.map((user) => (
+          {users.length > 0 ? (
+            <Table>
+              <TableHeader className="text-start bg-brand-500 text-white border-b border-gray-100 dark:border-white/5">
+                <Columns />
+              </TableHeader>
+              <TableBody className="divide-y divide-gray-100 dark:divide-white/5">
+                {users.map((user) => (
                   <Row
                     key={user.id}
                     user={user}
@@ -189,34 +192,30 @@ export function Users() {
                     onEdit={handleEdit}
                     onDelete={handleDelete}
                   />
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={6}
-                    className="px-5 py-8 text-center text-gray-500"
-                  >
-                    No users found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <EmptyState
+              title="Aucun utilisateur"
+              description="Aucun utilisateur ne correspond à ces critères pour le moment."
+              fullWidth={false}
+              className="border-0 bg-transparent"
+            />
+          )}
         </div>
       </div>
 
       {/* Pagination Unifiée connectée au Serveur */}
-      {meta && (
-        <UnifiedPagination
-          mode="server"
-          currentPage={meta.page}
-          totalPages={meta.totalPages}
-          totalItems={meta.total}
-          itemsPerPage={meta.size}
-          onPageChange={handlePageChange}
-          variant="both"
-        />
-      )}
+      <UnifiedPagination
+        mode="server"
+        currentPage={pagination.page}
+        totalPages={pagination.totalPages}
+        totalItems={pagination.total}
+        itemsPerPage={pagination.size}
+        onPageChange={handlePageChange}
+        variant="both"
+      />
 
       {/* Modals regroupées et isolées */}
       <Modals

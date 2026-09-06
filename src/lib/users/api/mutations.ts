@@ -2,17 +2,18 @@ import { mutationOptions } from "@tanstack/react-query";
 import { userKeys } from "./queries";
 import { getQueryClient } from "@/lib/query-client";
 import { createUserAction, deleteUserAction, updateUserAction } from "./action";
-import { UserCreatePayload, UserUpdatePayload } from "../schemas/user";
+import { UserFormValues } from "@/lib/auth/schemas/auth";
+import { UserUpdateFormValues } from "../schemas/user";
 
 export const createUserMutation = mutationOptions({
-  mutationFn: (data: UserCreatePayload) => createUserAction(data),
+  mutationFn: (data: UserFormValues) => createUserAction(data),
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });
   },
 });
 
 export const updateUserMutation = mutationOptions({
-  mutationFn: ({ id, values }: { id: number; values: UserUpdatePayload }) =>
+  mutationFn: ({ id, values }: { id: number; values: UserUpdateFormValues }) =>
     updateUserAction(id, values),
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });

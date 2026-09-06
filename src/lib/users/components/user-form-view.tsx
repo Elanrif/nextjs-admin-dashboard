@@ -3,8 +3,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { User } from "../api/types";
-import { userByIdOptions } from "../api/queries/queries.client";
+import { userByIdQueryOptions } from "../api/queries/queries.client";
 import { UserForm } from "./ui/user-form";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 type TUserViewPageProps = {
   userId: string;
@@ -22,6 +23,12 @@ export default function UserFormView({ userId, onSaved }: TUserViewPageProps) {
     );
   }
 
+  const numericId = Number(userId);
+  if (Number.isNaN(numericId)) {
+    notFound();
+    return null;
+  }
+
   return <EditUserView userId={Number(userId)} onSaved={onSaved} />;
 }
 
@@ -32,11 +39,16 @@ function EditUserView({
   userId: number;
   onSaved?: () => void;
 }) {
-  const { data } = useSuspenseQuery(userByIdOptions(userId));
+  const { data } = useSuspenseQuery(userByIdQueryOptions(userId));
 
-  if (!data?.ok || !data?.data) {
-    notFound();
+  if (!data.ok) {
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
+
   return (
     <UserForm
       initialData={data.data as User}

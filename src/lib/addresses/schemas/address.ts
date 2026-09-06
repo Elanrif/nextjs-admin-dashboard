@@ -26,26 +26,7 @@ export const addressFiels = {
   defaultAddress: z.boolean().default(false),
 };
 
-/**
- * ------------------------------------------------------------------
- * SCHÉMAS API / SERVICE
- * ------------------------------------------------------------------
-*/
 export const addressCreateSchema = z.object(addressFiels);
 export const addressUpdateSchema = addressCreateSchema.partial();
-
-/**
- * ------------------------------------------------------------------
- * Types UI / Form
- * ------------------------------------------------------------------
-*/
 export type AddressFormValues = z.input<typeof addressCreateSchema>;
 export type AddressUpdateFormValues = z.input<typeof addressUpdateSchema>;
-
-/**
- * ------------------------------------------------------------------
- * Types API / Service
- * ------------------------------------------------------------------
-*/
-export type AddressCreatePayload = z.output<typeof addressCreateSchema>;
-export type AddressUpdatePayload = z.output<typeof addressUpdateSchema>;

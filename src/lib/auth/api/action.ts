@@ -8,23 +8,23 @@ import {
   updateMyAccount,
   updateMyPassword,
 } from "@/lib/auth/api/services/auth.server";
-import {
-  ChangePwdPayload,
-  DeletePayload,
-  LoginPayload,
-  RegisterPayload,
-  ResetPwdPayload,
-  UserPayload,
-} from "@/lib/auth/schemas/auth";
 import { generateResetToken, sendPasswordResetEmail } from "@/lib/mail";
 import environment from "@/config/environment.config";
 import { ApiError } from "@/lib/shared/api-error";
+import {
+  DeleteFormValues,
+  LoginFormValues,
+  RegisterFormValues,
+  ChangePwdFormValues,
+  UserFormValues,
+  ResetPwdFormValues,
+} from "../schemas/auth";
 
-export async function signInAction(credentials: LoginPayload) {
+export async function signInAction(credentials: LoginFormValues) {
   return serverSignIn(credentials);
 }
 
-export async function signUpAction(userData: RegisterPayload) {
+export async function signUpAction(userData: RegisterFormValues) {
   return serverSignUp(userData);
 }
 
@@ -77,18 +77,18 @@ export async function sendPasswordResetAction(
   }
 }
 
-export async function resetPasswordTokenAction(data: ResetPwdPayload) {
+export async function resetPasswordTokenAction(data: ResetPwdFormValues) {
   return resetPassword(data);
 }
 
-export async function updateMyAccountAction(data: UserPayload) {
+export async function updateMyAccountAction(data: UserFormValues) {
   return updateMyAccount(data);
 }
 
-export async function updateMyPasswordAction(data: ChangePwdPayload) {
+export async function updateMyPasswordAction(data: ChangePwdFormValues) {
   return updateMyPassword(data);
 }
 
-export async function deleteMyAccountAction(data: DeletePayload) {
+export async function deleteMyAccountAction(data: DeleteFormValues) {
   return deleteMyAccount(data);
 }

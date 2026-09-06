@@ -9,10 +9,8 @@ import { toast } from "sonner";
 
 import {
   UserCreateFormValues,
-  UserCreatePayload,
   userCreateSchema,
   UserUpdateFormValues,
-  UserUpdatePayload,
   userUpdateSchema,
 } from "../../schemas/user";
 import Label from "@/components/form/Label";
@@ -70,7 +68,6 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
     register,
     handleSubmit,
     setValue,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<UserCreateFormValues | UserUpdateFormValues>({
     resolver: zodResolver(formSchema),
@@ -142,21 +139,14 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
   });
 
   const onSubmit = (values: UserCreateFormValues | UserUpdateFormValues) => {
-    if (isEdit) {
-      // On applique la validation/transformation d'update
-      const parsed = userUpdateSchema.safeParse(values);
-      if (parsed.success) {
-        updateMutation.mutate({
-          id: initialData.id,
-          // On force le cast vers UserUpdate pour que l'union se resolve proprement
-          values: parsed.data as UserUpdatePayload,
-        });
-      }
-    } else {
-      // On force le cast vers UserCreate car on sait qu'on est en mode création
-      createMutation.mutate(values as UserCreatePayload);
-      reset();
+    if(isEdit) {
+      updateMutation.mutate({
+        id: initialData.id,
+        values: values as UserUpdateFormValues,
+      });
+      return;
     }
+    createMutation.mutate(values as UserCreateFormValues);
     handleImageRemove();
   };
 
@@ -260,7 +250,7 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
                   type="email"
                   {...register("email")}
                   placeholder="Enter email"
-                  className="pl-[62px]"
+                  className="pl-15.5"
                 />
                 <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
                   <EnvelopeIcon />

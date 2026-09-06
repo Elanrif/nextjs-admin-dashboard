@@ -22,9 +22,11 @@ import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
 import { Filters } from "./ui/addresses-card/filters";
 import { Row } from "./ui/addresses-card/row";
-import { NoResult } from "./ui/addresses-card/no-result";
 import { Modals } from "./ui/addresses-card/modals";
 import { useAddressFilters } from "./ui/addresses-card/use-filters";
+import environment from "@/config/environment.config";
+import { ErrorState } from "@/lib/shared/ui/error-state";
+import { EmptyState } from "@/lib/shared/ui/empty-state";
 
 export type AddressesQueryProps = {
   // Optional parameters provided by the parent to scope the addresses.
@@ -33,17 +35,20 @@ export type AddressesQueryProps = {
   };
 };
 
+const {
+  pagination: { defaultPage, defaultLimit },
+} = environment;
+
 export function Addresses({ queryParams }: AddressesQueryProps) {
   const queryClient = useQueryClient();
-
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
     usePaginationParams({
       pageParam: "current",
       sizeParam: "limit",
-      defaultPage: 1,
-      defaultSize: 5,
+      defaultPage: defaultPage,
+      defaultSize: defaultLimit,
     });
 
   const {
@@ -62,10 +67,6 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
   });
 
   const { data } = useSuspenseQuery(userAddressesQueryOptions(filters));
-
-  const addresses = data.ok ? data.data.data || [] : [];
-
-  const meta = data.ok ? data.data.meta : null;
 
   const viewModal = useModal();
   const editModal = useModal();
@@ -122,7 +123,7 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
         return;
       }
 
-      const list = result.data.data || [];
+      const list = result.data.content || [];
 
       const dataToExport = list.map((address: Address) => ({
         street: address.street,
@@ -156,11 +157,18 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
     }
   };
 
+  if (!data.ok) {
+    return <ErrorState error={data.error} />;
+  }
+
+  const addresses = data.data.content;
+  const pagination = data.data;
+
   const startIndex =
-    meta && addresses.length > 0 ? (meta.page - 1) * meta.size + 1 : 0;
+    pagination && addresses.length > 0 ? (pagination.page - 1) * pagination.size + 1 : 0;
 
   const endIndex =
-    meta && addresses.length > 0 ? startIndex + addresses.length - 1 : 0;
+    pagination && addresses.length > 0 ? startIndex + addresses.length - 1 : 0;
 
   return (
     <div className="space-y-4">
@@ -200,7 +208,7 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
       />
       {/* INFO */}
       <div id="address-table-top">
-        Showing {startIndex} to {endIndex} of {meta?.total ?? 0}
+        Showing {startIndex} to {endIndex} of {pagination?.total ?? 0}
       </div>
       {/* GRID CARDS */}
       <div className="overflow-hidden rounded-xl border">
@@ -216,18 +224,25 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
               />
             ))
           ) : (
-            <NoResult onAdd={() => createModal.openModal()} />
+            <EmptyState
+              title="Aucune adresse"
+              description="Aucune adresse ne correspond à ces critères pour le moment."
+              action={{
+                label: "Ajouter",
+                onClick: () => createModal.openModal(),
+              }}
+            />
           )}
         </div>
       </div>
       {/* PAGINATION */}
-      {meta && (
+      {pagination && (
         <UnifiedPagination
           mode="server"
-          currentPage={meta.page}
-          totalPages={meta.totalPages}
-          totalItems={meta.total}
-          itemsPerPage={meta.size}
+          currentPage={pagination.page}
+          totalPages={pagination.totalPages}
+          totalItems={pagination.total}
+          itemsPerPage={pagination.size}
           onPageChange={handlePageChange}
           variant="both"
           updateUrl={false}

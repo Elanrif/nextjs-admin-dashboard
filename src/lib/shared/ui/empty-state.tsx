@@ -14,7 +14,6 @@ type EmptyStateProps = {
     onClick: () => void;
   };
   className?: string;
-  /** Set to false for empty states inside a table row/cell, where col-span-full or py-16 don't apply. */
   fullWidth?: boolean;
 };
 

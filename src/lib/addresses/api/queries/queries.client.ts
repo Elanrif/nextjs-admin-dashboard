@@ -12,7 +12,7 @@ export const userAddressesQueryOptions = (filters: AddressFilters) =>
     queryFn: () => fetchUserAddresses(filters),
   });
 
-export const userAddressesByIdOptions = (addressId: number) =>
+export const userAddressesByIdQueryOptions = (addressId: number) =>
   queryOptions({
     queryKey: addressKeys.byId(addressId),
     queryFn: () => fetchUserAddressById(addressId),
