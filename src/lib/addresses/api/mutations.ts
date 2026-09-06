@@ -9,15 +9,11 @@ import {
   updateAddressAction,
 } from "./action";
 import { addressKeys } from "./queries";
-import { AddressFormValues } from "../schemas/address";
-
+import { AddressCreateFormValues } from "../schemas/address";
 
 export const createUserAddressMutation = mutationOptions({
-  mutationFn: ({
-    payload,
-  }: {
-    payload: AddressFormValues;
-  }) => createUserAddressAction(payload),
+  mutationFn: ({ payload }: { payload: AddressCreateFormValues }) =>
+    createUserAddressAction(payload),
 
   onSettled: () => {
     void getQueryClient().invalidateQueries({
@@ -32,7 +28,7 @@ export const updateAddressMutation = mutationOptions({
     payload,
   }: {
     addressId: number;
-    payload: Partial<AddressFormValues>;
+    payload: Partial<AddressCreateFormValues>;
   }) => updateAddressAction(addressId, payload),
 
   onSettled: () => {
@@ -64,7 +60,7 @@ export const resetDefaultAddressMutation = mutationOptions({
 });
 
 export const deleteUserAddressMutation = mutationOptions({
-  mutationFn: ({addressId }: {addressId: number }) =>
+  mutationFn: ({ addressId }: { addressId: number }) =>
     deleteUserAddressAction(addressId),
 
   onSettled: () => {

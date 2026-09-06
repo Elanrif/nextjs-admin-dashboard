@@ -22,17 +22,16 @@ import { ChevronDownIcon } from "@/icons";
 import { User } from "@/lib/users/api/types";
 import Alert from "@/components/ui/alert/Alert";
 import {
-  PostCreatePayload,
   postCreateSchema,
-  PostFormValues,
+  PostCreateFormValues,
   PostUpdateFormValues,
-  PostUpdatePayload,
   postUpdateSchema,
 } from "../../schemas/post";
 import { createPostMutation, updatePostMutation } from "../../api/mutations";
 import { postKeys } from "../../api/queries";
 import { Post } from "../../api/types";
 import { PostQueryProps } from "../posts";
+import environment from "@/config/environment.config";
 
 interface PostFormProps {
   initialData: Post | null;
@@ -56,30 +55,20 @@ export function PostForm({
 
   const formSchema = isEdit ? postUpdateSchema : postCreateSchema;
 
-  const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
-  );
-  const users = usersResult.ok ? usersResult.data.data : [];
-
-  const image = useImageDraft({
-    storageKey: `post:image:${initialData?.id ?? "new"}`,
-    initialUrl: initialData?.imageUrl,
-  });
-
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<PostFormValues | PostUpdateFormValues>({
+  } = useForm<PostCreateFormValues | PostUpdateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
-          title: initialData?.title ?? "",
-          description: initialData?.description ?? "",
-          imageUrl: initialData?.imageUrl ?? "",
-          likes: initialData?.likes ?? 0,
-          authorId: authorId ?? initialData?.author?.id,
+          title: initialData.title,
+          description: initialData.description,
+          imageUrl: initialData.imageUrl,
+          likes: initialData.likes,
+          authorId: authorId ?? initialData.author.id,
         }
       : {
           title: "",
@@ -89,10 +78,6 @@ export function PostForm({
           authorId,
         },
   });
-
-  // =========================================================
-  // CREATE
-  // =========================================================
 
   const createMutation = useMutation({
     ...createPostMutation,
@@ -110,7 +95,6 @@ export function PostForm({
       });
 
       toast.success("Post created successfully");
-
       onSaved?.();
     },
 
@@ -118,10 +102,6 @@ export function PostForm({
       toast.error("Failed to create post");
     },
   });
-
-  // =========================================================
-  // UPDATE
-  // =========================================================
 
   const updateMutation = useMutation({
     ...updatePostMutation,
@@ -148,57 +128,52 @@ export function PostForm({
     },
   });
 
-  // =========================================================
-  // SUBMIT
-  // =========================================================
-
-  const onSubmit = (values: PostFormValues | PostUpdateFormValues) => {
+  const onSubmit = (values: PostCreateFormValues | PostUpdateFormValues) => {
     if (isEdit) {
-      const parsed = postUpdateSchema.safeParse(values);
-
-      if (parsed.success) {
-        const payload: PostUpdatePayload = parsed.data;
-
-        updateMutation.mutate({
-          id: initialData.id,
-          values: payload,
-        });
-      }
-    } else {
-      const parsed = postCreateSchema.safeParse(values);
-
-      if (parsed.success) {
-        const payload: PostCreatePayload = parsed.data;
-
-        createMutation.mutate(payload);
-      }
+      updateMutation.mutate({
+        id: initialData.id,
+        values: values as PostUpdateFormValues,
+      });
+      return;
     }
+    createMutation.mutate(values as PostCreateFormValues);
+    handleImageRemove();
   };
+
+  const { data: usersResult } = useSuspenseQuery(
+    usersQueryOptions({ size: environment.pagination.size }),
+  );
+  const users = usersResult.ok ? usersResult.data.content : [];
+
+  const image = useImageDraft({
+    storageKey: `post:image:${initialData?.id ?? "new"}`,
+    initialUrl: initialData?.imageUrl,
+  });
+
+  function handleImageRemove() {
+    image.handleRemove();
+    setValue("imageUrl", "", {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  }
 
   const isSaving =
     isSubmitting || createMutation.isPending || updateMutation.isPending;
-
-  // =========================================================
-  // UI
-  // =========================================================
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex h-[90vh] max-h-[90vh] flex-col"
     >
-      {/* =====================================================
-          HEADER FIXE
-          ===================================================== */}
+      {/* Header sticky */}
       <div className="sticky top-0 z-20 shrink-0 border-b border-gray-200 bg-white px-6 py-4 dark:border-gray-700 dark:bg-gray-900">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           {pageTitle}
         </h2>
       </div>
 
-      {/* =====================================================
-          CONTENU SCROLLABLE
-          ===================================================== */}
+      {/* Content scrollable */}
       <div className="min-h-0 flex-1 overflow-y-auto p-6">
         <div className="space-y-5">
           {Object.keys(errors).length > 0 && (
@@ -211,13 +186,8 @@ export function PostForm({
               />
             </ComponentCard>
           )}
-
-          {/* =================================================
-              POST INFORMATION
-              ================================================= */}
           <ComponentCard>
             <div className="space-y-5">
-              {/* Title */}
               <div>
                 <Label required>Title</Label>
 
@@ -230,7 +200,6 @@ export function PostForm({
                 )}
               </div>
 
-              {/* Description */}
               <div>
                 <Label>Description</Label>
 
@@ -294,7 +263,6 @@ export function PostForm({
                 <input type="hidden" {...register("authorId")} />
               )}
 
-              {/* Likes */}
               <div>
                 <Label>Likes</Label>
 
@@ -314,10 +282,6 @@ export function PostForm({
               </div>
             </div>
           </ComponentCard>
-
-          {/* =================================================
-              IMAGE
-              ================================================= */}
           <ComponentCard title="Post image">
             <ImageUpload
               folder="posts"
@@ -325,7 +289,6 @@ export function PostForm({
               publicId={image.publicId}
               onChange={(url, publicId) => {
                 image.handleChange(url, publicId);
-
                 setValue("imageUrl", url, {
                   shouldDirty: true,
                   shouldValidate: true,
@@ -333,7 +296,6 @@ export function PostForm({
               }}
               onRemove={() => {
                 image.handleRemove();
-
                 setValue("imageUrl", "", {
                   shouldDirty: true,
                   shouldValidate: true,
@@ -341,10 +303,6 @@ export function PostForm({
               }}
               variant="light"
             />
-
-            {/* =================================================
-                SUBMIT
-                ================================================= */}
             <div className="mt-5 flex justify-end">
               <Button
                 type="submit"

@@ -16,7 +16,7 @@ import {
   LoginFormValues,
   RegisterFormValues,
   ChangePwdFormValues,
-  UserFormValues,
+  UserCreateFormValues,
   ResetPwdFormValues,
 } from "../schemas/auth";
 
@@ -81,7 +81,7 @@ export async function resetPasswordTokenAction(data: ResetPwdFormValues) {
   return resetPassword(data);
 }
 
-export async function updateMyAccountAction(data: UserFormValues) {
+export async function updateMyAccountAction(data: UserCreateFormValues) {
   return updateMyAccount(data);
 }
 

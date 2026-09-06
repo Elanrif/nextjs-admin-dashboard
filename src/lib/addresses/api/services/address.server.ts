@@ -6,7 +6,7 @@ import { getLogger } from "@config/logger.config";
 import { Address, AddressesResponse, AddressFilters } from "../types";
 import {
   addressCreateSchema,
-  AddressFormValues,
+  AddressCreateFormValues,
   AddressUpdateFormValues,
   addressUpdateSchema,
 } from "../../schemas/address";
@@ -28,10 +28,12 @@ export async function getUserAddresses(
   filters: AddressFilters = {},
 ): Promise<Result<AddressesResponse, ApiError>> {
   try {
-    const response = await apiClient(true).get<AddressesResponse>(addressesUrl, {
-      params: filters,
-    });
-
+    const response = await apiClient(true).get<AddressesResponse>(
+      addressesUrl,
+      {
+        params: filters,
+      },
+    );
     logger.debug({ count: response.data.total }, "User addresses fetched");
 
     return {
@@ -100,7 +102,7 @@ export async function getUserAddress(
 }
 
 export async function createUserAddress(
-  payload: AddressFormValues,
+  payload: AddressCreateFormValues,
 ): Promise<Result<Address, ApiError>> {
   const parse = addressCreateSchema.safeParse(payload);
 
@@ -112,7 +114,10 @@ export async function createUserAddress(
   }
 
   try {
-    const response = await apiClient(true).post<Address>(addressesUrl, parse.data);
+    const response = await apiClient(true).post<Address>(
+      addressesUrl,
+      parse.data,
+    );
 
     logger.info(
       { addressId: response.data.id },

@@ -1,15 +1,6 @@
-/**
- * Post types — API response models (no validation)
- * See: src/lib/posts/schemas/post.schema.ts for form validation
- */
-
 import { Comment } from "@/lib/comments/api/types";
 import { PageResponse } from "@/lib/shared/types";
 import { UserSummary } from "@/lib/users/api/types";
-
-// ============================================================================
-// CORE ENTITIES
-// ============================================================================
 
 export interface Post {
   id: number;
@@ -26,10 +17,6 @@ export interface Post {
 
 export type PostsResponse = PageResponse<Post>;
 
-// ============================================================================
-// REQUEST & RESPONSE TYPES
-// ============================================================================
-
 export type PostFilters = {
   page?: number;
   size?: number;
@@ -37,13 +24,3 @@ export type PostFilters = {
   sort?: string;
   authorId?: number;
 };
-
-export type PostCreate = {
-  title: string;
-  description?: string;
-  imageUrl?: string;
-  likes: number;
-  authorId?: number;
-};
-
-export type PostUpdate = Partial<PostCreate>;

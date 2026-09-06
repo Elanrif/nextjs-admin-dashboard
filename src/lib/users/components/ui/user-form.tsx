@@ -139,7 +139,7 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
   });
 
   const onSubmit = (values: UserCreateFormValues | UserUpdateFormValues) => {
-    if(isEdit) {
+    if (isEdit) {
       updateMutation.mutate({
         id: initialData.id,
         values: values as UserUpdateFormValues,
@@ -176,11 +176,6 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
     initialUrl: undefined,
   });
 
-  function handleImageChange(url: string, publicId: string) {
-    image.handleChange(url, publicId);
-    setValue("avatarUrl", url, { shouldDirty: true, shouldValidate: true });
-  }
-
   function handleImageRemove() {
     image.handleRemove();
     setValue("avatarUrl", "", { shouldDirty: true, shouldValidate: true });
@@ -191,18 +186,14 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex h-[90vh] max-h-[90vh] flex-col"
     >
-      {/* =====================================================
-          HEADER FIXE
-          ===================================================== */}
+      {/* Header sticky */}
       <div className="sticky top-0 z-20 shrink-0 border-b border-gray-200 bg-white px-6 py-4 dark:border-gray-700 dark:bg-gray-900">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
           {pageTitle}
         </h2>
       </div>
 
-      {/* =====================================================
-          CONTENU SCROLLABLE
-          ===================================================== */}
+      {/* Content scrollable */}
       <div className="min-h-0 flex-1 overflow-y-auto p-6">
         {Object.keys(errors).length > 0 && (
           <Alert
@@ -394,8 +385,20 @@ export function UserForm({ initialData, pageTitle, onSaved }: UserFormProps) {
           <ImageUpload
             value={image.url}
             publicId={image.publicId}
-            onChange={handleImageChange}
-            onRemove={handleImageRemove}
+            onChange={(url, publicId) => {
+              image.handleChange(url, publicId);
+              setValue("avatarUrl", url, {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+            }}
+            onRemove={() => {
+              image.handleRemove();
+              setValue("avatarUrl", "", {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+            }}
             variant="light"
           />
           <Button

@@ -14,7 +14,7 @@ import {
   DeleteFormValues,
   LoginFormValues,
   RegisterFormValues,
-  UserFormValues,
+  UserCreateFormValues,
 } from "../schemas/auth";
 
 export function useSignInMutation() {
@@ -30,7 +30,7 @@ export function useSignUpMutation() {
 }
 
 export const updateMyAccountMutation = mutationOptions({
-  mutationFn: (values: UserFormValues) => updateMyAccountAction(values),
+  mutationFn: (values: UserCreateFormValues) => updateMyAccountAction(values),
 
   onSettled: () => {
     void getQueryClient().invalidateQueries({ queryKey: userKeys.all });

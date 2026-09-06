@@ -13,7 +13,7 @@ import {
   LoginFormValues,
   RegisterFormValues,
   ResetPwdFormValues,
-  UserFormValues,
+  UserCreateFormValues,
   ChangePwdFormValues,
   DeleteFormValues,
 } from "@lib/auth/schemas/auth";
@@ -180,7 +180,7 @@ export async function resetPassword(
 }
 
 export async function updateMyAccount(
-  data: UserFormValues,
+  data: UserCreateFormValues,
 ): Promise<Result<User, ApiError>> {
   const parse = UserSchema.safeParse(data);
 
@@ -231,7 +231,10 @@ export async function updateMyPassword(
   }
 
   try {
-    const response = await apiClient(true).patch<User>(changeMyPwdUrl, parse.data);
+    const response = await apiClient(true).patch<User>(
+      changeMyPwdUrl,
+      parse.data,
+    );
 
     logger.info(
       {

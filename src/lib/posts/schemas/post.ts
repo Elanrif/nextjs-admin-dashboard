@@ -24,27 +24,8 @@ const postFields = {
   authorId: z.number().int().positive().optional(),
 };
 
-
-/**
- * ------------------------------------------------------------------
- * SCHÉMAS API / SERVICE
- * ------------------------------------------------------------------
-*/
 export const postCreateSchema = z.object(postFields);
 export const postUpdateSchema = postCreateSchema.partial();
 
-/**
- * ------------------------------------------------------------------
- * Types UI / Form
- * ------------------------------------------------------------------
-*/
-export type PostFormValues = z.input<typeof postCreateSchema>;
+export type PostCreateFormValues = z.input<typeof postCreateSchema>;
 export type PostUpdateFormValues = z.input<typeof postUpdateSchema>;
-
-/**
- * ------------------------------------------------------------------
- * Types API / Service
- * ------------------------------------------------------------------
-*/
-export type PostCreatePayload = z.output<typeof postCreateSchema>;
-export type PostUpdatePayload = z.output<typeof postUpdateSchema>;

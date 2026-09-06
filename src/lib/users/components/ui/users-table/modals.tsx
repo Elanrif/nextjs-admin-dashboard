@@ -69,7 +69,7 @@ export function Modals({
       <Modal
         isOpen={modals.delete.isOpen}
         onClose={modals.delete.close}
-        className="max-h-[90vh] max-w-4xl p-0"
+        className="max-w-md p-6 lg:p-10"
       >
         <div className="text-center space-y-4">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-error-100 dark:bg-error-500/20">

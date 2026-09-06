@@ -30,6 +30,8 @@ import { deletePostMutation } from "@/lib/posts/api/mutations";
 import type { Post } from "@/lib/posts/api/types";
 import { Modals } from "@/lib/posts/components/ui/posts-table/modals";
 import Comments from "./comments";
+import { ErrorState } from "@/lib/shared/ui/error-state";
+import environment from "@/config/environment.config";
 
 export default function Posts() {
   const { user, isLoading } = useSession();
@@ -42,13 +44,8 @@ export default function Posts() {
   const viewModal = useModal();
   const editModal = useModal();
   const createModal = useModal();
+  const createModalComment = useModal();
   const deleteModal = useModal();
-
-  const { data: postsResult } = useSuspenseQuery(
-    postsQueryOptions({ size: 1000 }),
-  );
-
-  const posts = postsResult.ok ? postsResult.data.data : [];
 
   const deleteMutation = useMutation({
     ...deletePostMutation,
@@ -75,6 +72,15 @@ export default function Posts() {
     setSelectedPost(post);
     editModal.openModal();
   };
+
+  const { data } = useSuspenseQuery(
+    postsQueryOptions({ size: environment.pagination.size }),
+  );
+
+  if (!data.ok) {
+    return <ErrorState error={data.error} />;
+  }
+  const posts = data.data.content;
 
   return (
     <section className="mx-auto w-full max-w-3xl">
@@ -222,6 +228,7 @@ export default function Posts() {
                         type="button"
                         onClick={() => {
                           setExpandedPost(post.id);
+                          createModalComment.openModal();
                         }}
                         className="ml-auto inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
                       >
@@ -234,6 +241,7 @@ export default function Posts() {
                   {isExpanded && (
                     <Comments
                       queryParams={{ postId: post.id, authorId: user?.id }}
+                      action={createModalComment}
                     />
                   )}
                 </div>
@@ -242,7 +250,7 @@ export default function Posts() {
           );
         })}
       </div>
-      {/* 
+      {/*
       Optional queryParams scope the create/edit forms and hide the
       corresponding select fields.
       When omitted, the related fields remain

@@ -62,9 +62,9 @@ export function Modals({
       >
         {selectedPost && (
           <PostFormView
-          postId={String(selectedPost.id)}
-          hiddenFields={{ authorId }}
-          onSaved={modals.edit.close}
+            postId={String(selectedPost.id)}
+            hiddenFields={{ authorId }}
+            onSaved={modals.edit.close}
           />
         )}
       </Modal>
@@ -73,7 +73,7 @@ export function Modals({
       <Modal
         isOpen={modals.delete.isOpen}
         onClose={modals.delete.close}
-        className="max-h-[90vh] max-w-4xl p-0"
+        className="max-w-md p-6 lg:p-10"
       >
         <div className="space-y-4 text-center">
           <Trash2 className="mx-auto h-10 w-10 text-error-500" />

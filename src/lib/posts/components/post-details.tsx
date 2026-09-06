@@ -5,18 +5,22 @@ import { useState } from "react";
 import { FileText, MessageSquare } from "lucide-react";
 import { Comments } from "@/lib/comments/components/comments";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { postByIdOptions } from "../api/queries/queries.client";
+import { postByIdQueryOptions } from "../api/queries/queries.client";
 import notFound from "@/app/not-found";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 export default function PostDetails({ postId }: { postId: number }) {
   const [activeTab, setActiveTab] = useState<"description" | "comments">(
     "description",
   );
 
-  const { data } = useSuspenseQuery(postByIdOptions(postId));
+  const { data } = useSuspenseQuery(postByIdQueryOptions(postId));
   if (!data.ok) {
-    notFound();
-    return null;
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
   const post = data.data;
 
@@ -191,8 +195,10 @@ export default function PostDetails({ postId }: { postId: number }) {
                 </div>
 
                 {/* Edit button */}
-                <button className="mt-auto w-full flex items-center justify-center gap-2 bg-green-700
-                 hover:bg-green-800 text-white font-medium text-sm py-2.5 rounded-lg transition-colors">
+                <button
+                  className="mt-auto w-full flex items-center justify-center gap-2 bg-green-700
+                 hover:bg-green-800 text-white font-medium text-sm py-2.5 rounded-lg transition-colors"
+                >
                   ✏️ Modifier
                 </button>
               </div>

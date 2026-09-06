@@ -9,7 +9,7 @@ export const postsQueryOptions = (filters: PostFilters) =>
     queryFn: () => fetchPosts(filters),
   });
 
-export const postByIdOptions = (id: number) =>
+export const postByIdQueryOptions = (id: number) =>
   queryOptions({
     queryKey: postKeys.detail(id),
     queryFn: () => fetchPostById(id),

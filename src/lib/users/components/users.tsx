@@ -32,7 +32,7 @@ import { useUserFilters } from "./ui/users-table/use-filters";
 import environment from "@/config/environment.config";
 
 const {
-  pagination: { defaultPage, defaultLimit },
+  pagination: { page, size },
 } = environment;
 
 export function Users() {
@@ -43,8 +43,8 @@ export function Users() {
     usePaginationParams({
       pageParam: "page",
       sizeParam: "size",
-      defaultPage: defaultPage,
-      defaultSize: defaultLimit,
+      defaultPage: page,
+      defaultSize: size,
     });
 
   const {

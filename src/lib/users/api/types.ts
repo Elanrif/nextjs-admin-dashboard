@@ -14,10 +14,6 @@ export enum UserStatus {
   DELETED = "DELETED",
 }
 
-// ============================================================================
-// CORE ENTITIES
-// ============================================================================
-
 export interface User {
   id: number;
   email: string;
@@ -41,10 +37,6 @@ export interface UserSummary {
   email: string;
   role?: UserRole;
 }
-
-// ============================================================================
-// REQUEST & RESPONSE TYPES
-// ============================================================================
 
 export type UserFilters = {
   page?: number;

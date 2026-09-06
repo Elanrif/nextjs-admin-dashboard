@@ -5,11 +5,11 @@ import { User } from "./types";
 import { createUser, deleteUser, updateUser } from "./services/user.server";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
-import { UserFormValues } from "@/lib/auth/schemas/auth";
+import { UserCreateFormValues } from "@/lib/auth/schemas/auth";
 import { UserUpdateFormValues } from "../schemas/user";
 
 export async function createUserAction(
-  data: UserFormValues,
+  data: UserCreateFormValues,
 ): Promise<Result<User, ApiError>> {
   const result = await createUser(data);
   if (result.ok) {

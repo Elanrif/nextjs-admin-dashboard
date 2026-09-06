@@ -1,18 +1,18 @@
 import { mutationOptions } from "@tanstack/react-query";
 import { postKeys } from "./queries";
-import { PostCreatePayload, PostUpdatePayload } from "../schemas/post";
 import { getQueryClient } from "@/lib/query-client";
 import { createPostAction, deletePostAction, updatePostAction } from "./action";
+import { PostCreateFormValues, PostUpdateFormValues } from "../schemas/post";
 
 export const createPostMutation = mutationOptions({
-  mutationFn: (data: PostCreatePayload) => createPostAction(data),
+  mutationFn: (data: PostCreateFormValues) => createPostAction(data),
   onSuccess: () => {
     getQueryClient().invalidateQueries({ queryKey: postKeys.all });
   },
 });
 
 export const updatePostMutation = mutationOptions({
-  mutationFn: ({ id, values }: { id: number; values: PostUpdatePayload }) =>
+  mutationFn: ({ id, values }: { id: number; values: PostUpdateFormValues }) =>
     updatePostAction(id, values),
   onSuccess: () => {
     getQueryClient().invalidateQueries({ queryKey: postKeys.all });

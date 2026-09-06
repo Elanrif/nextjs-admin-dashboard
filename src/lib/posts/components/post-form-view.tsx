@@ -3,9 +3,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { Post } from "../api/types";
-import { postByIdOptions } from "../api/queries/queries.client";
+import { postByIdQueryOptions } from "../api/queries/queries.client";
 import { PostForm } from "./ui/post-form";
 import { PostQueryProps } from "./posts";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
 type TPostViewPageProps = {
   postId: string;
@@ -29,6 +30,12 @@ export default function PostFormView({
     );
   }
 
+  const numericId = Number(postId);
+  if (Number.isNaN(numericId)) {
+    notFound();
+    return null;
+  }
+
   return <EditPostView postId={Number(postId)} onSaved={onSaved} />;
 }
 
@@ -39,10 +46,14 @@ function EditPostView({
   postId: number;
   onSaved?: () => void;
 }) {
-  const { data } = useSuspenseQuery(postByIdOptions(postId));
+  const { data } = useSuspenseQuery(postByIdQueryOptions(postId));
 
-  if (!data?.ok || !data?.data) {
-    notFound();
+  if (!data.ok) {
+    if (data.error.status === 404) {
+      notFound();
+      return null;
+    }
+    return <ErrorState error={data.error} />;
   }
 
   return (

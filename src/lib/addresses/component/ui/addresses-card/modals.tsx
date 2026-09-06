@@ -53,7 +53,7 @@ export function Modals({
       >
         <AddressFormView
           addressId="new"
-          hiddenFields={{ userId}}
+          hiddenFields={{ userId }}
           onSaved={modals.create.close}
         />
       </Modal>
@@ -66,7 +66,7 @@ export function Modals({
       >
         <AddressFormView
           addressId={selectedAddress ? String(selectedAddress.id) : "new"}
-          hiddenFields={{ userId}}
+          hiddenFields={{ userId }}
           onSaved={modals.edit.close}
         />
       </Modal>

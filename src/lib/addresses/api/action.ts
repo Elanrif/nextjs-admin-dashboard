@@ -12,10 +12,10 @@ import {
 import { Address } from "./types";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
-import { AddressFormValues } from "../schemas/address";
+import { AddressCreateFormValues } from "../schemas/address";
 
 export async function createUserAddressAction(
-  payload: AddressFormValues,
+  payload: AddressCreateFormValues,
 ): Promise<Result<Address, ApiError>> {
   const result = await createUserAddress(payload);
 
@@ -29,7 +29,7 @@ export async function createUserAddressAction(
 
 export async function updateAddressAction(
   addressId: number,
-  payload: Partial<AddressFormValues>,
+  payload: Partial<AddressCreateFormValues>,
 ): Promise<Result<Address, ApiError>> {
   const result = await updateAddress(addressId, payload);
 

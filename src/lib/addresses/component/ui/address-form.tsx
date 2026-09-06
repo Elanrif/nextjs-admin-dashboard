@@ -21,7 +21,7 @@ import {
 import { addressKeys } from "@/lib/addresses/api/queries";
 import {
   addressCreateSchema,
-  AddressFormValues,
+  AddressCreateFormValues,
   AddressUpdateFormValues,
   addressUpdateSchema,
 } from "@/lib/addresses/schemas/address";
@@ -32,6 +32,7 @@ import Select from "@/components/form/Select";
 import { User } from "@/lib/users/api/types";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
 import { ErrorState } from "@/lib/shared/ui/error-state";
+import environment from "@/config/environment.config";
 
 export default function AddressForm({
   initialData,
@@ -52,7 +53,7 @@ export default function AddressForm({
 
   const formSchema = isEdit ? addressUpdateSchema : addressCreateSchema;
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
+    usersQueryOptions({ size: environment.pagination.size }),
   );
 
   const {
@@ -61,7 +62,7 @@ export default function AddressForm({
     setValue,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<AddressFormValues | AddressUpdateFormValues>({
+  } = useForm<AddressCreateFormValues | AddressUpdateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       street: initialData?.street ?? "",
@@ -118,7 +119,9 @@ export default function AddressForm({
     },
   });
 
-  const onSubmit = (values: AddressFormValues | AddressUpdateFormValues) => {
+  const onSubmit = (
+    values: AddressCreateFormValues | AddressUpdateFormValues,
+  ) => {
     if (isEdit && initialData) {
       updateMutation.mutate({
         addressId: initialData.id,
@@ -128,7 +131,7 @@ export default function AddressForm({
     }
 
     createMutation.mutate({
-      payload: values as AddressFormValues,
+      payload: values as AddressCreateFormValues,
     });
   };
 

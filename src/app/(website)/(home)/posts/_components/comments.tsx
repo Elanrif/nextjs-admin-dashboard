@@ -8,9 +8,8 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { MessageSquare, Pencil, Plus, Trash2 } from "lucide-react";
+import { MessageSquare, Pencil, Trash2 } from "lucide-react";
 
-import Button from "@/components/ui/button/Button";
 import { useModal } from "@/hooks/useModal";
 import { commentsQueryOptions } from "@/lib/comments/api/queries/queries.client";
 import { deleteCommentMutation } from "@/lib/comments/api/mutations";
@@ -18,40 +17,35 @@ import { commentKeys } from "@/lib/comments/api/queries";
 import { Comment } from "@/lib/comments/api/types";
 import { Modals } from "@/lib/comments/components/ui/comments-table/modals";
 import { CommentsQueryProps } from "@/lib/comments/components/comments";
+import { ErrorState } from "@/lib/shared/ui/error-state";
 
-export default function Comments({ queryParams }: CommentsQueryProps) {
+export default function Comments({
+  queryParams,
+  action,
+}: CommentsQueryProps & {
+  action: {
+    isOpen: boolean;
+    openModal: () => void;
+    closeModal: () => void;
+  };
+}) {
   const queryClient = useQueryClient();
 
   const [selectedComment, setSelectedComment] = useState<Comment | null>(null);
 
-  /* Modals */
   const viewModal = useModal();
   const editModal = useModal();
-  const createModal = useModal();
   const deleteModal = useModal();
-
-  const { data } = useSuspenseQuery(
-    commentsQueryOptions({
-      postId: queryParams?.postId,
-      size: 100,
-    }),
-  );
-
-  const comments = data.ok ? data.data.data : [];
 
   const deleteMutation = useMutation({
     ...deleteCommentMutation,
-
     onSuccess: async (result) => {
       if (!result.ok) {
         toast.error(result.error.message);
         return;
       }
 
-      await queryClient.invalidateQueries({
-        queryKey: commentKeys.all,
-      });
-
+      await queryClient.invalidateQueries({ queryKey: commentKeys.all });
       toast.success("Commentaire supprimé");
 
       deleteModal.closeModal();
@@ -69,23 +63,24 @@ export default function Comments({ queryParams }: CommentsQueryProps) {
     deleteModal.openModal();
   };
 
+  const { data } = useSuspenseQuery(
+    commentsQueryOptions({
+      postId: queryParams?.postId,
+      size: 100,
+    }),
+  );
+
+  if (!data.ok) {
+    return <ErrorState error={data.error} />;
+  }
+  const comments = data.data.content;
+
   return (
     <>
       <div className="mt-6 space-y-4 border-l border-stone-300 pl-4 dark:border-stone-700">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-stone-800 dark:text-stone-200">
-            Commentaires
-          </h3>
-
-          <Button
-            size="sm"
-            variant="outline"
-            startIcon={<Plus size={15} />}
-            onClick={createModal.openModal}
-          >
-            Commenter
-          </Button>
-        </div>
+        <h3 className="text-sm font-semibold text-stone-800 dark:text-stone-200">
+          Commentaires
+        </h3>
 
         {comments.length > 0 ? (
           comments.map((comment) => (
@@ -144,15 +139,14 @@ export default function Comments({ queryParams }: CommentsQueryProps) {
         ) : (
           <div className="py-4 text-center">
             <MessageSquare className="mx-auto mb-3 h-10 w-10 text-stone-300 dark:text-stone-600" />
-
             <p className="text-sm italic text-stone-500">
               Aucun commentaire pour le moment.
             </p>
           </div>
         )}
       </div>
-      {/* MODALS */}
-      {/* 
+
+      {/*
       Optional queryParams scope the create/edit forms and hide the
       corresponding select fields.
       When omitted, the related fields remain
@@ -165,22 +159,10 @@ export default function Comments({ queryParams }: CommentsQueryProps) {
           authorId: queryParams?.authorId,
         }}
         modals={{
-          view: {
-            isOpen: viewModal.isOpen,
-            close: viewModal.closeModal,
-          },
-          edit: {
-            isOpen: editModal.isOpen,
-            close: editModal.closeModal,
-          },
-          create: {
-            isOpen: createModal.isOpen,
-            close: createModal.closeModal,
-          },
-          delete: {
-            isOpen: deleteModal.isOpen,
-            close: deleteModal.closeModal,
-          },
+          view: { isOpen: viewModal.isOpen, close: viewModal.closeModal },
+          edit: { isOpen: editModal.isOpen, close: editModal.closeModal },
+          create: { isOpen: action.isOpen, close: action.closeModal },
+          delete: { isOpen: deleteModal.isOpen, close: deleteModal.closeModal },
         }}
         onConfirmDelete={() =>
           selectedComment && deleteMutation.mutate(selectedComment.id)

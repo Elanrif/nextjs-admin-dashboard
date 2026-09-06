@@ -28,5 +28,5 @@ export const addressFiels = {
 
 export const addressCreateSchema = z.object(addressFiels);
 export const addressUpdateSchema = addressCreateSchema.partial();
-export type AddressFormValues = z.input<typeof addressCreateSchema>;
+export type AddressCreateFormValues = z.input<typeof addressCreateSchema>;
 export type AddressUpdateFormValues = z.input<typeof addressUpdateSchema>;

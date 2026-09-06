@@ -25,9 +25,8 @@ export async function fetchPosts(
 export async function fetchPostById(
   id: number,
 ): Promise<Result<Post, ApiError>> {
-  const res = await frontendHttp().get<
-    unknown,
-    AxiosResponse<Result<Post, ApiError>>
-  >(`${postsUrl}/${id}`);
+  const res = await frontendHttp().get<Result<Post, ApiError>>(
+    `${postsUrl}/${id}`,
+  );
   return res.data;
 }

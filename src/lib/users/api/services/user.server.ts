@@ -5,14 +5,14 @@ import environment from "@config/environment.config";
 import { getLogger } from "@config/logger.config";
 import { User, UserFilters, UsersResponse } from "@/lib/users/api/types";
 import {
-  parseUserCreate,
-  parseUserUpdate,
+  UserCreateFormValues,
+  userCreateSchema,
   UserUpdateFormValues,
+  userUpdateSchema,
 } from "@/lib/users/schemas/user";
 import { Result } from "@/lib/shared/types";
 import { ApiError, fromZodError } from "@/lib/shared/api-error";
 import { checkValidId } from "@/utils";
-import { UserFormValues } from "@/lib/auth/schemas/auth";
 
 const {
   api: {
@@ -75,9 +75,9 @@ export async function getUserById(id: number): Promise<Result<User, ApiError>> {
 }
 
 export async function createUser(
-  user: UserFormValues,
+  user: UserCreateFormValues,
 ): Promise<Result<User, ApiError>> {
-  const parse = parseUserCreate(user);
+  const parse = userCreateSchema.safeParse(user);
 
   if (!parse.success) {
     return {
@@ -89,10 +89,10 @@ export async function createUser(
   try {
     const res = await apiClient(true).post<User>(usersUrl, parse.data);
 
-      logger.info(
-        { id: res.data.id, content: res.data.email },
-        "User created successfully",
-      );
+    logger.info(
+      { id: res.data.id, content: res.data.email },
+      "User created successfully",
+    );
 
     return {
       ok: true,
@@ -113,7 +113,7 @@ export async function updateUser(
   const idCheck = checkValidId(id, "user");
   if (idCheck) return idCheck;
 
-  const parse = parseUserUpdate(user);
+  const parse = userUpdateSchema.safeParse(user);
 
    if (!parse.success) {
      return {

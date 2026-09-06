@@ -29,7 +29,7 @@ const passwordSchema = z
   .max(255, "Password must be at most 255 characters");
 
 export const UserSchema = z.object({
-  ...coreFields
+  ...coreFields,
 });
 
 export const changePasswordSchema = z
@@ -94,7 +94,7 @@ export const registerFormSchema = z
     }
   });
 
-const MESSAGE_DELETE_ACCOUNT = 'I want to delete my account';
+const MESSAGE_DELETE_ACCOUNT = "I want to delete my account";
 export const deleteFormSchema = z.object({
   emailInput: z
     .string()
@@ -103,15 +103,17 @@ export const deleteFormSchema = z.object({
   messageInput: z
     .string()
     .trim()
-    .refine((val) => val.toUpperCase() === MESSAGE_DELETE_ACCOUNT.toUpperCase(), {
-      message: `You must type "${MESSAGE_DELETE_ACCOUNT}" to confirm`,
-    }),
+    .refine(
+      (val) => val.toUpperCase() === MESSAGE_DELETE_ACCOUNT.toUpperCase(),
+      {
+        message: `You must type "${MESSAGE_DELETE_ACCOUNT}" to confirm`,
+      },
+    ),
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 export type RegisterFormValues = z.infer<typeof registerFormSchema>;
-export type UserFormValues = z.infer<typeof UserSchema>;
+export type UserCreateFormValues = z.infer<typeof UserSchema>;
 export type ChangePwdFormValues = z.infer<typeof changePasswordSchema>;
 export type ResetPwdFormValues = z.infer<typeof resetPasswordSchema>;
 export type DeleteFormValues = z.infer<typeof deleteFormSchema>;
-

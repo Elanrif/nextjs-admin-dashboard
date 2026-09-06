@@ -1,6 +1,5 @@
 "use client";
 
-import { User } from "../api/types";
 import { useState } from "react";
 import {
   User as UserIcon,

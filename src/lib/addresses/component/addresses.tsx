@@ -36,7 +36,7 @@ export type AddressesQueryProps = {
 };
 
 const {
-  pagination: { defaultPage, defaultLimit },
+  pagination: { page, size },
 } = environment;
 
 export function Addresses({ queryParams }: AddressesQueryProps) {
@@ -47,8 +47,8 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
     usePaginationParams({
       pageParam: "current",
       sizeParam: "limit",
-      defaultPage: defaultPage,
-      defaultSize: defaultLimit,
+      defaultPage: page,
+      defaultSize: size,
     });
 
   const {
@@ -165,7 +165,9 @@ export function Addresses({ queryParams }: AddressesQueryProps) {
   const pagination = data.data;
 
   const startIndex =
-    pagination && addresses.length > 0 ? (pagination.page - 1) * pagination.size + 1 : 0;
+    pagination && addresses.length > 0
+      ? (pagination.page - 1) * pagination.size + 1
+      : 0;
 
   const endIndex =
     pagination && addresses.length > 0 ? startIndex + addresses.length - 1 : 0;

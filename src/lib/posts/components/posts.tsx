@@ -8,13 +8,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { UnifiedPagination } from "@/components/ui/paginations";
 import { useModal } from "@/hooks/useModal";
@@ -31,6 +25,9 @@ import { Modals } from "./ui/posts-table/modals";
 import { usePaginationParams } from "@/lib/use-pagination-params";
 import { usePostFilters } from "./ui/posts-table/use-filters";
 import { usersQueryOptions } from "@/lib/users/api/queries/queries.client";
+import { ErrorState } from "@/lib/shared/ui/error-state";
+import { EmptyState } from "@/lib/shared/ui/empty-state";
+import environment from "@/config/environment.config";
 
 export type PostQueryProps = {
   // Optional parameters provided by the parent to scope the comments.
@@ -43,10 +40,6 @@ export function Posts({ queryParams }: PostQueryProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: 1000 }),
-  );
-  const authors = usersResult.ok ? usersResult.data.data : [];
 
   const { currentPage, itemsPerPage, handlePageChange, handleSizeChange } =
     usePaginationParams({
@@ -64,17 +57,6 @@ export function Posts({ queryParams }: PostQueryProps) {
       onPageReset: () => handlePageChange(1),
     });
 
-  const { data } = useSuspenseQuery(postsQueryOptions(filters));
-  const posts = data.ok ? data.data.data : [];
-  const meta = data.ok ? data.data.meta : null;
-  const allQuery = useSuspenseQuery(postsQueryOptions({ size: 1000 }));
-
-  /* Modals */
-  const viewModal = useModal();
-  const editModal = useModal();
-  const createModal = useModal();
-  const deleteModal = useModal();
-
   const deleteMutation = useMutation({
     ...deletePostMutation,
     onSuccess: (result) => {
@@ -87,8 +69,14 @@ export function Posts({ queryParams }: PostQueryProps) {
     },
   });
 
+  /* Modals */
+  const viewModal = useModal();
+  const editModal = useModal();
+  const createModal = useModal();
+  const deleteModal = useModal();
+
   const exportPosts = () => {
-    const rows = allQuery.data.ok ? allQuery.data.data.data : [];
+    const rows = allQuery.data.ok ? allQuery.data.data.content : [];
     exportToCSV(
       rows.map((post) => ({
         title: post.title,
@@ -105,6 +93,22 @@ export function Posts({ queryParams }: PostQueryProps) {
       "posts.csv",
     );
   };
+
+  const { data } = useSuspenseQuery(postsQueryOptions(filters));
+  const { data: usersResult } = useSuspenseQuery(
+    usersQueryOptions({ size: environment.pagination.size }),
+  );
+  const allQuery = useSuspenseQuery(
+    postsQueryOptions({ size: environment.pagination.size }),
+  );
+
+  if (!data?.ok) {
+    return <ErrorState error={data.error} />;
+  }
+
+  const posts = data.data.content;
+  const pagination = data.data;
+  const authors = usersResult.ok ? usersResult.data.content : [];
 
   return (
     <div className="space-y-4">
@@ -137,18 +141,21 @@ export function Posts({ queryParams }: PostQueryProps) {
         onLimitChange={handleSizeChange}
       />
       <div className="text-sm text-gray-500 dark:text-gray-400" id="table-top">
-        Showing {posts.length ? (meta!.page - 1) * meta!.size + 1 : 0} to{" "}
-        {posts.length ? (meta!.page - 1) * meta!.size + posts.length : 0} of{" "}
-        {meta?.total ?? 0} posts
+        Showing{" "}
+        {posts.length ? (pagination!.page - 1) * pagination!.size + 1 : 0} to{" "}
+        {posts.length
+          ? (pagination!.page - 1) * pagination!.size + posts.length
+          : 0}{" "}
+        of {pagination?.total ?? 0} posts
       </div>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3">
-        <Table>
-          <TableHeader className="text-start bg-green-600 text-white border-b border-gray-100 dark:border-white/5">
-            <Columns />
-          </TableHeader>
-          <TableBody>
-            {posts.length ? (
-              posts.map((post) => (
+        {posts.length > 0 ? (
+          <Table>
+            <TableHeader className="text-start bg-green-600 text-white border-b border-gray-100 dark:border-white/5">
+              <Columns />
+            </TableHeader>
+            <TableBody>
+              {posts.map((post) => (
                 <Row
                   key={post.id}
                   post={post}
@@ -165,27 +172,25 @@ export function Posts({ queryParams }: PostQueryProps) {
                     deleteModal.openModal();
                   }}
                 />
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={6}
-                  className="py-8 text-center text-gray-500"
-                >
-                  No posts found
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <EmptyState
+            title="Aucun post"
+            description="Aucun post ne correspond à ces critères pour le moment."
+            fullWidth={false}
+            className="border-0 bg-transparent"
+          />
+        )}
       </div>
-      {meta && (
+      {pagination && (
         <UnifiedPagination
           mode="server"
-          currentPage={meta.page}
-          totalPages={meta.totalPages}
-          totalItems={meta.total}
-          itemsPerPage={meta.size}
+          currentPage={pagination.page}
+          totalPages={pagination.totalPages}
+          totalItems={pagination.total}
+          itemsPerPage={pagination.size}
           onPageChange={handlePageChange}
           variant="both"
         />

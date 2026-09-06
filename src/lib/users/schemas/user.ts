@@ -117,8 +117,4 @@ export const userFormSchema = z
   });
 
 export type UserCreateFormValues = z.input<typeof userCreateSchema>;
-export const parseUserCreate =
-  userCreateSchema.safeParse.bind(userCreateSchema);
 export type UserUpdateFormValues = z.input<typeof userUpdateSchema>;
-export const parseUserUpdate =
-  userUpdateSchema.safeParse.bind(userUpdateSchema);

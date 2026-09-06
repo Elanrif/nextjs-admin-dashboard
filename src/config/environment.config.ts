@@ -28,10 +28,10 @@ const environment = {
     },
   },
   pagination: {
-    defaultPage: Number.parseInt(
+    page: Number.parseInt(
       process.env.NEXT_PUBLIC_PAGINATION_DEFAULT_PAGE || "1",
     ),
-    defaultLimit: Number.parseInt(
+    size: Number.parseInt(
       process.env.NEXT_PUBLIC_PAGINATION_DEFAULT_LIMIT || "10",
     ),
   },
