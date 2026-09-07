@@ -8,7 +8,7 @@ import {
   registerFormSchema,
   changePasswordSchema,
   resetPasswordSchema,
-  UserSchema,
+  CurrentUserSchema,
   deleteFormSchema,
   LoginFormValues,
   RegisterFormValues,
@@ -182,7 +182,7 @@ export async function resetPassword(
 export async function updateMyAccount(
   data: UserCreateFormValues,
 ): Promise<Result<User, ApiError>> {
-  const parse = UserSchema.safeParse(data);
+  const parse = CurrentUserSchema.safeParse(data);
 
   if (!parse.success) {
     return {

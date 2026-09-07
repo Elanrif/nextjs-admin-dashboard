@@ -28,7 +28,7 @@ const passwordSchema = z
   .min(8, "Password must be at least 8 characters")
   .max(255, "Password must be at most 255 characters");
 
-export const UserSchema = z.object({
+export const CurrentUserSchema = z.object({
   ...coreFields,
 });
 
@@ -75,7 +75,7 @@ export const registerFormSchema = z
   .object({
     ...coreFields,
     password: z.string(),
-    confirmNewPassword: z.string(),
+    confirmPassword: z.string(),
   })
   .superRefine((data, ctx) => {
     if (data.password.length < 8) {
@@ -85,7 +85,7 @@ export const registerFormSchema = z
         message: "Password must be at least 8 characters",
       });
     }
-    if (data.password !== data.confirmNewPassword) {
+    if (data.password !== data.confirmPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["confirmNewPassword"],
@@ -113,7 +113,7 @@ export const deleteFormSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;
 export type RegisterFormValues = z.infer<typeof registerFormSchema>;
-export type UserCreateFormValues = z.infer<typeof UserSchema>;
+export type UserCreateFormValues = z.infer<typeof CurrentUserSchema>;
 export type ChangePwdFormValues = z.infer<typeof changePasswordSchema>;
 export type ResetPwdFormValues = z.infer<typeof resetPasswordSchema>;
 export type DeleteFormValues = z.infer<typeof deleteFormSchema>;

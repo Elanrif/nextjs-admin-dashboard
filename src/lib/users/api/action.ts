@@ -5,8 +5,7 @@ import { User } from "./types";
 import { createUser, deleteUser, updateUser } from "./services/user.server";
 import { Result } from "@/lib/shared/types";
 import { ApiError } from "@/lib/shared/api-error";
-import { UserCreateFormValues } from "@/lib/auth/schemas/auth";
-import { UserUpdateFormValues } from "../schemas/user";
+import { UserCreateFormValues, UserUpdateFormValues } from "../schemas/user";
 
 export async function createUserAction(
   data: UserCreateFormValues,

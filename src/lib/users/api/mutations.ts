@@ -2,8 +2,7 @@ import { mutationOptions } from "@tanstack/react-query";
 import { userKeys } from "./queries";
 import { getQueryClient } from "@/lib/query-client";
 import { createUserAction, deleteUserAction, updateUserAction } from "./action";
-import { UserCreateFormValues } from "@/lib/auth/schemas/auth";
-import { UserUpdateFormValues } from "../schemas/user";
+import { UserCreateFormValues, UserUpdateFormValues } from "../schemas/user";
 
 export const createUserMutation = mutationOptions({
   mutationFn: (data: UserCreateFormValues) => createUserAction(data),

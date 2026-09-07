@@ -34,13 +34,13 @@ export default function SignUpForm() {
       phoneNumber: "",
       email: "",
       password: "",
-      confirmNewPassword: "",
+      confirmPassword: "",
     },
   });
 
   const [errorFromApi, setErrorFromApi] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [showconfirmNewPassword, setShowconfirmNewPassword] = useState(false);
+  const [showconfirmPassword, setShowconfirmPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const onSubmit = async (data: RegisterFormValues) => {
@@ -57,7 +57,7 @@ export default function SignUpForm() {
         phoneNumber: data.phoneNumber,
         email: data.email,
         password: data.password,
-        confirmNewPassword: data.confirmNewPassword,
+        confirmPassword: data.confirmPassword,
       });
 
       if (!result.ok) {
@@ -253,27 +253,27 @@ export default function SignUpForm() {
                   <Label required>Confirm Password</Label>
                   <div className="relative">
                     <Input
-                      type={showconfirmNewPassword ? "text" : "password"}
-                      {...register("confirmNewPassword")}
+                      type={showconfirmPassword ? "text" : "password"}
+                      {...register("confirmPassword")}
                       placeholder="Confirm your password"
                     />
                     <button
                       type="button"
                       onClick={() =>
-                        setShowconfirmNewPassword(!showconfirmNewPassword)
+                        setShowconfirmPassword(!showconfirmPassword)
                       }
                       className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
                     >
-                      {showconfirmNewPassword ? (
+                      {showconfirmPassword ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
                       ) : (
                         <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
                       )}
                     </button>
                   </div>
-                  {errors.confirmNewPassword && (
+                  {errors.confirmPassword && (
                     <p className="mt-1 text-sm text-error-500">
-                      {errors.confirmNewPassword.message}
+                      {errors.confirmPassword.message}
                     </p>
                   )}
                 </div>

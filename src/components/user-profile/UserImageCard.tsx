@@ -7,7 +7,6 @@ import { useImageDraft } from "@/lib/shared/cloudinary/hooks/use-image-draft";
 import Button from "../ui/button/Button";
 import {
   UserUpdateFormValues,
-  UserUpdatePayload,
   userUpdateSchema,
 } from "@/lib/users/schemas/user";
 import { useForm, useWatch } from "react-hook-form";
@@ -16,19 +15,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserMutation } from "@/lib/users/api/mutations";
 import { toast } from "sonner";
 import { userKeys } from "@/lib/users/api/queries";
-import { useRouter } from "next/navigation";
 import { LoaderIcon } from "lucide-react";
 import { useState } from "react";
 
 export default function UserImageCard() {
   const { user, setUser } = useSession();
-  const router = useRouter();
   const queryClient = useQueryClient();
   const {
     handleSubmit,
     setValue,
     control, // 👈 1. Récupère 'control' ici
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<UserUpdateFormValues>({
     resolver: zodResolver(userUpdateSchema),
     defaultValues: {
@@ -78,7 +75,7 @@ export default function UserImageCard() {
 
   const onSubmit = (values: UserUpdateFormValues) => {
     const updateValues = values as UserUpdateFormValues;
-    const payload: UserUpdatePayload = {
+    const payload: UserUpdateFormValues = {
       avatarUrl: updateValues.avatarUrl,
     };
     updateMutation.mutate({

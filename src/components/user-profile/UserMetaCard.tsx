@@ -8,11 +8,14 @@ import Label from "../form/Label";
 import Image from "next/image";
 import { useSession } from "@/lib/auth/components/auth.context";
 import ComponentCard from "../common/ComponentCard";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { updateUserMutation } from "@/lib/users/api/mutations";
 import {
   UserUpdateFormValues,
-  UserUpdatePayload,
   userUpdateSchema,
 } from "@/lib/users/schemas/user";
 import { useForm } from "react-hook-form";
@@ -20,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { userKeys } from "@/lib/users/api/queries";
 import PhoneInput from "../form/group-input/PhoneInput";
+import { userAddressesQueryOptions } from "@/lib/addresses/api/queries/queries.server";
 
 const countries = [
   { code: "KM", label: "+269" },
@@ -33,9 +37,13 @@ const countries = [
 export default function UserMetaCard() {
   const { isOpen, openModal, closeModal } = useModal();
   const { user, setUser } = useSession();
-  const defaultAddress = user?.addresses?.find(
-    (address) => address.defaultAddress,
+  const { data } = useSuspenseQuery(
+    userAddressesQueryOptions({
+      userId: user?.id,
+      isDefault: true,
+    }),
   );
+  const defaultAddress = data.ok ? data.data.content[0] : undefined;
 
   const queryClient = useQueryClient();
   // react-hook-form avec validation Zod
@@ -77,7 +85,7 @@ export default function UserMetaCard() {
 
   const onSubmit = (values: UserUpdateFormValues) => {
     const updateValues = values as UserUpdateFormValues;
-    const payload: UserUpdatePayload = {
+    const payload: UserUpdateFormValues = {
       firstName: updateValues.firstName,
       lastName: updateValues.lastName,
       email: updateValues.email,
@@ -126,11 +134,8 @@ export default function UserMetaCard() {
                 </p>
                 <div className="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {(defaultAddress?.country || user?.addresses?.[0]?.country) ??
-                    "N/A"}
-                  ,
-                  {(defaultAddress?.city || user?.addresses?.[0]?.city) ??
-                    "N/A"}
+                  {defaultAddress?.country ?? "N/A"},
+                  {defaultAddress?.city ?? "N/A"}
                 </p>
               </div>
             </div>

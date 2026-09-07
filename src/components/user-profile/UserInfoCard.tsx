@@ -8,7 +8,6 @@ import Label from "../form/Label";
 import { useSession } from "@/lib/auth/components/auth.context";
 import {
   UserUpdateFormValues,
-  UserUpdatePayload,
   userUpdateSchema,
 } from "@/lib/users/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -72,7 +71,7 @@ export default function UserInfoCard() {
 
   const onSubmit = (values: UserUpdateFormValues) => {
     const updateValues = values as UserUpdateFormValues;
-    const payload: UserUpdatePayload = {
+    const payload: UserUpdateFormValues = {
       firstName: updateValues.firstName,
       lastName: updateValues.lastName,
       email: updateValues.email,
