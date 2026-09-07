@@ -1,7 +1,7 @@
 "use client";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import BackButton from "@/layout/back-button";
+import BackButton from "@/layout/BackButton";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import Link from "next/link";
 

@@ -2,6 +2,7 @@
 
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import { useSession } from "@/lib/auth/components/auth.context";
+import { UserRole } from "@/lib/users/api/types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -95,7 +96,9 @@ export default function MainHeader() {
                     href="/dashboard"
                     className="hidden rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:-translate-y-0.5 hover:bg-indigo-500 sm:inline-flex"
                   >
-                    Dashboard
+                    {user.role === UserRole.ADMIN
+                      ? "Admin Dashboard"
+                      : "Account"}
                   </Link>
                   <div
                     onClick={signOut}
@@ -173,7 +176,9 @@ export default function MainHeader() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500"
                   >
-                    Dashboard
+                    {user.role === UserRole.ADMIN
+                      ? "Admin Dashboard"
+                      : "Account"}
                   </Link>
                   <span
                     onClick={signOut}

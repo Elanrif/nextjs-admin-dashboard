@@ -3,7 +3,6 @@ import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
-import BackButton from "@/layout/back-button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -16,6 +15,7 @@ import { toast } from "sonner";
 import { signUpAction } from "../api/action";
 import PhoneInput from "@/components/form/group-input/PhoneInput";
 import { UserRole } from "@/lib/users/api/types";
+import BackButton from "@/layout/BackButton";
 
 export default function SignUpForm() {
   const router = useRouter();

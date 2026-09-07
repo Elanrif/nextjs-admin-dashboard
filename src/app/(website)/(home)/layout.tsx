@@ -1,7 +1,7 @@
 "use client";
 
-import MainHeader from "@/layout/main-header";
 import AppFooter from "@/layout/AppFooter";
+import MainHeader from "@/layout/MainHeader";
 
 export default function HomeLayout({
   children,

@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
-import BackButton from "@/layout/back-button";
+import BackButton from "@/layout/BackButton";
 import Link from "next/link";
 
 export default function ResetPasswordForm() {

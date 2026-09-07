@@ -4167,3 +4167,9 @@
 {"level":40,"time":1788739019479,"pid":28584,"hostname":"ELTECH","timestamp":"2026-09-06T23:56:59.323Z","status":403,"error":"Forbidden","message":"Forbidden","path":"/api/v1/users","msg":"[API Error] [getUsers]"}
 {"level":30,"time":1788739019488,"pid":28584,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
 {"level":30,"time":1788739019492,"pid":28584,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1788795142950,"pid":34408,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":50,"time":1788795143064,"pid":34408,"hostname":"ELTECH","error":"Forbidden","timestamp":"2026-09-07T15:32:23.054Z","status":403,"message":"Forbidden","path":"/api/v1/users","msg":"API error"}
+{"level":40,"time":1788795143071,"pid":34408,"hostname":"ELTECH","timestamp":"2026-09-07T15:32:23.054Z","status":403,"error":"Forbidden","message":"Forbidden","path":"/api/v1/users","msg":"[API Error] [getUsers]"}
+{"level":30,"time":1788795143210,"pid":34408,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1788795149993,"pid":34408,"hostname":"ELTECH","msg":"Request to safe URL http://localhost:8081/api/v1/auth/login, skipping token interceptor"}
+{"level":30,"time":1788795150459,"pid":34408,"hostname":"ELTECH","id":2,"email":"visitor@gmail.com","msg":"User signed in"}
