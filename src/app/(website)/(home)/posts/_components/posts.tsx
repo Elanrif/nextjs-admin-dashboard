@@ -32,6 +32,7 @@ import { Modals } from "@/lib/posts/components/ui/posts-table/modals";
 import Comments from "./comments";
 import { ErrorState } from "@/lib/shared/ui/error-state";
 import environment from "@/config/environment.config";
+import { EmptyState } from "@/lib/shared/ui/empty-state";
 
 export default function Posts() {
   const { user, isLoading } = useSession();
@@ -108,147 +109,156 @@ export default function Posts() {
       </div>
 
       <div className="divide-y divide-stone-200 border-y border-stone-200 dark:divide-stone-800 dark:border-stone-800">
-        {posts.map((post: Post) => {
-          const isExpanded = expandedPost === post.id;
-          const owner = isPostOwner(post);
+        {posts.length > 0 ? (
+          <>
+            {posts.map((post: Post) => {
+              const isExpanded = expandedPost === post.id;
+              const owner = isPostOwner(post);
 
-          return (
-            <article
-              key={post.id}
-              className="my-8 bg-[#faf8f3] px-0 py-8 dark:bg-slate-950 sm:px-6"
-            >
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-                {post.imageUrl && (
-                  <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-stone-200 sm:h-32 sm:w-44">
-                    <Image
-                      src={post.imageUrl}
-                      alt={post.title || "Image du post"}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 176px"
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <Avatar
-                        src={post.author?.avatarUrl}
-                        name={`${post.author?.firstName ?? ""} ${
-                          post.author?.lastName ?? ""
-                        }`}
-                      />
-
-                      <div>
-                        <p className="text-sm text-stone-500">
-                          {post.author?.firstName} {post.author?.lastName}
-                          <span className="mx-2">·</span>
-                          {new Date(post.createdAt).toLocaleDateString(
-                            "fr-FR",
-                            {
-                              day: "numeric",
-                              month: "short",
-                            },
-                          )}
-                        </p>
-
-                        <h2 className="font-serif text-2xl font-semibold leading-tight text-stone-900 dark:text-stone-100">
-                          {post.title}
-                        </h2>
+              return (
+                <article
+                  key={post.id}
+                  className="my-8 bg-[#faf8f3] px-0 py-8 dark:bg-slate-950 sm:px-6"
+                >
+                  <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+                    {post.imageUrl && (
+                      <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-stone-200 sm:h-32 sm:w-44">
+                        <Image
+                          src={post.imageUrl}
+                          alt={post.title || "Image du post"}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 176px"
+                          className="object-cover"
+                        />
                       </div>
-                    </div>
+                    )}
 
-                    {owner && (
-                      <div className="group relative shrink-0">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <Avatar
+                            src={post.author?.avatarUrl}
+                            name={`${post.author?.firstName ?? ""} ${
+                              post.author?.lastName ?? ""
+                            }`}
+                          />
+
+                          <div>
+                            <p className="text-sm text-stone-500">
+                              {post.author?.firstName} {post.author?.lastName}
+                              <span className="mx-2">·</span>
+                              {new Date(post.createdAt).toLocaleDateString(
+                                "fr-FR",
+                                {
+                                  day: "numeric",
+                                  month: "short",
+                                },
+                              )}
+                            </p>
+
+                            <h2 className="font-serif text-2xl font-semibold leading-tight text-stone-900 dark:text-stone-100">
+                              {post.title}
+                            </h2>
+                          </div>
+                        </div>
+
+                        {owner && (
+                          <div className="group relative shrink-0">
+                            <button
+                              type="button"
+                              className="rounded-full p-2 text-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800"
+                              aria-label="Options du post"
+                            >
+                              <MoreHorizontal size={20} />
+                            </button>
+
+                            <div className="invisible absolute right-0 top-10 z-10 w-36 rounded-lg border border-stone-200 bg-white p-1 opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 dark:border-stone-700 dark:bg-stone-900">
+                              <button
+                                type="button"
+                                onClick={() => openPostEdit(post)}
+                                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-stone-100 dark:hover:bg-stone-800"
+                              >
+                                <Pencil size={14} />
+                                Modifier
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedPost(post);
+                                  deleteModal.openModal();
+                                }}
+                                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                              >
+                                <Trash2 size={14} />
+                                Supprimer
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <p className="mt-4 whitespace-pre-line font-serif text-lg leading-8 text-stone-700 dark:text-stone-300">
+                        {post.description}
+                      </p>
+
+                      <div className="mt-6 flex items-center gap-6 border-t border-stone-200 pt-4 text-sm text-stone-500 dark:border-stone-800">
+                        <span className="inline-flex items-center gap-2">
+                          <Heart size={17} />
+                          {post.likes}
+                        </span>
+
                         <button
                           type="button"
-                          className="rounded-full p-2 text-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800"
-                          aria-label="Options du post"
+                          onClick={() =>
+                            setExpandedPost(isExpanded ? null : post.id)
+                          }
+                          className="inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
                         >
-                          <MoreHorizontal size={20} />
+                          <MessageSquare size={17} />
+                          {(post.numberOfComments as number) > 0
+                            ? `${post.numberOfComments} commentaire${(post.numberOfComments as number) > 1 ? "s" : ""}`
+                            : `Aucun commentaire`}
+                          {isExpanded ? (
+                            <ChevronUp size={15} />
+                          ) : (
+                            <ChevronDown size={15} />
+                          )}
                         </button>
 
-                        <div className="invisible absolute right-0 top-10 z-10 w-36 rounded-lg border border-stone-200 bg-white p-1 opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 dark:border-stone-700 dark:bg-stone-900">
-                          <button
-                            type="button"
-                            onClick={() => openPostEdit(post)}
-                            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-stone-100 dark:hover:bg-stone-800"
-                          >
-                            <Pencil size={14} />
-                            Modifier
-                          </button>
-
+                        {user && (
                           <button
                             type="button"
                             onClick={() => {
-                              setSelectedPost(post);
-                              deleteModal.openModal();
+                              setExpandedPost(post.id);
+                              createModalComment.openModal();
                             }}
-                            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                            className="ml-auto inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
                           >
-                            <Trash2 size={14} />
-                            Supprimer
+                            <Plus size={17} />
+                            Commenter
                           </button>
-                        </div>
+                        )}
                       </div>
-                    )}
-                  </div>
 
-                  <p className="mt-4 whitespace-pre-line font-serif text-lg leading-8 text-stone-700 dark:text-stone-300">
-                    {post.description}
-                  </p>
-
-                  <div className="mt-6 flex items-center gap-6 border-t border-stone-200 pt-4 text-sm text-stone-500 dark:border-stone-800">
-                    <span className="inline-flex items-center gap-2">
-                      <Heart size={17} />
-                      {post.likes}
-                    </span>
-
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setExpandedPost(isExpanded ? null : post.id)
-                      }
-                      className="inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
-                    >
-                      <MessageSquare size={17} />
-                      {(post.numberOfComments as number) > 0
-                        ? `${post.numberOfComments} commentaire${(post.numberOfComments as number) > 1 ? "s" : ""}`
-                        : `Aucun commentaire`}
-                      {isExpanded ? (
-                        <ChevronUp size={15} />
-                      ) : (
-                        <ChevronDown size={15} />
+                      {isExpanded && (
+                        <Comments
+                          queryParams={{ postId: post.id, authorId: user?.id }}
+                          action={createModalComment}
+                        />
                       )}
-                    </button>
-
-                    {user && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setExpandedPost(post.id);
-                          createModalComment.openModal();
-                        }}
-                        className="ml-auto inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-stone-100"
-                      >
-                        <Plus size={17} />
-                        Commenter
-                      </button>
-                    )}
+                    </div>
                   </div>
-
-                  {isExpanded && (
-                    <Comments
-                      queryParams={{ postId: post.id, authorId: user?.id }}
-                      action={createModalComment}
-                    />
-                  )}
-                </div>
-              </div>
-            </article>
-          );
-        })}
+                </article>
+              );
+            })}
+          </>
+        ) : (
+          <EmptyState
+            title="Aucun post trouvé"
+            description="Il n'y a aucun post à afficher pour le moment."
+          />
+        )}
       </div>
       {/*
       Optional queryParams scope the create/edit forms and hide the
