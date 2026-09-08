@@ -101,6 +101,16 @@ function buildServerLogger(): Logger {
   const { level, output, file } = environment.log.server;
   const isDev = process.env.NODE_ENV !== "production";
 
+  // In production (and especially on serverless platforms like Vercel),
+  // avoid pino.transport(): it spawns a worker thread that dynamically
+  // requires its dependencies (e.g. pino-abstract-transport) at runtime.
+  // Next.js's file-tracing can't detect those dynamic requires, so they
+  // get excluded from the deployed bundle -> "Cannot find module" crash.
+  // Plain JSON on stdout is the standard, worker-free approach in prod.
+  if (!isDev) {
+    return pino({ level: level as Level }) as unknown as Logger;
+  }
+  
   const targets: TransportTargetOptions[] = [];
 
   if (output.includes("console")) {
