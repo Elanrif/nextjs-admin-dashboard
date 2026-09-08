@@ -40,9 +40,9 @@ const navItems: NavItem[] = [
     icon: <MenuIcon />,
     name: "Main",
     subItems: [
-      { name: "Users", path: `${DASHBOARD}/${USERS}`, pro: false },
-      { name: "Posts", path: `${DASHBOARD}/${POSTS}`, pro: false },
-      { name: "Comments", path: `${DASHBOARD}/${COMMENTS}`, pro: false },
+      { name: "Users", path: `${DASHBOARD}${USERS}`, pro: false },
+      { name: "Posts", path: `${DASHBOARD}${POSTS}`, pro: false },
+      { name: "Comments", path: `${DASHBOARD}${COMMENTS}`, pro: false },
     ],
   },
   {
