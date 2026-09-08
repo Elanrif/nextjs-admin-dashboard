@@ -244,12 +244,9 @@ const AppSidebar: React.FC = () => {
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const isActive = useCallback(
-    (path: string) => {
-      return pathname === path || pathname.startsWith(`${path}/`);
-    },
-    [pathname],
-  );
+  
+    const isActive = useCallback((path: string) =>
+       path === pathname, [pathname]);
 
   useEffect(() => {
     let submenuMatched = false;
