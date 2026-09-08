@@ -75,7 +75,7 @@ export async function createComment(
   }
 
   try {
-    const res = await apiClient().post<Comment>(
+    const res = await apiClient(true).post<Comment>(
       commentsUrl,
       parse.data,
     );
@@ -108,7 +108,7 @@ export async function updateComment(
   }
 
   try {
-    const res = await apiClient().patch<Comment>(
+    const res = await apiClient(true).patch<Comment>(
       `${commentsUrl}/${id}`,
       parse.data,
     );
@@ -131,7 +131,7 @@ export async function deleteComment(
   if (idCheck) return idCheck;
 
   try {
-    await apiClient().delete(`${commentsUrl}/${id}`);
+    await apiClient(true).delete(`${commentsUrl}/${id}`);
     logger.info({ id }, "Comment deleted successfully");
     return { ok: true, data: { success: true } };
   } catch (error) {
