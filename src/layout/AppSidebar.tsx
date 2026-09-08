@@ -18,7 +18,7 @@ import {
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
-import { MenuIcon, ShoppingBasket } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { ROUTES } from "@/utils/routes";
 
 type NavItem = {
@@ -244,9 +244,16 @@ const AppSidebar: React.FC = () => {
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  
-    const isActive = useCallback((path: string) =>
-       path === pathname, [pathname]);
+  const isActive = useCallback(
+    (path: string) => {
+      // Exact match for the dashboard home to avoid it staying highlighted everywhere
+      if (path === DASHBOARD) {
+        return pathname === path;
+      }
+      return pathname === path || pathname.startsWith(`${path}/`);
+    },
+    [pathname],
+  );
 
   useEffect(() => {
     let submenuMatched = false;
@@ -301,7 +308,10 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 ml-3 sm:ml-5 flex flex-col lg:mt-0 top-0 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 dark:border-gray-800 
+      className={`fixed mt-16 ml-3 sm:ml-5 flex flex-col lg:mt-0 top-0 left-0
+         bg-white dark:bg-gray-900 dark:border-gray-800
+          text-gray-900 h-screen transition-all duration-300 
+          ease-in-out z-50 border-r border-gray-200 
         ${
           isExpanded || isMobileOpen
             ? "w-72.5"

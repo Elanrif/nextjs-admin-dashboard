@@ -8,9 +8,10 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { MessageSquare, Pencil, Trash2 } from "lucide-react";
+import { MessageSquare, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 import { useModal } from "@/hooks/useModal";
+import { useSession } from "@/lib/auth/components/auth.context";
 import { commentsQueryOptions } from "@/lib/comments/api/queries/queries.client";
 import { deleteCommentMutation } from "@/lib/comments/api/mutations";
 import { commentKeys } from "@/lib/comments/api/queries";
@@ -18,6 +19,7 @@ import { Comment } from "@/lib/comments/api/types";
 import { Modals } from "@/lib/comments/components/ui/comments-table/modals";
 import { CommentsQueryProps } from "@/lib/comments/components/comments";
 import { ErrorState } from "@/lib/shared/ui/error-state";
+import environment from "@/config/environment.config";
 
 export default function Comments({
   queryParams,
@@ -29,9 +31,11 @@ export default function Comments({
     closeModal: () => void;
   };
 }) {
+  const { user } = useSession();
   const queryClient = useQueryClient();
 
   const [selectedComment, setSelectedComment] = useState<Comment | null>(null);
+  const [openMenuId, setOpenMenuId] = useState<number | null>(null);
 
   const viewModal = useModal();
   const editModal = useModal();
@@ -53,20 +57,24 @@ export default function Comments({
     },
   });
 
+  const isCommentOwner = (comment: Comment) => user?.id === comment.author?.id;
+
   const handleEdit = (comment: Comment) => {
     setSelectedComment(comment);
+    setOpenMenuId(null);
     editModal.openModal();
   };
 
   const handleDelete = (comment: Comment) => {
     setSelectedComment(comment);
+    setOpenMenuId(null);
     deleteModal.openModal();
   };
 
   const { data } = useSuspenseQuery(
     commentsQueryOptions({
       postId: queryParams?.postId,
-      size: 100,
+      size: environment.pagination.size,
     }),
   );
 
@@ -83,59 +91,89 @@ export default function Comments({
         </h3>
 
         {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div
-              key={comment.id}
-              className="group flex items-start justify-between gap-3"
-            >
-              <div className="flex min-w-0 items-start gap-3">
-                <Avatar
-                  src={comment.author?.avatarUrl}
-                  name={`${comment.author?.firstName ?? ""} ${
-                    comment.author?.lastName ?? ""
-                  }`}
-                />
+          comments.map((comment) => {
+            const owner = isCommentOwner(comment);
+            const isMenuOpen = openMenuId === comment.id;
 
-                <div>
-                  <p className="text-sm font-semibold text-stone-800 dark:text-stone-200">
-                    {comment.author?.firstName} {comment.author?.lastName}
-                    <span className="ml-2 font-normal text-stone-400">
-                      {new Date(comment.createdAt).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "short",
-                      })}
-                    </span>
-                  </p>
+            return (
+              <div
+                key={comment.id}
+                className="flex items-start justify-between gap-3"
+              >
+                <div className="flex min-w-0 items-start gap-3">
+                  <Avatar
+                    src={comment.author?.avatarUrl}
+                    name={`${comment.author?.firstName ?? ""} ${
+                      comment.author?.lastName ?? ""
+                    }`}
+                  />
 
-                  <p className="mt-1 font-serif text-base leading-7 text-stone-700 dark:text-stone-300">
-                    {comment.content}
-                  </p>
+                  <div>
+                    <p className="text-sm font-semibold text-stone-800 dark:text-stone-200">
+                      {comment.author?.firstName} {comment.author?.lastName}
+                      <span className="ml-2 font-normal text-stone-400">
+                        {new Date(comment.createdAt).toLocaleDateString(
+                          "fr-FR",
+                          {
+                            day: "numeric",
+                            month: "short",
+                          },
+                        )}
+                      </span>
+                    </p>
+
+                    <p className="mt-1 font-serif text-base leading-7 text-stone-700 dark:text-stone-300">
+                      {comment.content}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex shrink-0 gap-1 opacity-0 transition group-hover:opacity-100">
-                <button
-                  type="button"
-                  onClick={() => handleEdit(comment)}
-                  className="rounded p-1.5 text-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800"
-                  aria-label="Modifier le commentaire"
-                  title="Modifier"
-                >
-                  <Pencil size={15} />
-                </button>
+                {owner && (
+                  <div className="relative shrink-0">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenMenuId(isMenuOpen ? null : comment.id)
+                      }
+                      className="rounded-full p-1.5 text-stone-500 hover:bg-stone-200 dark:hover:bg-stone-800"
+                      aria-label="Options du commentaire"
+                    >
+                      <MoreHorizontal size={16} />
+                    </button>
 
-                <button
-                  type="button"
-                  onClick={() => handleDelete(comment)}
-                  className="rounded p-1.5 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
-                  aria-label="Supprimer le commentaire"
-                  title="Supprimer"
-                >
-                  <Trash2 size={15} />
-                </button>
+                    {isMenuOpen && (
+                      <>
+                        {/* Backdrop to close the menu on outside click/tap */}
+                        <div
+                          className="fixed inset-0 z-10"
+                          onClick={() => setOpenMenuId(null)}
+                        />
+                        <div className="absolute right-0 top-9 z-20 w-36 rounded-lg border border-stone-200 bg-white p-1 shadow-lg dark:border-stone-700 dark:bg-stone-900">
+                          <button
+                            type="button"
+                            onClick={() => handleEdit(comment)}
+                            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-stone-100 dark:hover:bg-stone-800"
+                          >
+                            <Pencil size={14} />
+                            Modifier
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(comment)}
+                            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                          >
+                            <Trash2 size={14} />
+                            Supprimer
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <div className="py-4 text-center">
             <MessageSquare className="mx-auto mb-3 h-10 w-10 text-stone-300 dark:text-stone-600" />
@@ -146,12 +184,6 @@ export default function Comments({
         )}
       </div>
 
-      {/*
-      Optional queryParams scope the create/edit forms and hide the
-      corresponding select fields.
-      When omitted, the related fields remain
-      available for selection.
-      */}
       <Modals
         selectedComment={selectedComment}
         hiddenFields={{

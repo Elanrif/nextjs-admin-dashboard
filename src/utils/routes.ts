@@ -1,6 +1,6 @@
 export const ROUTES = {
   HOME: "/",
-  MY_ACCOUNT: "/account",
+  ACCOUNT: "/account",
   EDIT_PROFILE: "/account/edit",
   CHANGE_PASSWORD: "/account/password",
   DASHBOARD: "/dashboard",

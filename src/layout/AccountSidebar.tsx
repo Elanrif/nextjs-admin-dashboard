@@ -15,6 +15,7 @@ import {
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
 import { MapPinIcon, MessageCircleHeart } from "lucide-react";
+import { ROUTES } from "@/utils/routes";
 
 type NavItem = {
   name: string;
@@ -43,7 +44,7 @@ const navItems: NavItem[] = [
     icon: <MessageCircleHeart />,
     name: "Posts",
     path: "/account/posts",
-  }
+  },
 ];
 
 const othersItems: NavItem[] = [
@@ -83,6 +84,8 @@ const othersItems: NavItem[] = [
     ],
   },
 ];
+
+const { ACCOUNT } = ROUTES;
 
 const AccountSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
@@ -209,8 +212,16 @@ const AccountSidebar: React.FC = () => {
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const isActive = useCallback((path: string) =>
-     path === pathname, [pathname]);
+  const isActive = useCallback(
+    (path: string) => {
+      // Exact match for the account home to avoid it staying highlighted everywhere
+      if (path === ACCOUNT) {
+        return pathname === path;
+      }
+      return pathname === path || pathname.startsWith(`${path}/`);
+    },
+    [pathname],
+  );
 
   useEffect(() => {
     let submenuMatched = false;
@@ -265,7 +276,10 @@ const AccountSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 ml-3 sm:ml-5 flex flex-col lg:mt-0 top-0 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 dark:border-gray-800 
+      className={`fixed mt-16 ml-3 sm:ml-5 flex flex-col lg:mt-0 top-0 left-0
+         bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900
+          h-screen transition-all duration-300 ease-in-out z-50 border-r
+           border-gray-200 
         ${
           isExpanded || isMobileOpen
             ? "w-72.5"
