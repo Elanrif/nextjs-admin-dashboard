@@ -67,14 +67,12 @@ export function PostForm({
           title: initialData.title,
           description: initialData.description,
           imageUrl: initialData.imageUrl,
-          likes: initialData.likes,
           authorId: authorId ?? initialData.author.id,
         }
       : {
           title: "",
           description: "",
           imageUrl: "",
-          likes: 0,
           authorId,
         },
   });
@@ -201,7 +199,7 @@ export function PostForm({
               </div>
 
               <div>
-                <Label>Description</Label>
+                <Label required>Description</Label>
 
                 <textarea
                   {...register("description")}
@@ -262,27 +260,9 @@ export function PostForm({
               ) : (
                 <input type="hidden" {...register("authorId")} />
               )}
-
-              <div>
-                <Label>Likes</Label>
-
-                <Input
-                  type="number"
-                  min={0}
-                  {...register("likes", {
-                    valueAsNumber: true,
-                  })}
-                />
-
-                {errors.likes && (
-                  <p className="text-sm text-error-500">
-                    {errors.likes.message}
-                  </p>
-                )}
-              </div>
             </div>
           </ComponentCard>
-          <ComponentCard title="Post image">
+          <ComponentCard>
             <ImageUpload
               folder="posts"
               value={image.url}

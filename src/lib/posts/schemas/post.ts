@@ -6,21 +6,17 @@ const postFields = {
     .trim()
     .min(3, "Le titre ne peut pas être vide")
     .max(200, "Le titre doit contenir au maximum 200 caractères"),
+  description: z
+    .string()
+    .trim()
+    .min(3, "La description ne peut pas être vide")
+    .max(2000, "La description doit contenir au maximum 2000 caractères"),
   imageUrl: z
     .string()
     .trim()
     .max(200, "L'image doit contenir au maximum 200 caractères")
     .optional()
     .or(z.literal("")),
-  description: z
-    .string()
-    .trim()
-    .min(3, "La description ne peut pas être vide")
-    .max(2000, "La description doit contenir au maximum 2000 caractères"),
-  likes: z
-    .number()
-    .int()
-    .nonnegative("Les likes doivent être positifs ou nuls"),
   authorId: z.number().int().positive().optional(),
 };
 
