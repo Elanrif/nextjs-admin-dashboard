@@ -41,10 +41,6 @@ interface CommentFormProps {
   onSaved?: () => void;
 }
 
-const {
-  export: { maxSize: MAX_EXPORT_SIZE },
-} = environment;
-
 export function CommentForm({
   initialData,
   pageTitle,
@@ -58,16 +54,18 @@ export function CommentForm({
 
   const selectedPostId = initialData?.postId ?? postId;
   const selectedAuthorId = initialData?.author?.id ?? authorId;
-  const showPostSelect = selectedPostId == null;
-  const showAuthorSelect = selectedAuthorId == null;
+  // Post et auteur ne sont jamais modifiables en édition
+  // (absents de commentUpdateSchema)
+  const showPostSelect = !isEdit && selectedPostId == null;
+  const showAuthorSelect = !isEdit && selectedAuthorId == null;
 
   const formSchema = isEdit ? commentUpdateSchema : commentCreateSchema;
 
   const { data: postsResult } = useSuspenseQuery(
-    postsQueryOptions({ size: MAX_EXPORT_SIZE }),
+    postsQueryOptions({ size: environment.pagination.size }),
   );
   const { data: usersResult } = useSuspenseQuery(
-    usersQueryOptions({ size: MAX_EXPORT_SIZE }),
+    usersQueryOptions({ size: environment.pagination.size }),
   );
 
   const posts = postsResult.ok ? postsResult.data.content : [];
@@ -81,16 +79,14 @@ export function CommentForm({
   } = useForm<CommentFormValues | CommentUpdateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
-  ? {
-      content: initialData?.content ?? "",
-      postId: selectedPostId,
-      authorId: selectedAuthorId,
-    }
-  : {
-      content: "",
-      postId: selectedPostId,
-      authorId: selectedAuthorId,
-    },
+      ? {
+          content: initialData?.content ?? "",
+        }
+      : {
+          content: "",
+          postId: selectedPostId,
+          authorId: selectedAuthorId,
+        },
   });
 
   const createMutation = useMutation({
@@ -176,77 +172,79 @@ export function CommentForm({
             )}
           </div>
 
-          {/* POST */}
-          {showPostSelect ? (
-            <div>
-              <Label required>Post</Label>
+          {/* POST : uniquement à la création */}
+          {!isEdit &&
+            (showPostSelect ? (
+              <div>
+                <Label required>Post</Label>
 
-              <div className="relative">
-                <Select
-                  options={posts.map((post) => ({
-                    value: String(post.id),
-                    label: post.title,
-                  }))}
-                  placeholder="Select a post"
-                  defaultValue=""
-                  onChange={(value) =>
-                    setValue("postId", Number(value), {
-                      shouldDirty: true,
-                      shouldValidate: true,
-                    })
-                  }
-                />
+                <div className="relative">
+                  <Select
+                    options={posts.map((post) => ({
+                      value: String(post.id),
+                      label: post.title,
+                    }))}
+                    placeholder="Select a post"
+                    defaultValue=""
+                    onChange={(value) =>
+                      setValue("postId", Number(value), {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                  />
 
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  <ChevronDownIcon />
-                </span>
+                  <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                    <ChevronDownIcon />
+                  </span>
+                </div>
+
+                {"postId" in errors && errors.postId && (
+                  <p className="text-sm text-error-500">
+                    {errors.postId.message as string}
+                  </p>
+                )}
               </div>
+            ) : (
+              <input type="hidden" {...register("postId")} />
+            ))}
 
-              {errors.postId && (
-                <p className="text-sm text-error-500">
-                  {errors.postId.message}
-                </p>
-              )}
-            </div>
-          ) : (
-            <input type="hidden" {...register("postId")} />
-          )}
+          {/* AUTHOR : uniquement à la création */}
+          {!isEdit &&
+            (showAuthorSelect ? (
+              <div>
+                <Label required>Author</Label>
 
-          {/* AUTHOR */}
-          {showAuthorSelect ? (
-            <div>
-              <Label required>Author</Label>
+                <div className="relative">
+                  <Select
+                    options={users.map((user: User) => ({
+                      value: String(user.id),
+                      label: `${user.firstName} ${user.lastName} (${user.email})`,
+                    }))}
+                    placeholder="Select an author"
+                    defaultValue=""
+                    onChange={(value) =>
+                      setValue("authorId", Number(value), {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                  />
 
-              <div className="relative">
-                <Select
-                  options={users.map((user: User) => ({
-                    value: String(user.id),
-                    label: `${user.firstName} ${user.lastName} (${user.email})`,
-                  }))}
-                  placeholder="Select an author"
-                  defaultValue=""
-                  onChange={(value) =>
-                    setValue("authorId", Number(value), {
-                      shouldDirty: true,
-                      shouldValidate: true,
-                    })
-                  }
-                />
+                  <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                    <ChevronDownIcon />
+                  </span>
+                </div>
 
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  <ChevronDownIcon />
-                </span>
+                {"authorId" in errors && errors.authorId && (
+                  <p className="text-sm text-error-500">
+                    {errors.authorId.message as string}
+                  </p>
+                )}
               </div>
-
-              {errors.authorId && (
-                <p className="text-sm text-error-500">
-                  {errors.authorId.message}
-                </p>
-              )}
-            </div>
-          ) : (
-            <input type="hidden" {...register("authorId")} />
-          )}
+            ) : (
+              <input type="hidden" {...register("authorId")} />
+            ))}
         </div>
       </ComponentCard>
 

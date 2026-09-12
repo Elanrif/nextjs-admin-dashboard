@@ -49,7 +49,9 @@ export default function AddressForm({
 
   const isEdit = !!initialData;
   const selectedAuthorId = initialData?.userId ?? userId;
-  const showAuthorSelect = selectedAuthorId == null;
+  // Sur édition, l'utilisateur propriétaire n'est jamais modifiable
+  // (absent de addressUpdateSchema)
+  const showAuthorSelect = !isEdit && selectedAuthorId == null;
 
   const formSchema = isEdit ? addressUpdateSchema : addressCreateSchema;
   const { data: usersResult } = useSuspenseQuery(
@@ -64,26 +66,44 @@ export default function AddressForm({
     formState: { errors, isSubmitting },
   } = useForm<AddressCreateFormValues | AddressUpdateFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      street: initialData?.street ?? "",
-      postalCode: initialData?.postalCode ?? "",
-      city: initialData?.city ?? "",
-      country: initialData?.country ?? "",
-      userId,
-      defaultAddress: initialData?.defaultAddress ?? false,
-    },
+    defaultValues: isEdit
+      ? {
+          street: initialData.street,
+          postalCode: initialData.postalCode,
+          city: initialData.city,
+          country: initialData.country,
+          defaultAddress: initialData.defaultAddress ?? false,
+        }
+      : {
+          street: "",
+          postalCode: "",
+          city: "",
+          country: "",
+          userId,
+          defaultAddress: false,
+        },
   });
 
   useEffect(() => {
-    reset({
-      street: initialData?.street ?? "",
-      postalCode: initialData?.postalCode ?? "",
-      city: initialData?.city ?? "",
-      country: initialData?.country ?? "",
-      userId,
-      defaultAddress: initialData?.defaultAddress ?? false,
-    });
-  }, [initialData, userId, reset]);
+    if (isEdit && initialData) {
+      reset({
+        street: initialData.street,
+        postalCode: initialData.postalCode,
+        city: initialData.city,
+        country: initialData.country,
+        defaultAddress: initialData.defaultAddress ?? false,
+      });
+    } else {
+      reset({
+        street: "",
+        postalCode: "",
+        city: "",
+        country: "",
+        userId,
+        defaultAddress: false,
+      });
+    }
+  }, [initialData, userId, isEdit, reset]);
 
   const createMutation = useMutation({
     ...createUserAddressMutation,
@@ -218,47 +238,43 @@ export default function AddressForm({
             </p>
           )}
         </div>
-        {/* Author */}
-        {showAuthorSelect ? (
-          <div>
-            <Label>Author</Label>
 
-            <div className="relative">
-              <Select
-                options={users.map((user: User) => ({
-                  value: String(user.id),
-                  label: `${user.firstName} ${user.lastName} (${user.email})`,
-                }))}
-                placeholder="Select an author"
-                defaultValue={String(userId ?? initialData?.userId ?? "")}
-                onChange={(value) =>
-                  setValue("userId", Number(value), {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
-                }
-              />
+        {/* Author : uniquement à la création, jamais à l'édition */}
+        {!isEdit &&
+          (showAuthorSelect ? (
+            <div>
+              <Label required>Author</Label>
 
-              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                <ChevronDownIcon />
-              </span>
+              <div className="relative">
+                <Select
+                  options={users.map((user: User) => ({
+                    value: String(user.id),
+                    label: `${user.firstName} ${user.lastName} (${user.email})`,
+                  }))}
+                  placeholder="Select an author"
+                  defaultValue={String(userId ?? "")}
+                  onChange={(value) =>
+                    setValue("userId", Number(value), {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    })
+                  }
+                />
+
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                  <ChevronDownIcon />
+                </span>
+              </div>
+
+              {"userId" in errors && errors.userId && (
+                <p className="text-sm text-error-500">
+                  {errors.userId.message as string}
+                </p>
+              )}
             </div>
-
-            <input
-              type="hidden"
-              {...register("userId", {
-                setValueAs: (value) =>
-                  value === "" ? undefined : Number(value),
-              })}
-            />
-
-            {errors.userId && (
-              <p className="text-sm text-error-500">{errors.userId.message}</p>
-            )}
-          </div>
-        ) : (
-          <input type="hidden" {...register("userId")} />
-        )}
+          ) : (
+            <input type="hidden" {...register("userId")} />
+          ))}
       </div>
       <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
         <Switch

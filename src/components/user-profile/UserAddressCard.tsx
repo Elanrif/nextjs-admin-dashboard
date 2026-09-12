@@ -75,7 +75,6 @@ export default function UserAddressCard() {
       street: defaultAddress?.street || "",
       postalCode: defaultAddress?.postalCode || "",
       city: defaultAddress?.city || "",
-      userId: user?.id || undefined,
       country: defaultAddress?.country || "",
       defaultAddress: defaultAddress?.defaultAddress ?? false,
     },

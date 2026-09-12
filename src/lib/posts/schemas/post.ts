@@ -4,12 +4,12 @@ const baseFields = {
   title: z
     .string()
     .trim()
-    .regex(/\S/, "Le titre ne peut pas être vide")
+    .min(1, "Le titre ne peut pas être vide")
     .max(200, "Le titre doit contenir au maximum 200 caractères"),
   description: z
     .string()
     .trim()
-    .regex(/\S/, "La description ne peut pas être vide")
+    .min(1, "La description ne peut pas être vide")
     .max(2000, "La description doit contenir au maximum 2000 caractères"),
   imageUrl: z
     .union([
