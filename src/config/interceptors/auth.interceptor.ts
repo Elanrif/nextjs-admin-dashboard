@@ -35,6 +35,19 @@ export const sessionCookieInterceptor = async (
   return config;
 };
 
+export const expiredSessionInterceptor = async (error: AxiosError) => {
+  const status = error.response?.status;
+
+  if (status === 401 || status === 403) {
+    const cookieStore = await cookies();
+    for (const { name } of cookieStore.getAll()) {
+      cookieStore.delete(name);
+    }
+  }
+
+  return Promise.reject(error);
+};
+
 export const anonTokenInterceptor = async (
   config: InternalAxiosRequestConfig,
 ) => {

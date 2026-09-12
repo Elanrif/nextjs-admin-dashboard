@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { PostFilters } from "@/lib/posts/api/types";
 import { getPosts } from "@/lib/posts/api/services/post.server";
+import { resultResponse } from "@/lib/shared/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,6 @@ export async function GET(request: NextRequest) {
     sort: sp.get("sort") ?? undefined,
   };
   const response = await getPosts(filters);
-  
-  return NextResponse.json(response, { status: 200 });
+
+  return resultResponse(response);
 }

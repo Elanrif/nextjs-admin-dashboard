@@ -5,6 +5,7 @@ import {
   requestLoggerInterceptor,
   responseLoggerInterceptor,
 } from "@config/interceptors/logger.interceptor";
+import { expiredSessionInterceptor } from "@config/interceptors/auth.interceptor";
 
 export { baseRequestConfig } from "@config/axios/base-request.config";
 export default function httpClient({ logger }: { logger: Logger }) {
@@ -21,12 +22,12 @@ export default function httpClient({ logger }: { logger: Logger }) {
   instance.interceptors.response.use(
     responseLoggerInterceptor(logger),
     (error: AxiosError) => {
-      const { trace: _, ...data } = (error.response?.data ?? {}) as Record<
-        string,
-        unknown
-      >;
+      const data = {
+        ...((error.response?.data ?? {}) as Record<string, unknown>),
+      };
+      delete data.trace;
       logger.error({ error: error.message, ...data }, "API error");
-      return Promise.reject(error);
+      return expiredSessionInterceptor(error);
     },
   );
   return instance;

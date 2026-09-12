@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getUsers } from "@/lib/users/api/services/user.server";
 import type { UserFilters } from "@/lib/users/api/types";
+import { resultResponse } from "@/lib/shared/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -29,5 +30,5 @@ export async function GET(_request: NextRequest) {
    *   - response.ok = false: operation failed, see response.error for details
    * This prevents Axios from throwing exceptions for business errors.
    */
-  return NextResponse.json(response, { status: 200 });
+  return resultResponse(response);
 }
