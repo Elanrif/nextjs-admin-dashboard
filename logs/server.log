@@ -4221,3 +4221,18 @@
 {"level":30,"time":1789210876352,"pid":21088,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
 {"level":30,"time":1789210876522,"pid":21088,"hostname":"ELTECH","count":16,"msg":"Users fetched"}
 {"level":30,"time":1789210876647,"pid":21088,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1789228852875,"pid":34540,"hostname":"ELTECH","msg":"Request to safe URL http://localhost:8081/api/v1/auth/login, skipping token interceptor"}
+{"level":30,"time":1789228853472,"pid":34540,"hostname":"ELTECH","id":1,"email":"admin@gmail.com","msg":"User signed in"}
+{"level":30,"time":1789228883095,"pid":34540,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1789228887441,"pid":34540,"hostname":"ELTECH","count":16,"msg":"Users fetched"}
+{"level":30,"time":1789228887564,"pid":34540,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1789228890788,"pid":34540,"hostname":"ELTECH","count":10,"msg":"Users fetched"}
+{"level":30,"time":1789228918514,"pid":34540,"hostname":"ELTECH","id":6,"msg":"Post created"}
+{"level":30,"time":1789228919257,"pid":34540,"hostname":"ELTECH","count":6,"msg":"Posts fetched"}
+{"level":30,"time":1789228919357,"pid":34540,"hostname":"ELTECH","count":6,"msg":"Posts fetched"}
+{"level":30,"time":1789228940641,"pid":34540,"hostname":"ELTECH","id":6,"msg":"Post deleted"}
+{"level":30,"time":1789228941135,"pid":34540,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1789228941143,"pid":34540,"hostname":"ELTECH","count":5,"msg":"Posts fetched"}
+{"level":30,"time":1789228947055,"pid":34540,"hostname":"ELTECH","id":5,"msg":"Post fetched"}
+{"level":30,"time":1789228996741,"pid":34540,"hostname":"ELTECH","count":10,"msg":"Users fetched"}
+{"level":30,"time":1789228996765,"pid":34540,"hostname":"ELTECH","count":16,"msg":"Users fetched"}

@@ -51,7 +51,8 @@ export function PostForm({
   const isEdit = !!initialData;
 
   const selectedAuthorId = initialData?.author?.id ?? authorId;
-  const showAuthorSelect = selectedAuthorId == null;
+  // Sur édition, l'auteur n'est jamais modifiable (absent de postUpdateSchema)
+  const showAuthorSelect = !isEdit && selectedAuthorId == null;
 
   const formSchema = isEdit ? postUpdateSchema : postCreateSchema;
 
@@ -67,7 +68,6 @@ export function PostForm({
           title: initialData.title,
           description: initialData.description,
           imageUrl: initialData.imageUrl,
-          authorId: authorId ?? initialData.author.id,
         }
       : {
           title: "",
@@ -135,7 +135,8 @@ export function PostForm({
       return;
     }
     createMutation.mutate(values as PostCreateFormValues);
-    handleImageRemove();
+    // Pas de handleImageRemove() ici : le nettoyage ne doit se faire
+    // qu'après confirmation du succès (voir image.clearDraft() dans onSuccess)
   };
 
   const { data: usersResult } = useSuspenseQuery(
@@ -147,14 +148,6 @@ export function PostForm({
     storageKey: `post:image:${initialData?.id ?? "new"}`,
     initialUrl: initialData?.imageUrl,
   });
-
-  function handleImageRemove() {
-    image.handleRemove();
-    setValue("imageUrl", "", {
-      shouldDirty: true,
-      shouldValidate: true,
-    });
-  }
 
   const isSaving =
     isSubmitting || createMutation.isPending || updateMutation.isPending;
@@ -215,54 +208,43 @@ export function PostForm({
                 )}
               </div>
 
-              {/* Author */}
-              {showAuthorSelect ? (
-                <div>
-                  <Label>Author</Label>
+              {/* Author : uniquement à la création, jamais à l'édition */}
+              {!isEdit &&
+                (showAuthorSelect ? (
+                  <div>
+                    <Label required>Author</Label>
 
-                  <div className="relative">
-                    <Select
-                      options={users.map((user: User) => ({
-                        value: String(user.id),
-                        label: `${user.firstName} ${user.lastName} (${user.email})`,
-                      }))}
-                      placeholder="Select an author"
-                      defaultValue={String(
-                        authorId ?? initialData?.author?.id ?? "",
-                      )}
-                      onChange={(value) =>
-                        setValue("authorId", Number(value), {
-                          shouldDirty: true,
-                          shouldValidate: true,
-                        })
-                      }
-                    />
+                    <div className="relative">
+                      <Select
+                        options={users.map((user: User) => ({
+                          value: String(user.id),
+                          label: `${user.firstName} ${user.lastName} (${user.email})`,
+                        }))}
+                        placeholder="Select an author"
+                        defaultValue={String(authorId ?? "")}
+                        onChange={(value) =>
+                          setValue("authorId", Number(value), {
+                            shouldDirty: true,
+                            shouldValidate: true,
+                          })
+                        }
+                      />
 
-                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
-                      <ChevronDownIcon />
-                    </span>
+                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                        <ChevronDownIcon />
+                      </span>
+                    </div>
+
+                    {"authorId" in errors && errors.authorId && (
+                      <p className="text-sm text-error-500">
+                        {errors.authorId.message as string}
+                      </p>
+                    )}
                   </div>
-
-                  <input
-                    type="hidden"
-                    {...register("authorId", {
-                      setValueAs: (value) =>
-                        value === "" ? undefined : Number(value),
-                    })}
-                  />
-
-                  {errors.authorId && (
-                    <p className="text-sm text-error-500">
-                      {errors.authorId.message}
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <input type="hidden" {...register("authorId")} />
-              )}
+                ) : (
+                  <input type="hidden" {...register("authorId")} />
+                ))}
             </div>
-          </ComponentCard>
-          <ComponentCard>
             <ImageUpload
               folder="posts"
               value={image.url}
