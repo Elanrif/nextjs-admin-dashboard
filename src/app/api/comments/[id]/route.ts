@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getCommentById } from "@/lib/comments/api/services/comment.server";
+import { resultResponse } from "@/lib/shared/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -13,5 +14,5 @@ export async function GET(
   const commentId = Number.parseInt(id, 10);
 
   const response = await getCommentById(commentId);
-  return NextResponse.json(response, { status: 200 });
+  return resultResponse(response);
 }

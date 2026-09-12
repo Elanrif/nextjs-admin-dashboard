@@ -2,8 +2,12 @@
 
 import { User } from "@/lib/users/api/types";
 import { createContext, useContext, useState, useEffect } from "react";
-
-const AUTH_KEY = "auth_user";
+import {
+  clearAuthSession,
+  getStoredAuthUser,
+  storeAuthUser,
+  subscribeToAuthSessionClear,
+} from "@/lib/auth/auth-session";
 
 interface SessionContextType {
   user: User | null;
@@ -19,27 +23,36 @@ export function AuthUserProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const unsubscribe = subscribeToAuthSessionClear(() => setUserState(null));
+    let timeoutId: number;
+
     try {
-      const stored = localStorage.getItem(AUTH_KEY);
-      setTimeout(
-        () => setUserState(stored ? (JSON.parse(stored) as User) : null),
-        0,
-      );
+      const stored = getStoredAuthUser();
+      const storedUser = stored ? (JSON.parse(stored) as User) : null;
+      timeoutId = window.setTimeout(() => {
+        setUserState(storedUser);
+        setIsLoading(false);
+      }, 0);
     } catch {
-      setTimeout(() => setUserState(null), 0);
-    } finally {
-      setIsLoading(false);
+      timeoutId = window.setTimeout(() => {
+        setUserState(null);
+        setIsLoading(false);
+      }, 0);
     }
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      unsubscribe();
+    };
   }, []);
 
   const setUser = (u: User) => {
     setUserState(u);
-    localStorage.setItem(AUTH_KEY, JSON.stringify(u));
+    storeAuthUser(u);
   };
 
   const signOut = () => {
-    setUserState(null);
-    localStorage.removeItem(AUTH_KEY);
+    clearAuthSession();
   };
 
   return (

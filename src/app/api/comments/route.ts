@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { CommentFilters } from "@/lib/comments/api/types";
 import { getComments } from "@/lib/comments/api/services/comment.server";
+import { resultResponse } from "@/lib/shared/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -22,5 +23,5 @@ export async function GET(request: NextRequest) {
     sort: searchParams.get("sort") ?? undefined,
   };
   const response = await getComments(filters);
-  return NextResponse.json(response, { status: 200 });
+  return resultResponse(response);
 }
